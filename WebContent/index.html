@@ -79,11 +79,6 @@
         	<div class="write-post">
         		<h1>Write Post</h1>
         		<textarea id="write"></textarea>
-        		<div id="" class="">
-        			<form id="postingimg" action="./img/postingimg" method="post">
-        				<input type="file" name="upload_file"/>
-        				<input type="button" id="uploadbutton" value="클릭">
-        			</form></div>
         		<div id="write_post_btn" class="pure-button">Post</div>
         	</div>
             <!-- A wrapper for all the blog posts -->
@@ -108,9 +103,16 @@
                 </section>
                  -->
 			</div>
-
-            <div class="posts">
-                <h1 class="content-subhead">Recent Posts</h1>
+			<div class="tab-layer content-subhead">
+			    <ul class="tab-btn">
+                <li><button id="recent_tab_btn"><h1 class="content-subhead">Recent Posts</h1></button></li>
+                <li><button id="popular_tab_btn"><h1 class="content-subhead">Popular Posts</h1></button></li>
+                </ul>
+			</div>
+            <div id="recent_post" class="posts">
+            </div>
+            <div id="popular_post" style="display:block">
+            여기는 백지장같이 하얀곳입니다 커스텀.js고칠생각하니 막막하네욯
             </div>
 
             <div class="footer">

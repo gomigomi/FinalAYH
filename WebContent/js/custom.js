@@ -18,7 +18,16 @@ $(function() {
 		});
 	}
 	getCommentData();
-
+	
+	$('#recent_tab_btn').click(function(){
+		$('#recent_post').show();
+		$('#popular_post').hide();
+	});
+	$('#popular_tab_btn').click(function(){
+		$('#recent_post').hide();
+		$('#popular_post').show();
+	});
+	
 	$('#log_out').click(function(){
 		window.sessionStorage.setItem('id','');
 		window.sessionStorage.setItem('name','');

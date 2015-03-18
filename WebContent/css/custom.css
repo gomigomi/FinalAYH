@@ -247,3 +247,24 @@ section{
 	width: 90px;
 	text-align: right;
 }
+
+.tab-layer{
+    height: 60px;
+	
+    margin-bottom: 20px;
+}
+.tab-layer .tab-btn li{
+    list-style: none;
+	
+    float: left;
+    width: 50%;
+}
+.tab-layer button{
+    background-color: transparent;
+    border: 0;
+}
+.tab-layer h1{
+    border: 0;
+	
+    font-size: 110%;
+}
