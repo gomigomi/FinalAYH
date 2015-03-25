@@ -1,0 +1,57 @@
+
+/*상단메뉴, top*/
+#top {
+	display : block;
+	border-bottom : 1px solid  #E1E1E1;
+	
+}
+
+.top_info {
+	border-top : 1px solid #E1E1E1;
+}
+
+#recommendation, #bookmark, #my-activity {
+	display : inline-block;
+	margin : 0 0 0 0;
+	padding : 0 10px 0 10px;
+	border : 1px solid #E1E1E1;
+	
+}
+
+/*preference*/
+#inner-checkbox {
+	margin :  0 0 10px 0;
+	border : 1px solid #E1E1E1;
+	width : 700px;
+	height : 200px;
+	border-radius : 20px;
+}
+
+.type_property, .taste_property, .time_property, .location_property {
+	
+	display : inline-flex;
+}
+
+.type-name, .taste-name, .time-name, .location-name {
+	display : inline-block;
+	width : 75px;
+	height : 15px;
+}
+
+.property {
+	position : relative;
+	top : 15px;
+	margin : 0 10px 0 5px;
+	
+}
+
+#preference h2 {
+	margin : 20px 0 5px 0;
+	padding : 0;
+	color : grey;
+}
+
+
+.posts {
+	display: block;
+}

@@ -256,7 +256,7 @@ $(function() {
 	$('.posts').on('click','.add-comment-btn', function(){
 		var parentElem = $(this).parents('section');
 		
-		console.log(parentElem.size());
+		//console.log(parentElem.size());
 		
 		var section_id=parentElem.attr('id');
 		var count_num = parentElem.attr('id').substr(0,3);
@@ -301,7 +301,7 @@ $(function() {
 						if(idx == currentCommentList.size()-1){
 							avg = (sum/currentCommentList.size());
 							parentElem.find('.bac-point').text(avg);
-							console.log('avg : '+avg);
+							//console.log('avg : '+avg);
 							
 						}
 					});
@@ -474,7 +474,7 @@ $(function() {
 		
 		//alert(JSON.stringify(commentDatas));
 		var	currentCommentDatas = _.filter(commentDatas, function(value){
-			console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
+			//console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
 			return value.posting_seq ==  postingDatas.seq;
 		});
 		var sectionObject = $(sectionElem);
@@ -490,7 +490,7 @@ $(function() {
 			
 			sectionObject.find('.comment-list').append(liElem);
 			
-			console.log(idx);
+			//console.log(idx);
 			
 		});
 			return sectionObject.get(0).outerHTML;
