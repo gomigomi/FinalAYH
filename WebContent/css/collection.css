@@ -18,6 +18,8 @@
 	
 }
 
+
+
 /*preference*/
 #inner-checkbox {
 	margin :  0 0 10px 0;
@@ -27,31 +29,20 @@
 	border-radius : 20px;
 }
 
+#preference-explain {
+	color : grey;
+}
+
 .type_property, .taste_property, .time_property, .location_property {
 	
 	display : inline-flex;
 }
 
-.type-name, .taste-name, .time-name, .location-name {
-	display : inline-block;
-	width : 75px;
-	height : 15px;
-}
-
 .property {
 	position : relative;
-	top : 15px;
-	margin : 0 10px 0 5px;
-	
+	top : 2px;
 }
 
-#preference h2 {
-	margin : 20px 0 5px 0;
-	padding : 0;
-	color : grey;
-}
-
-
-.posts {
-	display: block;
+#checkbox-type p {
+	margin : 0 5px 0 10px;
 }

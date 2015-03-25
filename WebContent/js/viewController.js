@@ -29,6 +29,11 @@ $(function() {
 	$('#timeline-button').click(function() {
 		$('#main-view').show();
 		$('#top').hide();
+		$('#preference').hide();
+		$('#favorite').hide();
+		$('#history').hide();
+		$('.top_explain').hide();
+		
 	});
 	
 })

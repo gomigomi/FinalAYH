@@ -6,7 +6,7 @@
 
 a {
     text-decoration: none;
-    color: rgb(61, 146, 201);
+    color: white;
 }
 a:hover,
 a:focus {
@@ -172,4 +172,15 @@ h3 {
         top: 0;
         bottom: 0;
     }
+}
+
+
+<!--modify-->
+.brand-title {
+	text-decoration : none;
+}
+
+.brand-title > a:hover {
+	color : orange;
+	text-decoration : none;
 }

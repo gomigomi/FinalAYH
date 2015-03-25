@@ -31,7 +31,7 @@
 	<div id="layout" class="pure-g">
 		<div class="sidebar pure-u-1 pure-u-md-1-4">
 			<div class="header">
-				<h1 class="brand-title" id="bi">HUNGRY?</h1>
+				<h1 class="brand-title" id="bi"><a href="http://localhost:8080">HUNGRY?</a></h1>
 				<h2 class="brand-tagline" id="desc">Where to GO?</h2>
 
 				<nav class="nav">
@@ -141,7 +141,7 @@
 			
 			<!-- recommendation -->
 			<div id = "preference" style = "display : none;">
-				<h2>&nbsp;&nbsp;Choose you want</h2>
+				<h2 id = "preference-explain">&nbsp;&nbsp;Choose you want</h2>
 				<div id = "checkbox">
 					<form action ="" id = "checkbox-type">
 						<div class = "type_wrapper">
@@ -179,7 +179,7 @@
 								<input type="checkbox" class = "property" name="taste" value="sin">
 								<p>Saulty</p>
 								<input type="checkbox" class = "property" name="taste" value="saulty">
-							</div>"
+							</div>
 						</div>
 							
 						<div class = "time_wrapper">
@@ -187,7 +187,7 @@
 								<h3>TIME</h3>		
 							</div>
 							<div class = "time_property">
-								<p>Breakfirst</p>
+								<p>Breakfast</p>
 								<input type="checkbox" class = "property" name="time" value="bf">
 								<p>Lunch</p>
 								<input type="checkbox" class = "property" name="time" value="lc">
@@ -201,7 +201,16 @@
 									<h3>지역</h3> <!-- select -->
 								</div>
 								<div class = "location_property">
-						
+									<select name = location>
+										<option value = 1 selected>서울</option>
+										<option value = 2>경기</option>
+										<option value = 3>강원</option>
+										<option value = 4>경상</option>
+										<option value = 5>충청</option>
+										<option value = 6>제주</option>
+										<option value = 7>전라</option>
+									</select>
+									<input type = "button" value = "SEARCH" id = "preference-submit-button">
 								</div>
 						</div>							
 					</form>
