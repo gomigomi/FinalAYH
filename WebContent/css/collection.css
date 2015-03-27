@@ -2,12 +2,37 @@
 /*상단메뉴, top*/
 #top {
 	display : block;
+	font-size : 75%;
+}
+
+#top-line {
 	border-bottom : 1px solid  #E1E1E1;
+	margin : 25px 0 0 10px;
+}
+
+#preference-button, #favorite-button, #history-button {
+	color : white;
+	border-radius : 10px;
+	border : none;
+}
+
+#preference-button {
+	background : #3abe82
 	
 }
 
-.top_info {
-	border-top : 1px solid #E1E1E1;
+#favorite-button {
+	background : #FF748C
+}
+
+#history-button {
+	background : #67C5F4
+}
+
+.top_explain {
+	color : #8d8b8b;
+	margin : 10px 0 0 0;
+	font-size : 150%;
 }
 
 #recommendation, #bookmark, #my-activity {

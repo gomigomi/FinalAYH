@@ -17,7 +17,7 @@ $(function() {
 	});
 	
 	/*preference*/
-	$('#recommend-button').click(function() {
+	$('#preference-button').click(function() {
 		$('#preference').show();
 		$('#favorite').hide();
 		$('#history').hide();
