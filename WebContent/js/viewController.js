@@ -24,6 +24,10 @@ $(function() {
 		$('.top_explain').hide();
 	});
 	
+	$('#preference-clear-button').click(function(){
+		$('.property').attr('checked', false)
+	})
+	
 	/*favorite*/
 	$('#favorite-button').click(function() {
 		$('#favorite').show();
