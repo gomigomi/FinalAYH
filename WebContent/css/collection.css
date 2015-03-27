@@ -38,6 +38,10 @@
 	display : inline-flex;
 }
 
+.type_name, .taste_name, .time_name, .location_name {
+	display : inline-block;
+}
+
 .property {
 	position : relative;
 	top : 2px;

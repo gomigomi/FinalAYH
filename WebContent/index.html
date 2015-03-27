@@ -31,7 +31,9 @@
 	<div id="layout" class="pure-g">
 		<div class="sidebar pure-u-1 pure-u-md-1-4">
 			<div class="header">
-				<h1 class="brand-title" id="bi"><a href="http://localhost:8080">HUNGRY?</a></h1>
+				<h1 class="brand-title" id="bi">
+					<a href="http://localhost:8080">HUNGRY?</a>
+				</h1>
 				<h2 class="brand-tagline" id="desc">Where to GO?</h2>
 
 				<nav class="nav">
@@ -77,7 +79,7 @@
 		</div>
 
 		<div class="content pure-u-1 pure-u-md-3-4">
-			<div id = "main-view">
+			<div id="main-view">
 				<div>
 					<div class="write-post">
 						<h1>Write Post</h1>
@@ -118,106 +120,139 @@
 				</div>
 				<div id="recent_post" class="posts"></div>
 				<div id="popular_post" style="display: block">여기는 백지장같이 하얀곳입니다
-					커스텀.js고칠생각하니 막막하네욯 냉면과 물만두 만두와 맥주
-				</div>
+					커스텀.js고칠생각하니 막막하네욯 냉면과 물만두 만두와 맥주</div>
 			</div>
 
 
 			<!-- 현우 collection -->
 			<!-- top-button -->
-			<div id = "top" style="display : none;">
-				<button id = "recommend-button">
+			<div id="top" style="display: none;">
+				<button id="recommend-button">
 					<h1>Hot Place</h1>
 				</button>
-				<button id = "favorite-button">
+				<button id="favorite-button">
 					<h1>Favorite</h1>
 				</button>
-				<button id = "history-button">
+				<button id="history-button">
 					<h1>History</h1>
 				</button>
-				
-				<h2 class = "top_explain">Please click a menu.</h2>
+
+				<h2 class="top_explain">Please click a menu.</h2>
 			</div>
-			
+
 			<!-- recommendation -->
-			<div id = "preference" style = "display : none;">
-				<h2 id = "preference-explain">&nbsp;&nbsp;Choose you want</h2>
-				<div id = "checkbox">
-					<form action ="" id = "checkbox-type">
-						<div class = "type_wrapper">
-							<div class = type_name>
+			<div id="preference">
+				<h2 id="preference-explain">&nbsp;&nbsp;Choose you want</h2>
+				<div id="checkbox">
+					<form action="" id="checkbox-type">
+						<div class="type_wrapper">
+							<div class=type_name>
 								<h3>TYPE</h3>
 							</div>
-							<div class = "type_property">
+							<div class="type_property">
 								<p>Korean</p>
-								<input type = "checkbox" class = "property" name = "type" value = "korean"> 
+								<input type="checkbox" class="property" name="type"
+									value="korean">
 								<p>Chines</p>
-								<input type = "checkbox" class = "property" name = "type" value = "chines">
+								<input type="checkbox" class="property" name="type"
+									value="chines">
 								<p>Japanes</p>
-								<input type = "checkbox" class = "property" name = "type" value = "japanes">
+								<input type="checkbox" class="property" name="type"
+									value="japanes">
 								<p>European</p>
-								<input type = "checkbox" class = "property" name = "type" value = "european">
+								<input type="checkbox" class="property" name="type"
+									value="european">
 								<p>American</p>
-								<input type = "checkbox" class = "property" name = "type" value = "american">
+								<input type="checkbox" class="property" name="type"
+									value="american">
 								<p>Mexican</p>
-								<input type = "checkbox" class = "property" name = "type" value = "mexican">
+								<input type="checkbox" class="property" name="type"
+									value="mexican">
 								<p>ETC</p>
-								<input type = "checkbox" class = "property" name = "type" value = "etc">
+								<input type="checkbox" class="property" name="type" value="etc">
 							</div>
 						</div>
-						
-						<div class = "taste_wrapper">
-							<div class = "taste_name">
+
+						<div class="taste_wrapper">
+							<div class="taste_name">
 								<h3>TASTE</h3>
 							</div>
-							<div class = "taste_property">
-							<p>Hot</p>
+							<div class="taste_property">
+								<p>Hot</p>
 								<input type="checkbox" class="property" name="taste" value="hot">
 								<p>Sweet</p>
-								<input type="checkbox" class = "property" name="taste" value="sweet">
+								<input type="checkbox" class="property" name="taste"
+									value="sweet">
 								<p>신맛</p>
-								<input type="checkbox" class = "property" name="taste" value="sin">
+								<input type="checkbox" class="property" name="taste" value="sin">
 								<p>Saulty</p>
-								<input type="checkbox" class = "property" name="taste" value="saulty">
+								<input type="checkbox" class="property" name="taste"
+									value="saulty">
 							</div>
 						</div>
-							
-						<div class = "time_wrapper">
-							<div class ="time_name">
-								<h3>TIME</h3>		
+
+						<div class="time_wrapper">
+							<div class="time_name">
+								<h3>TIME</h3>
 							</div>
-							<div class = "time_property">
+							<div class="time_property">
 								<p>Breakfast</p>
-								<input type="checkbox" class = "property" name="time" value="bf">
+								<input type="checkbox" class="property" name="time" value="bf">
 								<p>Lunch</p>
-								<input type="checkbox" class = "property" name="time" value="lc">
+								<input type="checkbox" class="property" name="time" value="lc">
 								<p>Dinner</p>
-								<input type="checkbox" class = "property" name="time" value="dn">
+								<input type="checkbox" class="property" name="time" value="dn">
 							</div>
 						</div>
-							
-						<div class = "location_wrapper">
-								<div class = "location_name">
-									<h3>지역</h3> <!-- select -->
-								</div>
-								<div class = "location_property">
-									<select name = location>
-										<option value = 1 selected>서울</option>
-										<option value = 2>경기</option>
-										<option value = 3>강원</option>
-										<option value = 4>경상</option>
-										<option value = 5>충청</option>
-										<option value = 6>제주</option>
-										<option value = 7>전라</option>
-									</select>
-									<input type = "button" value = "SEARCH" id = "preference-submit-button">
-								</div>
-						</div>							
+
+						<div class="location_wrapper">
+							<div class="location_name">
+								<h3>지역</h3>
+								<!-- select -->
+							</div>
+							<div class="location_property">
+								<select name=location>
+									<option value=1 selected>서울</option>
+									<option value=2>경기</option>
+									<option value=3>강원</option>
+									<option value=4>경상</option>
+									<option value=5>충청</option>
+									<option value=6>전라</option>
+									<option value=7>제주</option>
+								</select> <input type="button" value="SEARCH"
+									id="preference-submit-button">
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>
-
-
+			<!-- preference end -->
+			<!-- favorite start -->
+			<div id = "favorite">
+				<div class = "favorite_explain">
+					Here are postings you are interested in.
+				</div>
+			</div>
+			<!-- favorite end -->
+			<!-- history start -->
+			<div id = "history">
+				<button id = "history-posting-button">
+					POSTING
+				</button>
+				<button id = "history-comment-button">
+					COMMENT
+				</button>
+				<div id = "history-posting">
+					posting
+				</div>
+				<div id = "history-comment">
+					comment
+				</div>
+				
+			</div>
+			<!-- history end -->
+			
+			
 			<div class="footer">
 				<div class="pure-menu pure-menu-horizontal pure-menu-open">
 					<ul>
@@ -229,6 +264,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	<!-- Modal Start -->
 	<form action="" class="login_form modal" id="login-modal"
 		style="position: fixed; top: 50%; left: 50%; margin-top: -116.5px; margin-left: -200px; z-index: 2; display: none;">
