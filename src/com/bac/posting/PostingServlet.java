@@ -33,14 +33,21 @@ public class PostingServlet extends HttpServlet{
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
 		//String type = request.getParameter("type");
-
+		String type = request.getParameter("type");
 		PostingDao dao = new PostingDao();
-
+		
 		try{
-			JObject.put("result", dao.getPosting());
-
-
-		}catch (JSONException e) {
+			if(type.equals("1")){//get all postings
+				JObject.put("result", dao.getPosting());
+				}
+			else if(type.equals("2")){	//get someones posting
+				
+				String id = request.getParameter("id");
+				
+				JObject.put("result", dao.getUserPosting(id));
+			}
+		}
+			catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -317,7 +317,7 @@ $(function() {
 		$('.posts .post').remove();
 		count=0;
 		$.ajax({
-			url: 'http://localhost:8080/getPosting',
+			url: 'http://localhost:8080/getPosting?type=1',
 			method: 'get',
 			dataType: 'json',
 			async : false,

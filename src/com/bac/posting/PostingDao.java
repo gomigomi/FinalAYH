@@ -83,8 +83,50 @@ public class PostingDao {
 
 		return result;
 	}
-	
+	//writer=id
+	public List<HashMap<String, Object>> getUserPosting(String id) {
+		Connection conn = null;
+		Statement stmt = null;
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg where A.writer="+id+
+						"FROM posting AS A "+
+						"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+						"GROUP BY A.seq "+
+						"ORDER BY A.regdate DESC";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				HashMap<String, Object> item = new HashMap<String, Object>();
+				item.put("seq", rs.getString("seq"));
+				item.put("content", rs.getString("content"));
+				item.put("writer", rs.getString("writer"));
+				item.put("regdate", rs.getString("regdate"));
+				item.put("thumb", rs.getString("thumb"));
+				item.put("avg", rs.getString("avg"));
+				
+				result.add(item);
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		}catch(SQLException se){
+			se.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+		}
+
+		return result;
+	}
+	
 	public String postPosting(Map<String, String[]> postingParam){
 		Connection conn = null;
 		Statement stmt = null;
