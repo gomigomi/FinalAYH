@@ -18,16 +18,7 @@ $(function() {
 		});
 	}
 	getCommentData();
-	
-	$('#recent_tab_btn').click(function(){
-		$('#recent_post').show();
-		$('#popular_post').hide();
-	});
-	$('#popular_tab_btn').click(function(){
-		$('#recent_post').hide();
-		$('#popular_post').show();
-	});
-	
+
 	$('#log_out').click(function(){
 		window.sessionStorage.setItem('id','');
 		window.sessionStorage.setItem('name','');
@@ -331,6 +322,8 @@ $(function() {
 			async : false,
 			success : function(res){
 				postingDatas = res.result;
+				//콘솔 
+				console.log(postingDatas);
 				for(var i=0; i<5; i++ ){
 					renderSectionElem();
 				}
@@ -411,10 +404,6 @@ $(function() {
 		});
 	});
 	
-	$(document).on('click','.post-like', function(){
-		alert('hi!')
-	});
-	
      $("#uploadbutton").click(function(){
          var form = $('#postingimg')[0];
          var formData = new FormData(form);
@@ -451,7 +440,6 @@ $(function() {
 			'<p>'+
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
-			'<button class="post-like"><i class="fa fa-heart-o"></i></button>'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
 			'</span>'+ 
