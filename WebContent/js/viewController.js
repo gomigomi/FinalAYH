@@ -74,4 +74,16 @@ $(function() {
 		
 	});
 	
+	/*라겸*/
+	$('#recent_tab_btn').click(function(){
+		$('#recent_post').show();
+		$('#popular_post').hide();
+	});
+	
+	$('#popular_tab_btn').click(function(){
+		$('#popular_post').show();
+		$('#recent_post').hide();
+	});
+	
+	
 })
