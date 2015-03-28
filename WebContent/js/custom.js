@@ -411,6 +411,10 @@ $(function() {
 		});
 	});
 	
+	$(document).on('click','.post-like', function(){
+		alert('hi!')
+	});
+	
      $("#uploadbutton").click(function(){
          var form = $('#postingimg')[0];
          var formData = new FormData(form);
@@ -447,6 +451,7 @@ $(function() {
 			'<p>'+
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
+			'<button class="post-like"><i class="fa fa-heart-o"></i></button>'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
 			'</span>'+ 
