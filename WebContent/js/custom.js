@@ -4,6 +4,7 @@ $(function() {
 	var postingDatas;	//Posting
 	var commentDatas;	//Comment
 	var count=0;
+
 	
 	function getCommentData(){
 		$.ajax({

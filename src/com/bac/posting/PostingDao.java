@@ -50,11 +50,11 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg,  COUNT(C.point) AS size "+
+			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
 						"FROM posting AS A "+
-							"LEFT OUTER JOIN user B ON B.id = A.writer "+
-							"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+
-						"GROUP BY C.posting_seq "+
+						"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+						"GROUP BY A.seq "+
 						"ORDER BY A.regdate DESC";
 			ResultSet rs = stmt.executeQuery(sql);
 			
