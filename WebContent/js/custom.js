@@ -1,11 +1,10 @@
 $(function() {
-	/*Logout Btn Handler*/
 
 	var postingDatas;	//Posting
 	var commentDatas;	//Comment
 	var count=0;
 
-	
+	//comment process
 	function getCommentData(){
 		$.ajax({
 			url : 'http://localhost:8080/getComment',
@@ -13,18 +12,17 @@ $(function() {
 			dataType : 'json',
 			success : function(res){
 				commentDatas = res.result;
-				
 				renderPostingList();
 			}
 		});
 	}
+	
 	getCommentData();
 
+	
+	//log-out process
 	$('#log_out').click(function(){
-		window.sessionStorage.setItem('id','');
-		window.sessionStorage.setItem('name','');
-		window.sessionStorage.setItem('thumb','');
-		window.sessionStorage.setItem('pass','');
+		sessionStorage.clear();
 
 		$('.logon').hide();
 		$('.logoff').show();
@@ -32,6 +30,8 @@ $(function() {
 		renderPostingList();
 	});
 
+	
+	//profile edit process
 	$('#profile-edit-submit').click(
 			function() {
 				var id = $('#user_edit_id').val();
@@ -62,6 +62,8 @@ $(function() {
 				}
 			});
 
+	
+	//user delete process
 	$('#user-delete-submit').click(function(){
 		var id = $('#user_edit_id').val();
 		var pass = $('#user_edit_pass').val();
@@ -85,10 +87,7 @@ $(function() {
 
 						$.modal.close();
 
-						window.sessionStorage.setItem('id', '');
-						window.sessionStorage.setItem('name','');
-						window.sessionStorage.setItem('thumb','');
-						window.sessionStorage.setItem('pass','');
+						sessionStorage.clear();
 
 						$('.logoff').show();
 						$('.logon').hide();
@@ -101,9 +100,12 @@ $(function() {
 			alert('please check your password confirm again');
 		}
 	});
+	
+	
 	/**
 	 * Login Btn Handler
 	 */
+	//log-in process
 	$('#login-submit').click(function(){
 		var id = $('#user_id').val();
 		var pass = $('#user_pass').val();
@@ -127,15 +129,15 @@ $(function() {
 					window.sessionStorage.setItem('thumb',res.result.thumb);
 					window.sessionStorage.setItem('pass',res.result.pass);
 
-					$('.logon').show();
-					$('.logoff').hide();
-
-					renderPostingList();
-
 					var name = res.result.name;
 					var id = res.result.id;
 					var pass=res.result.pass;
 					var thumb=res.result.thumb;
+					
+					$('.logon').show();
+					$('.logoff').hide();
+
+					renderPostingList();
 
 					$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'.jpg"'+')');
 					$('.info').text(id + '('+name+')');
@@ -155,13 +157,15 @@ $(function() {
 		});
 	});
 	
+	
+	//sign-in process
 	$('#signin-submit').click(function(){
 		var id = $('#user_signin_id').val();
 		var name = $('#user_signin_name').val();
 		var pass = $('#user_signin_pass').val();
 		var passconf = $('#user_signin_passconf').val();
 		
-		var regexp = /[0-9a-z]/; // 숫자,영문,특수문자
+		var regexp = /[0-9a-z]/; // 예외처리를 위한 변수 선언 : 숫자,영문,특수문자
 
 		if(id == '' || pass == '' || name =='' || passconf =='' ){
 			alert('please fill out the all blanks');
@@ -170,37 +174,13 @@ $(function() {
 		else if(pass!=passconf){
 			alert('password confirm failed');
 			return false;
-		}
+		} //한글 예외처리 
 		else if(id != " " && regexp.test(id) == false ){
-			alert("한글이나 특수문자는 입력불가능 합니다.");
+			alert("영(소)문자와 숫자만 입력 가능합니다.");
 			return false;
 		}
 			
-			
-	        
-	        // var regexp = /[0-9]/; // 숫자만
-//	         var regexp = /[a-zA-Z]/; // 영문만
-	        
-//	        for(var i=0; i<text.length; i++){
-//	            if(text.charAt(i) != " " && regexp.test(text.charAt(i)) == false ){
-//					alert("한글이나 특수문자는 입력불가능 합니다.");
-//					return false;
-//				}
-//	        }
-//		
-		
-		
-//		} //한글 예외처리 
-//		  else if (event.keyCode > 48){
-//			alert('아이디는 (소)영문자와 숫자의 조합으로만 가능합니다.');
-//			return false;
-//		} else if (event.keyCode >= 123){
-//			alert('아이디는 (소)영문자와 숫자의 조합으로만 가능합니다.');
-//			return false;
-//		} else if (event.keyCode <= 58 && event.keyCode >= 96){
-//			alert('아이디는 (소)영문자와 숫자의 조합으로만 가능합니다.');
-//			return false;
-//		}
+				
 		$.ajax({	//ID 중복 체크
 			url: 'http://localhost:8080/getUser?type=3&id='+id,
 			method : 'get',
@@ -249,6 +229,8 @@ $(function() {
 		});
 	});
 
+	
+	//posting process
 	$('#write_post_btn').click(function(){
 		if(!window.sessionStorage.getItem('id')){
 			alert('login first!');
@@ -285,6 +267,7 @@ $(function() {
 			error : function(){}
 		});
 	});
+	
 	
 	//add comment handler
 	$('.posts').on('click','.add-comment-btn', function(){
