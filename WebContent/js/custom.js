@@ -160,6 +160,8 @@ $(function() {
 		var name = $('#user_signin_name').val();
 		var pass = $('#user_signin_pass').val();
 		var passconf = $('#user_signin_passconf').val();
+		
+		var regexp = /[0-9a-z]/; // 숫자,영문,특수문자
 
 		if(id == '' || pass == '' || name =='' || passconf =='' ){
 			alert('please fill out the all blanks');
@@ -169,6 +171,36 @@ $(function() {
 			alert('password confirm failed');
 			return false;
 		}
+		else if(id != " " && regexp.test(id) == false ){
+			alert("한글이나 특수문자는 입력불가능 합니다.");
+			return false;
+		}
+			
+			
+	        
+	        // var regexp = /[0-9]/; // 숫자만
+//	         var regexp = /[a-zA-Z]/; // 영문만
+	        
+//	        for(var i=0; i<text.length; i++){
+//	            if(text.charAt(i) != " " && regexp.test(text.charAt(i)) == false ){
+//					alert("한글이나 특수문자는 입력불가능 합니다.");
+//					return false;
+//				}
+//	        }
+//		
+		
+		
+//		} //한글 예외처리 
+//		  else if (event.keyCode > 48){
+//			alert('아이디는 (소)영문자와 숫자의 조합으로만 가능합니다.');
+//			return false;
+//		} else if (event.keyCode >= 123){
+//			alert('아이디는 (소)영문자와 숫자의 조합으로만 가능합니다.');
+//			return false;
+//		} else if (event.keyCode <= 58 && event.keyCode >= 96){
+//			alert('아이디는 (소)영문자와 숫자의 조합으로만 가능합니다.');
+//			return false;
+//		}
 		$.ajax({	//ID 중복 체크
 			url: 'http://localhost:8080/getUser?type=3&id='+id,
 			method : 'get',
@@ -192,6 +224,16 @@ $(function() {
 							$('#user_signin_pass').val('');
 							$('#user_signin_passconf').val('');
 							$.modal.close();
+							
+							
+							//auto log-in
+							window.sessionStorage.setItem('id', id);
+							window.sessionStorage.setItem('name', name);
+							
+							$('.logon').show();
+							$('.thumb').show()
+							$('.info').show();
+							$('.logoff').hide();
 						},
 						error : function(){
 
