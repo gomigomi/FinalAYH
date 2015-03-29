@@ -323,15 +323,13 @@ $(function() {
 			async : false,
 			success : function(res){
 				postingDatas = res.result;
-				//콘솔 
-				console.log(postingDatas);
-				for(var i=0; i<5; i++ ){
+				for(var i=0; i<postingDatas.length; i++ ){
 					renderSectionElem();
 				}
 			}
 		})
 	}
-
+/* 스크롤 내릴때마다 자동 로딩되게 해주는
 	var timer = setInterval(function() {scrollOK = true;}, 100);
 	var scrollOK = true;
 	$(window).bind('scroll',function() {
@@ -352,6 +350,7 @@ $(function() {
 			}
 		}
 	});
+	*/
 	
 	/**
 	 * 
@@ -366,7 +365,7 @@ $(function() {
 		}
 		count++;
 	}
-
+//포스팅삭제 
 	$(document).on('click', '.post-delete' , function(){
 		var seq=$(this).parent().parent().parent().parent().parent().attr('id');
 		seq= seq.substring(11);
@@ -382,7 +381,7 @@ $(function() {
 			});
 		}else{return false;}
 	});
-
+//포스팅 수정 
 	$(document).on('click','.post-edit', function(){
 		var seq = $(this).closet('section').attr('id');
 		seq= seq.substring(11);
@@ -404,7 +403,7 @@ $(function() {
 			});
 		});
 	});
-	
+	/*파일 입출력 처리 
      $("#uploadbutton").click(function(){
          var form = $('#postingimg')[0];
          var formData = new FormData(form);
@@ -419,7 +418,7 @@ $(function() {
                 }
             });
          });
-	
+	*/
 	/**
 	 * postingDatas - seq, thumb, writer, regdate, content
 	 * isHide - boolean
