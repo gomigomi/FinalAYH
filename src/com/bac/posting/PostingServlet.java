@@ -52,6 +52,10 @@ public class PostingServlet extends HttpServlet{
 				
 				JObject.put("result", dao.getUserCommentPosting(id));
 			}
+			else if(type.equals("4")){	//get popular posting
+				
+				JObject.put("result", dao.getPopularPosting());
+			}
 		}
 			catch (JSONException e) {
 			// TODO Auto-generated catch block
