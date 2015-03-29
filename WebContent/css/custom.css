@@ -82,6 +82,10 @@
     display: inline-block;
     vertical-align: middle;
 }
+.post-author{
+    color: rgb(61, 79, 93);
+	
+}
 .bac-point{
     /* float: right; */
     display: inline-block;
