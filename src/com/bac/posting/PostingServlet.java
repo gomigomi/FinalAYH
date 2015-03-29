@@ -46,6 +46,12 @@ public class PostingServlet extends HttpServlet{
 				
 				JObject.put("result", dao.getUserPosting(id));
 			}
+			else if(type.equals("3")){	//get someones posting
+				
+				String id = request.getParameter("id");
+				
+				JObject.put("result", dao.getUserCommentPosting(id));
+			}
 		}
 			catch (JSONException e) {
 			// TODO Auto-generated catch block

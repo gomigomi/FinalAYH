@@ -37,26 +37,26 @@ $(function() {
 	})
 	
 	
-	/*history*/
-	$('#history-button').click(function() {
-		$('#history').show();
-		$('#history-posting').show();
-		$('#history-comment').hide();
-		$('#preference').hide();
-		$('#favorite').hide();
-		$('.top_explain').hide();
-		
-		$('#history-posting-button').click(function(){
-			$('#history-posting').show();
-			$('#history-comment').hide();
-		})
-		
-		$('#history-comment-button').click(function(){
-			$('#history-comment').show();
-			$('#history-posting').hide();
-		})
-	})
-	
+//	/*history*/
+//	$('#history-button').click(function() {
+//		$('#history').show();
+//		$('#history-posting').show();
+//		$('#history-comment').hide();
+//		$('#preference').hide();
+//		$('#favorite').hide();
+//		$('.top_explain').hide();
+//		
+//		$('#history-posting-button').click(function(){
+//			$('#history-posting').show();
+//			$('#history-comment').hide();
+//		})
+//		
+//		$('#history-comment-button').click(function(){
+//			$('#history-comment').show();
+//			$('#history-posting').hide();
+//		})
+//	})
+//	
 	
 	
 	
