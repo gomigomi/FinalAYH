@@ -12,16 +12,10 @@ import java.util.Map;
 
 public class PostingDao {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://ec2-54-199-180-105.ap-northeast-1.compute.amazonaws.com:3306/bac-krk";
+	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
 
 	static final String USER = "root";
-	static final String PASS = "wjsxo123";
-	
-//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-//	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
-//
-//	static final String USER = "root";
-//	static final String PASS = "900418";
+	static final String PASS = "900418";
 	
 	/**
 	 * 커넥션 공동 메소드
@@ -55,7 +49,7 @@ public class PostingDao {
 						"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
 						"GROUP BY A.seq "+
-						"ORDER BY A.regdate DESC";
+						"ORDER BY A.seq DESC";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){

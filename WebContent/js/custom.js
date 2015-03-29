@@ -384,7 +384,7 @@ $(function() {
 	});
 
 	$(document).on('click','.post-edit', function(){
-		var seq = $(this).closet('section').attr('id');
+		var seq = $(this).closest('section').attr('id');
 		seq= seq.substring(11);
 		$(document).on('click', '#post-edit-submit' , function(){
 			var content=$('#post_edit_area').val();
@@ -441,6 +441,7 @@ $(function() {
 			'<p>'+
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
+			'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
 			'</span>'+ 
@@ -539,4 +540,5 @@ $(function() {
 		
 		return datestring;
 	}
+	
 });
