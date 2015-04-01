@@ -10,13 +10,13 @@
 	margin : 25px 0 0 10px;
 }
 
-#preference-button, #favorite-button, #history-button {
+#search-button, #favorite-button, #history-button {
 	color : white;
 	border-radius : 10px;
 	border : none;
 }
 
-#preference-button {
+#search-button {
 	background : #3abe82
 	
 }
@@ -45,7 +45,7 @@
 
 
 
-/*preference*/
+/*search*/
 #inner-checkbox {
 	margin :  0 0 10px 0;
 	border : 1px solid #E1E1E1;
@@ -54,7 +54,7 @@
 	border-radius : 20px;
 }
 
-#preference-explain {
+#search-explain {
 	color : grey;
 }
 

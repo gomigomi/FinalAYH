@@ -1,7 +1,7 @@
 $(function() {
 	console.log("View Ready!");
 	
-	$('#preference, #favorite, #history').hide();
+	$('#search, #favorite, #history').hide();
 	
 	/*collection을 누를 때 */
 	$('#collection-button').click(function() {
@@ -15,22 +15,22 @@ $(function() {
 		}
 	});
 	
-	/*preference*/
-	$('#preference-button').click(function() {
-		$('#preference').show();
+	/*search*/
+	$('#search-button').click(function() {
+		$('#search').show();
 		$('#favorite').hide();
 		$('#history').hide();
 		$('.top_explain').hide();
 	});
 	
-	$('#preference-clear-button').click(function(){
+	$('#search-clear-button').click(function(){
 		$('.property').attr('checked', false)
 	})
 	
 	/*favorite*/
 	$('#favorite-button').click(function() {
 		$('#favorite').show();
-		$('#preference').hide();
+		$('#search').hide();
 		$('#history').hide();
 		$('.top_explain').hide();
 	})
@@ -41,7 +41,7 @@ $(function() {
 //		$('#history').show();
 //		$('#history-posting').show();
 //		$('#history-comment').hide();
-//		$('#preference').hide();
+//		$('#search').hide();
 //		$('#favorite').hide();
 //		$('.top_explain').hide();
 //		
@@ -66,7 +66,7 @@ $(function() {
 	$('#timeline-button').click(function() {
 		$('#main-view').show();
 		$('#top').hide();
-		$('#preference').hide();
+		$('#search').hide();
 		$('#favorite').hide();
 		$('#history').hide();
 		$('.top_explain').hide();
