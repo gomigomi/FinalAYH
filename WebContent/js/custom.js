@@ -1,26 +1,26 @@
 $(function() {
-
-	var postingDatas;	//Posting
-	var commentDatas;	//Comment
+	console.log(commentDatas);
+	getCommentData();
+	var postingDatas;	//Posting//Comment
+//	var commentDatas = getCommentData();
 	var count=0;
 
 	//comment process
 
 
-	function getCommentData(){
-		$.ajax({
-			url : 'http://localhost:8080/getComment',
-			method : 'get',
-			dataType : 'json',
-			success : function(res){
-				console.log("getCommentData_custom");
-				commentDatas = res.result;
-				renderPostingList();
-			}
-		});
-	}
-	getCommentData();
-
+//	function getCommentData(){
+//		$.ajax({
+//			url : 'http://localhost:8080/getComment',
+//			method : 'get',
+//			dataType : 'json',
+//			success : function(res){
+//				console.log("getCommentData_custom");
+//				commentDatas = res.result;				
+//			}
+//		});
+//	}
+	
+	renderPostingList();
 	
 	//log-out process
 	$('#log_out').click(function(){
@@ -505,6 +505,8 @@ $(function() {
 			'</section>';
 		
 		//alert(JSON.stringify(commentDatas));
+
+
 		var	currentCommentDatas = _.filter(commentDatas, function(value){
 			//console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
 			return value.posting_seq ==  postingDatas.seq;

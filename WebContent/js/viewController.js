@@ -1,13 +1,8 @@
 $(function() {
-	console.log("View Ready!");
-	
-	
-	
+////	console.log("View Ready!");
+//	var commentDatas = getCommentData();
 	
 	$('#howAbout, #search, #favorite, #history').hide();
-	
-	
-	
 
 	
 	/*collection을 누를 때 */
@@ -95,19 +90,19 @@ $(function() {
 	/*라겸*/
 	
 	//
-	function getCommentData(){
-		$.ajax({
-			url : 'http://localhost:8080/getComment',
-			method : 'get',
-			dataType : 'json',
-			success : function(res){
-				console.log("getCommentView");
-				commentDatas = res.result;			
-				renderPopularPostingList();
-			}
-		});
-	}
-	getCommentData();
+//	function getCommentData(){
+//		$.ajax({
+//			url : 'http://localhost:8080/getComment',
+//			method : 'get',
+//			dataType : 'json',
+//			success : function(res){
+//				console.log("getCommentView");
+//				commentDatas = res.result;			
+//				renderPopularPostingList();
+//			}
+//		});
+//	}
+
 
 	$('#recent_tab_btn').click(function(){
 		$('#recent_post').show();
@@ -130,6 +125,7 @@ $(function() {
 			success : function(res){
 				console.log("get populare posting");
 				postingPopularDatas = res.result;
+				getCommentData();
 				for(var i=0; i<postingPopularDatas.length; i++ ){
 					if(window.sessionStorage.getItem('id')==postingPopularDatas[i].writer){
 						$('#popular_post').append(getSectionItem(postingPopularDatas[i], false));
