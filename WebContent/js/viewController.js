@@ -1,7 +1,14 @@
 $(function() {
 	console.log("View Ready!");
 	
-	$('#search, #favorite, #history').hide();
+	
+	
+	
+	$('#howAbout, #search, #favorite, #history').hide();
+	
+	
+	
+
 	
 	/*collection을 누를 때 */
 	$('#collection-button').click(function() {
@@ -15,9 +22,20 @@ $(function() {
 		}
 	});
 	
+	/*What about*/
+	$('#howAbout-button').click(function(){
+		$('#howAbout').show();
+		$('#search').hide();
+		$('#favorite').hide();
+		$('#history').hide();
+		$('.top_explain').hide();
+	})
+	
+	
 	/*search*/
 	$('#search-button').click(function() {
 		$('#search').show();
+		$('#howAbout').hide();
 		$('#favorite').hide();
 		$('#history').hide();
 		$('.top_explain').hide();
@@ -30,6 +48,7 @@ $(function() {
 	/*favorite*/
 	$('#favorite-button').click(function() {
 		$('#favorite').show();
+		$('#howAbout').hide();
 		$('#search').hide();
 		$('#history').hide();
 		$('.top_explain').hide();

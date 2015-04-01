@@ -10,23 +10,27 @@
 	margin : 25px 0 0 10px;
 }
 
-#search-button, #favorite-button, #history-button {
+#howAbout-button, #search-button, #favorite-button, #history-button {
 	color : white;
 	border-radius : 10px;
 	border : none;
 }
 
+#howAbout-button {
+	background : chocolate;
+}
+
 #search-button {
-	background : #3abe82
+	background : #3abe82;
 	
 }
 
 #favorite-button {
-	background : #FF748C
+	background : #FF748C;
 }
 
 #history-button {
-	background : #67C5F4
+	background : #67C5F4;
 }
 
 .top_explain {

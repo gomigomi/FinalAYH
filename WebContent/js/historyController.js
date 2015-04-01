@@ -19,7 +19,7 @@ $(function() {
 		$('#history').show();
 		$('#history-posting').show();
 		$('#history-comment').hide();
-		$('#preference').hide();
+		$('#search').hide();
 		$('#favorite').hide();
 		$('.top_explain').hide();
 		
