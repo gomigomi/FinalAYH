@@ -75,17 +75,19 @@ $(function() {
 	
 	/*라겸*/
 	
-	function getCommentData(){
-		$.ajax({
-			url : 'http://localhost:8080/getComment',
-			method : 'get',
-			dataType : 'json',
-			success : function(res){
-				commentDatas = res.result;			
-				renderPopularPostingList();
-			}
-		});
-	}
+	//
+//	function getCommentData(){
+//		$.ajax({
+//			url : 'http://localhost:8080/getComment',
+//			method : 'get',
+//			dataType : 'json',
+//			success : function(res){
+//				console.log("getCommentView");
+//				commentDatas = res.result;			
+//				renderPopularPostingList();
+//			}
+//		});
+//	}
 	getCommentData();
 
 	$('#recent_tab_btn').click(function(){
@@ -107,6 +109,7 @@ $(function() {
 			dataType: 'json',
 			async : false,
 			success : function(res){
+				console.log("get populare posting");
 				postingPopularDatas = res.result;
 				for(var i=0; i<postingPopularDatas.length; i++ ){
 					if(window.sessionStorage.getItem('id')==postingPopularDatas[i].writer){

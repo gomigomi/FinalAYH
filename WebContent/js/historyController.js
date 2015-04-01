@@ -2,16 +2,17 @@ $(function() {
 	console.log("View Ready!");
 	//모든 코멘트를 불러온
 	var commentDatas;
-	function getCommentData(){
-		$.ajax({
-			url : 'http://localhost:8080/getComment',
-			method : 'get',
-			dataType : 'json',
-			success : function(res){
-				commentDatas = res.result;
-			}
-		})
-	}
+//	function getCommentData(){
+//		$.ajax({
+//			url : 'http://localhost:8080/getComment',
+//			method : 'get',
+//			dataType : 'json',
+//			success : function(res){
+//				console.log("get comment");
+//				commentDatas = res.result;
+//			}
+//		})
+//	}
 	getCommentData();
 	
 	$('#history-button').click(function() {
@@ -44,6 +45,7 @@ $(function() {
 			dataType: 'json',
 			async : false,
 			success : function(res){
+				console.log("get user-written-posting");
 				postingUserDatas = res.result;
 				for(var i=0;i<postingUserDatas.length;i++){
 					$('#history-posting').append(getSectionItem(postingUserDatas[i],false));
@@ -62,6 +64,7 @@ $(function() {
 			dataType: 'json',
 			async : false,
 			success : function(res){
+				console.log("get-user-written comment");
 				postingUserCommentDatas = res.result;
 				//콘솔 
 				console.log(postingUserCommentDatas);

@@ -5,17 +5,7 @@ $(function() {
 	var count=0;
 
 	//comment process
-	function getCommentData(){
-		$.ajax({
-			url : 'http://localhost:8080/getComment',
-			method : 'get',
-			dataType : 'json',
-			success : function(res){
-				commentDatas = res.result;
-				renderPostingList();
-			}
-		});
-	}
+
 	
 	getCommentData();
 
@@ -46,6 +36,7 @@ $(function() {
 						method : 'POST',
 						dataType : 'json',
 						success : function(res) {
+							console.log("profile-edit");
 							window.sessionStorage.setItem('name', name);
 							window.sessionStorage.setItem('pass', pass);
 							$('#user_edit_name').val(name);
@@ -79,7 +70,8 @@ $(function() {
 					method :'DELETE',
 					dataType :'json',
 					success : function(res) {
-
+						console.log("user-delete");
+						
 						$('#user_edit_id').val('');
 						$('#user_edit_name').val('');
 						$('#user_edit_pass').val('');
@@ -120,6 +112,7 @@ $(function() {
 			method : 'get',
 			dataType : 'json',
 			success : function(res){
+				console.log("login-api");
 				if(res.result.id){
 					$('#user_id').val('');
 					$('#user_pass').val('');
@@ -186,6 +179,7 @@ $(function() {
 			method : 'get',
 			dataType : 'json',
 			success : function(res){
+				console.log("id overlap");
 				if(res.result==1){
 					alert('Sorry. Id is already exist');
 					$('#user_signin_id').val('');
@@ -198,6 +192,7 @@ $(function() {
 						method : 'post',
 						dataType : 'json',
 						success : function(res){
+							console.log("create user");
 							alert('sign in success!')
 							$('#user_signin_id').val('');
 							$('#user_signin_name').val('');
@@ -254,6 +249,7 @@ $(function() {
 				writer : window.sessionStorage.getItem('id')
 			},
 			success : function(res){
+				console.log("postposting");
 				if(res.result == 'success'){
 					$('#write').val('');
 
@@ -293,6 +289,7 @@ $(function() {
 			dataType: 'json',
 			data: param,
 			success: function(res){
+				console.log("postcomment");
 				if(res.result=='success'){
 					//Append comment to comment list
 					var commentItem = '<li>'+
@@ -347,6 +344,8 @@ $(function() {
 			dataType: 'json',
 			async : false,
 			success : function(res){
+				console.log("getposting");
+				
 				postingDatas = res.result;
 				for(var i=0; i<postingDatas.length; i++ ){
 					renderSectionElem();
@@ -401,6 +400,7 @@ $(function() {
 				method :'DELETE',
 				dataType :'json',
 				success : function(res) {
+					console.log("deleteposting");
 					renderPostingList();
 				}
 			});
@@ -421,6 +421,7 @@ $(function() {
 					content : content
 				},
 				success : function(res) {
+					console.log("posting-edit");
 					$('#post_edit_area').val('');
 					$.modal.close();
 					renderPostingList();
@@ -566,3 +567,16 @@ $(function() {
 	}
 	
 });
+
+function getCommentData(){
+	$.ajax({
+		url : 'http://localhost:8080/getComment',
+		method : 'get',
+		dataType : 'json',
+		success : function(res){
+			console.log("getCommentData_custom");
+			commentDatas = res.result;
+			renderPostingList();
+		}
+	});
+}
