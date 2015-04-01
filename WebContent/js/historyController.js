@@ -2,17 +2,17 @@ $(function() {
 	console.log("View Ready!");
 	//모든 코멘트를 불러온
 	var commentDatas;
-//	function getCommentData(){
-//		$.ajax({
-//			url : 'http://localhost:8080/getComment',
-//			method : 'get',
-//			dataType : 'json',
-//			success : function(res){
-//				console.log("get comment");
-//				commentDatas = res.result;
-//			}
-//		})
-//	}
+	function getCommentData(){
+		$.ajax({
+			url : 'http://localhost:8080/getComment',
+			method : 'get',
+			dataType : 'json',
+			success : function(res){
+				console.log("get comment");
+				commentDatas = res.result;
+			}
+		})
+	}
 	getCommentData();
 	
 	$('#history-button').click(function() {

@@ -6,7 +6,19 @@ $(function() {
 
 	//comment process
 
-	
+
+	function getCommentData(){
+		$.ajax({
+			url : 'http://localhost:8080/getComment',
+			method : 'get',
+			dataType : 'json',
+			success : function(res){
+				console.log("getCommentData_custom");
+				commentDatas = res.result;
+				renderPostingList();
+			}
+		});
+	}
 	getCommentData();
 
 	
@@ -567,16 +579,3 @@ $(function() {
 	}
 	
 });
-
-function getCommentData(){
-	$.ajax({
-		url : 'http://localhost:8080/getComment',
-		method : 'get',
-		dataType : 'json',
-		success : function(res){
-			console.log("getCommentData_custom");
-			commentDatas = res.result;
-			renderPostingList();
-		}
-	});
-}
