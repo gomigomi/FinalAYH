@@ -35,7 +35,6 @@ $(function() {
 		})
 	})
 
-	getCommentData();
 //쓴 포스팅 불러오기 
 	function getPostingUser(){
 		$('#history-posting').empty();
