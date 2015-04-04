@@ -1,8 +1,6 @@
 $(function() {
 	console.log(commentDatas);
-	getCommentData();
 	var postingDatas;	//Posting//Comment
-//	var commentDatas = getCommentData();
 	var count=0;
 
 	//comment process

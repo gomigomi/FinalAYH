@@ -125,7 +125,6 @@ $(function() {
 			success : function(res){
 				console.log("get populare posting");
 				postingPopularDatas = res.result;
-				getCommentData();
 				for(var i=0; i<postingPopularDatas.length; i++ ){
 					if(window.sessionStorage.getItem('id')==postingPopularDatas[i].writer){
 						$('#popular_post').append(getSectionItem(postingPopularDatas[i], false));
