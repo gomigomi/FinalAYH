@@ -140,6 +140,8 @@ $(function() {
 					var thumb=res.result.thumb;
 					
 					$('.logon').show();
+					$('.thumb').show();
+					$('info').show();
 					$('.logoff').hide();
 
 					renderPostingList();
@@ -205,6 +207,7 @@ $(function() {
 						dataType : 'json',
 						success : function(res){
 							console.log("create user");
+							
 							alert('sign in success!')
 							$('#user_signin_id').val('');
 							$('#user_signin_name').val('');
@@ -212,15 +215,16 @@ $(function() {
 							$('#user_signin_passconf').val('');
 							$.modal.close();
 							
-							
-							//auto log-in
 							window.sessionStorage.setItem('id', id);
 							window.sessionStorage.setItem('name', name);
+							
 							
 							$('.logon').show();
 							$('.thumb').show()
 							$('.info').show();
 							$('.logoff').hide();
+							
+							
 						},
 						error : function(){
 
@@ -234,6 +238,8 @@ $(function() {
 			}
 
 		});
+		//auto log-in
+		
 	});
 
 	
@@ -383,6 +389,7 @@ $(function() {
 						renderSectionElem();
 					}
 				}
+			
 			}
 		}
 	});
@@ -403,7 +410,7 @@ $(function() {
 	}
 //포스팅삭제 
 	$(document).on('click', '.post-delete' , function(){
-		var seq=$(this).parent().parent().parent().parent().parent().attr('id');
+		var seq = $(this).closest('section').attr('id');
 		seq= seq.substring(11);
 		var check=confirm('Are you sure to delete this post?');
 		if (check){
@@ -441,22 +448,7 @@ $(function() {
 			});
 		});
 	});
-	/*파일 입출력 처리 
-     $("#uploadbutton").click(function(){
-         var form = $('#postingimg')[0];
-         var formData = new FormData(form);
-             $.ajax({
-                url: '/fileupload',
-                processData: false,
-                    contentType: false,
-                data: formData,
-                type: 'POST',
-                success: function(result){
-                    alert("업로드 성공!!");
-                }
-            });
-         });
-	*/
+
 	/**
 	 * postingDatas - seq, thumb, writer, regdate, content
 	 * isHide - boolean
@@ -558,6 +550,24 @@ $(function() {
 		  }
 		  return zero + n;
 	}
+	
+	/*파일 입출력 처리 
+    $("#uploadbutton").click(function(){
+        var form = $('#postingimg')[0];
+        var formData = new FormData(form);
+            $.ajax({
+               url: '/fileupload',
+               processData: false,
+                   contentType: false,
+               data: formData,
+               type: 'POST',
+               success: function(result){
+                   alert("업로드 성공!!");
+               }
+           });
+        });
+	*/
+
 	
 	
 	
