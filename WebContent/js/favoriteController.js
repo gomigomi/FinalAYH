@@ -2,6 +2,11 @@ $(function() {
 	console.log("favoriteController Ready!");
 	var flag = 0;
 	
+	$('#favorite-button').click(function(){
+		
+	})
+	
+	
 	$(document).on('click', '.favorite-btn', function(){
 		if(flag == 0) {
 			flag = 1;

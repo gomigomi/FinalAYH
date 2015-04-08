@@ -79,12 +79,39 @@
     <servlet-name>postComment</servlet-name>
     <url-pattern>/postComment</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>deleteComment</servlet-name>            
     <servlet-class>com.bac.comment.CommentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>deleteComment</servlet-name>
     <url-pattern>/deleteComment</url-pattern>
-  </servlet-mapping>   		
+  </servlet-mapping>   	
+  
+  
+  <!-- favorite -->
+  <servlet>
+    <servlet-name>getFavorite</servlet-name>
+    <servlet-class>com.bac.favorite.FavoriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getFavorite</servlet-name>
+    <url-pattern>/getFavorite</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>postFavorite</servlet-name>
+    <servlet-class>com.bac.favorite.FavoriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>postFavorite</servlet-name>
+    <url-pattern>/postFavorite</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteFavorite</servlet-name>
+    <servlet-class>com.bac.favorite.FavoriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteFavorite</servlet-name>
+    <url-pattern>/deleteFavorite</url-pattern>
+  </servlet-mapping>
 </web-app>

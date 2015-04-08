@@ -134,6 +134,10 @@
     border: 0;
     margin-right: 10px;
 }
+.favorite-btn{
+    float: right;
+	
+}
 
 #post_edit{
     width: 60%;
