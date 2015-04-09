@@ -6,13 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FavoriteDao {
+//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+//	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
+	//DB test
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
+
 
 	static final String USER = "root";
 	static final String PASS = "900418";
@@ -39,7 +44,7 @@ public class FavoriteDao {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("Fron Ajax!!");
+		System.out.println("User id "+id+" has selected from BOOKMARK");
 		
 		try{
 			conn = getConnection();
@@ -72,7 +77,6 @@ public class FavoriteDao {
 	}
 	
 	
-
 	
 	public String deleteFavorite(String seq){
 		Connection conn = null;
@@ -104,38 +108,38 @@ public class FavoriteDao {
 	
 	
 	
-	public String postFavorite(Map<String, String[]> userParam){
-		Connection conn = null;
-		Statement stmt = null;
-		String result = "success";
-		try{
-			conn = getConnection();
-
-			stmt = conn.createStatement();
-			String sql= "INSERT INTO bookmark (flag, posting_seq, id) "+
-						"VALUES('"+userParam.get("flag")[0].toString()+"', '"+userParam.get("posting_seq")[0].toString()+"', '"+userParam.get("id")[0].toString()+"'";
-
-			stmt.executeUpdate(sql);
-
-			stmt.close();
-			conn.close();
-
-		}catch(SQLException se){
-			se.printStackTrace();
-			result = "fail";
-		}catch(Exception e){
-			e.printStackTrace();
-			result = "fail";
-		}finally{
-			
-		}
-
-		return result;
-	}
+//	public String postFavorite(Map<String, String[]> userParam){
+//		Connection conn = null;
+//		Statement stmt = null;
+//		String result = "success";
+//		try{
+//			conn = getConnection();
+//
+//			stmt = conn.createStatement();
+//			String sql= "INSERT INTO bookmark (flag, posting_seq, id) "+
+//						"VALUES('"+userParam.get("flag")[0].toString()+"', '"+userParam.get("posting_seq")[0].toString()+"', '"+userParam.get("id")[0].toString()+"'";
+//
+//			stmt.executeUpdate(sql);
+//
+//			stmt.close();
+//			conn.close();
+//
+//		}catch(SQLException se){
+//			se.printStackTrace();
+//			result = "fail";
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			result = "fail";
+//		}finally{
+//			
+//		}
+//
+//		return result;
+//	}
 	
 //end FirstExample
 	
-	public String updateFavorite(int flag, int posting_seq, String id){
+	public String updateFavorite(String flag, String posting_seq, String id){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -143,7 +147,7 @@ public class FavoriteDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql= "UPDATE bookmark SET flag='"+flag+"', posting_seq='"+posting_seq+"' where id='"+id+"'";
+			String sql= "UPDATE bookmark SET flag='"+flag+"' where id='"+id+"' and posting_seq='"+posting_seq+"' ";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -158,39 +162,41 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-
+		System.out.println("User "+id+ "'s bookmark seq has been changed to "+flag);
 		return result;
 	}
+
+
 	
-	public int checkUser(String userId){	
-		Connection conn =null;
-		Statement stmt = null;
-		String sql="";
-		int result=0;
-		try{
-			conn=getConnection();
-			stmt=conn.createStatement();
-			
-			sql="select * from user where id='"+userId+"'";
-			ResultSet rs = stmt.executeQuery(sql);
-			
-			if(rs.next()){
-				result=1;
-				}
-			
-			rs.close();
-			stmt.close();
-			conn.close();
-		}catch(SQLException se){
-			se.printStackTrace();
-			result = 0;
-		}catch(Exception e){
-			e.printStackTrace();
-			result = 0;
-		}finally{
-			
-		}  
-			return result;
-	}
+//	public int checkUser(String userId){	
+//		Connection conn =null;
+//		Statement stmt = null;
+//		String sql="";
+//		int result=0;
+//		try{
+//			conn=getConnection();
+//			stmt=conn.createStatement();
+//			
+//			sql="select * from user where id='"+userId+"'";
+//			ResultSet rs = stmt.executeQuery(sql);
+//			
+//			if(rs.next()){
+//				result=1;
+//				}
+//			
+//			rs.close();
+//			stmt.close();
+//			conn.close();
+//		}catch(SQLException se){
+//			se.printStackTrace();
+//			result = 0;
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			result = 0;
+//		}finally{
+//			
+//		}  
+//			return result;
+//	}
 
 }

@@ -64,25 +64,21 @@ public class FavoriteServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-		String type = request.getParameter("type");
 
 		FavoriteDao dao = new FavoriteDao();
 //		Map<String, String[]> userParam = request.getParameterMap();
 
 		try{
-			if(type.equals("1")){	//Sign in API
-				Map<String, String[]> userParam = request.getParameterMap();				
-				JObject.put("result", dao.postFavorite(userParam));
-				
-			}else if(type.equals("2")){	//Update API
+			//Bookmark controller
 				
 				String flag = request.getParameter("flag");
 				String posting_seq = request.getParameter("posting_seq");
+				
+//				int flag = Integer.parseInt(flag_o);
+//				int posting_seq = Integer.parseInt(posting_seq_o);
 				String id = request.getParameter("id");
 				
 				JObject.put("result", dao.updateFavorite(flag, posting_seq, id));
-			}
-
 
 		}catch(JSONException e){
 			
@@ -92,24 +88,24 @@ public class FavoriteServlet extends HttpServlet{
 		printout.flush();
 	}
 
-	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=UTF-8");//DELETE
-
-		PrintWriter printout = response.getWriter();
-		JSONObject JObject = new JSONObject();
-
-		UserDao dao = new UserDao();
-		
-		String userId = request.getParameter("id");
-
-		
-		try{
-			JObject.put("result", dao.deleteUser(userId));
-		}catch(JSONException e){
-			
-			e.printStackTrace();
-		}
-		printout.print(JObject);
-		printout.flush();
-	}
+//	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.setContentType("application/json; charset=UTF-8");//DELETE
+//
+//		PrintWriter printout = response.getWriter();
+//		JSONObject JObject = new JSONObject();
+//
+//		UserDao dao = new UserDao();
+//		
+//		String userId = request.getParameter("id");
+//
+//		
+//		try{
+//			JObject.put("result", dao.deleteUser(userId));
+//		}catch(JSONException e){
+//			
+//			e.printStackTrace();
+//		}
+//		printout.print(JObject);
+//		printout.flush();
+//	}
 }
