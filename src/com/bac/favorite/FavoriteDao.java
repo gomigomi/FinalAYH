@@ -44,7 +44,7 @@ public class FavoriteDao {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("User id "+id+" has selected from BOOKMARK");
+		System.out.println("Favorite : user "+id+" has used getFavorite");
 		
 		try{
 			conn = getConnection();
@@ -59,7 +59,6 @@ public class FavoriteDao {
 				item.put("id", rs.getString("id"));
 				
 				result.add(item);
-	
 			}
 
 			rs.close();
@@ -78,7 +77,7 @@ public class FavoriteDao {
 	
 	
 	
-	public String deleteFavorite(String seq){
+	public String deleteFavorite(String id, String seq){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -87,7 +86,7 @@ public class FavoriteDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "DELETE from bookmark where seq='"+seq+"'";
+			String sql= "DELETE from bookmark where id='"+id+"' and seq='"+seq+"'";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -102,44 +101,11 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-
+		System.out.println("BOOKMARK : User "+id+" has deleted "+seq);
 		return result;
 	}
 	
-	
-	
-//	public String postFavorite(Map<String, String[]> userParam){
-//		Connection conn = null;
-//		Statement stmt = null;
-//		String result = "success";
-//		try{
-//			conn = getConnection();
-//
-//			stmt = conn.createStatement();
-//			String sql= "INSERT INTO bookmark (flag, posting_seq, id) "+
-//						"VALUES('"+userParam.get("flag")[0].toString()+"', '"+userParam.get("posting_seq")[0].toString()+"', '"+userParam.get("id")[0].toString()+"'";
-//
-//			stmt.executeUpdate(sql);
-//
-//			stmt.close();
-//			conn.close();
-//
-//		}catch(SQLException se){
-//			se.printStackTrace();
-//			result = "fail";
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			result = "fail";
-//		}finally{
-//			
-//		}
-//
-//		return result;
-//	}
-	
-//end FirstExample
-	
-	public String updateFavorite(String flag, String posting_seq, String id){
+	public String postFavorite(String posting_seq, String id){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -147,7 +113,7 @@ public class FavoriteDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql= "UPDATE bookmark SET flag='"+flag+"' where id='"+id+"' and posting_seq='"+posting_seq+"' ";
+			String sql= "UPDATE bookmark SET flag='1' where id='"+id+"' and posting_seq='"+posting_seq+"' ";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -162,41 +128,8 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-		System.out.println("User "+id+ "'s bookmark seq has been changed to "+flag);
+		System.out.println("User "+id+ " added "+posting_seq+" as favorite posting.");
 		return result;
 	}
-
-
-	
-//	public int checkUser(String userId){	
-//		Connection conn =null;
-//		Statement stmt = null;
-//		String sql="";
-//		int result=0;
-//		try{
-//			conn=getConnection();
-//			stmt=conn.createStatement();
-//			
-//			sql="select * from user where id='"+userId+"'";
-//			ResultSet rs = stmt.executeQuery(sql);
-//			
-//			if(rs.next()){
-//				result=1;
-//				}
-//			
-//			rs.close();
-//			stmt.close();
-//			conn.close();
-//		}catch(SQLException se){
-//			se.printStackTrace();
-//			result = 0;
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			result = 0;
-//		}finally{
-//			
-//		}  
-//			return result;
-//	}
 
 }

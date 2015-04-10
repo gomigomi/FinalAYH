@@ -59,6 +59,8 @@ public class FavoriteServlet extends HttpServlet{
 		printout.flush();
 	}
 
+	
+	//Post service
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");//CREATE
 
@@ -71,14 +73,10 @@ public class FavoriteServlet extends HttpServlet{
 		try{
 			//Bookmark controller
 				
-				String flag = request.getParameter("flag");
 				String posting_seq = request.getParameter("posting_seq");
-				
-//				int flag = Integer.parseInt(flag_o);
-//				int posting_seq = Integer.parseInt(posting_seq_o);
 				String id = request.getParameter("id");
 				
-				JObject.put("result", dao.updateFavorite(flag, posting_seq, id));
+				JObject.put("result", dao.postFavorite(posting_seq, id));
 
 		}catch(JSONException e){
 			
@@ -88,24 +86,25 @@ public class FavoriteServlet extends HttpServlet{
 		printout.flush();
 	}
 
-//	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json; charset=UTF-8");//DELETE
-//
-//		PrintWriter printout = response.getWriter();
-//		JSONObject JObject = new JSONObject();
-//
-//		UserDao dao = new UserDao();
-//		
-//		String userId = request.getParameter("id");
-//
-//		
-//		try{
-//			JObject.put("result", dao.deleteUser(userId));
-//		}catch(JSONException e){
-//			
-//			e.printStackTrace();
-//		}
-//		printout.print(JObject);
-//		printout.flush();
-//	}
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json; charset=UTF-8");//DELETE
+
+		PrintWriter printout = response.getWriter();
+		JSONObject JObject = new JSONObject();
+
+		FavoriteDao dao = new FavoriteDao();
+		
+		String id = request.getParameter("id");
+		String seq = request.getParameter("seq");
+
+		
+		try{
+			JObject.put("result", dao.deleteFavorite(id, seq));
+		}catch(JSONException e){
+			
+			e.printStackTrace();
+		}
+		printout.print(JObject);
+		printout.flush();
+	}
 }
