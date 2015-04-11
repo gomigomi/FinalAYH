@@ -1,4 +1,4 @@
-package com.bac.favorite;
+package com.hungry.favorite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

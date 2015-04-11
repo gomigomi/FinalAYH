@@ -1,4 +1,4 @@
-package com.bac.user;
+package com.hungry.posting;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//import com.bac.user.UserDao;
+import com.hungry.posting.PostingDao;
 
-public class UserServlet extends HttpServlet{
+//import com.bac.posting.PostingDao;
+
+public class PostingServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,30 +32,32 @@ public class UserServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
+		//String type = request.getParameter("type");
 		String type = request.getParameter("type");
-
-		UserDao dao = new UserDao();
-
+		PostingDao dao = new PostingDao();
+		
 		try{
-			if(type.equals("1")){	//User Info API
-				String user_id=request.getParameter("id");
-				
-				JObject.put("result", dao.getUser(user_id));
-			}else if(type.equals("2")){	//Login API
+			if(type.equals("1")){//get all postings
+				JObject.put("result", dao.getPosting());
+				}
+			else if(type.equals("2")){	//get someones posting
 				
 				String id = request.getParameter("id");
-				String pass = request.getParameter("pass");
 				
-				JObject.put("result", dao.loginUser(id, pass));
-			}else if(type.equals("3")){	//ID중복 API
-				
-				String check_id = request.getParameter("id");
-				
-				JObject.put("result", dao.checkUser(check_id));
+				JObject.put("result", dao.getUserPosting(id));
 			}
-
-
-		}catch (JSONException e) {
+			else if(type.equals("3")){	//get someones posting
+				
+				String id = request.getParameter("id");
+				
+				JObject.put("result", dao.getUserCommentPosting(id));
+			}
+			else if(type.equals("4")){	//get popular posting
+				
+				JObject.put("result", dao.getPopularPosting());
+			}
+		}
+			catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -67,26 +71,24 @@ public class UserServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-		String type = request.getParameter("type");
+		String type=request.getParameter("type");
 
-		UserDao dao = new UserDao();
-//		Map<String, String[]> userParam = request.getParameterMap();
+		PostingDao dao = new PostingDao();
+		
 
+		
 		try{
-			if(type.equals("1")){	//Sign in API
-				Map<String, String[]> userParam = request.getParameterMap();				
-				JObject.put("result", dao.postUser(userParam));
+			if(type.equals("1")){
+				Map<String, String[]> postingParam = request.getParameterMap();
+			
+				JObject.put("result", dao.postPosting(postingParam));
+			}else if(type.equals("2")){
+				String seq=request.getParameter("seq");
+				String content=request.getParameter("content");
 				
-			}else if(type.equals("2")){	//Update API
+				JObject.put("result", dao.updatePosting(seq, content));
 				
-				String id = request.getParameter("id");
-				String name = request.getParameter("name");
-				String pass = request.getParameter("pass");
-				
-				JObject.put("result", dao.updateUser(id, name, pass));
 			}
-
-
 		}catch(JSONException e){
 			
 			e.printStackTrace();
@@ -101,13 +103,13 @@ public class UserServlet extends HttpServlet{
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
 
-		UserDao dao = new UserDao();
+		PostingDao dao = new PostingDao();
 		
-		String userId = request.getParameter("id");
+		String seq = request.getParameter("seq");
 
 		
 		try{
-			JObject.put("result", dao.deleteUser(userId));
+			JObject.put("result", dao.deletePosting(seq));
 		}catch(JSONException e){
 			
 			e.printStackTrace();
@@ -115,4 +117,5 @@ public class UserServlet extends HttpServlet{
 		printout.print(JObject);
 		printout.flush();
 	}
+
 }

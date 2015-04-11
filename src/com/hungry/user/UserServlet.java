@@ -1,4 +1,4 @@
-package com.bac.comment;
+package com.hungry.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.bac.comment.CommentDao;
+//import com.bac.user.UserDao;
 
-//import com.bac.comment.CommentDao;
-
-public class CommentServlet extends HttpServlet{
+public class UserServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,12 +30,29 @@ public class CommentServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-		//String type = request.getParameter("type");
+		String type = request.getParameter("type");
 
-		CommentDao dao = new CommentDao();
+		UserDao dao = new UserDao();
 
 		try{
-			JObject.put("result", dao.getComment());
+			if(type.equals("1")){	//User Info API
+				String user_id=request.getParameter("id");
+				
+				JObject.put("result", dao.getUser(user_id));
+			}else if(type.equals("2")){	//Login API
+				
+				String id = request.getParameter("id");
+				String pass = request.getParameter("pass");
+				
+				JObject.put("result", dao.loginUser(id, pass));
+			}else if(type.equals("3")){	//ID중복 API
+				
+				String check_id = request.getParameter("id");
+				
+				JObject.put("result", dao.checkUser(check_id));
+			}
+
+
 		}catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,21 +61,32 @@ public class CommentServlet extends HttpServlet{
 		printout.print(JObject);
 		printout.flush();
 	}
-	
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");//CREATE
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
+		String type = request.getParameter("type");
 
-		CommentDao dao = new CommentDao();
-		
-		Map<String, String[]> commentParam = request.getParameterMap();
+		UserDao dao = new UserDao();
+//		Map<String, String[]> userParam = request.getParameterMap();
 
-		
 		try{
-			JObject.put("result", dao.postComment(commentParam));
+			if(type.equals("1")){	//Sign in API
+				Map<String, String[]> userParam = request.getParameterMap();				
+				JObject.put("result", dao.postUser(userParam));
+				
+			}else if(type.equals("2")){	//Update API
+				
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String pass = request.getParameter("pass");
+				
+				JObject.put("result", dao.updateUser(id, name, pass));
+			}
+
+
 		}catch(JSONException e){
 			
 			e.printStackTrace();
@@ -70,18 +96,18 @@ public class CommentServlet extends HttpServlet{
 	}
 
 	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=UTF-8");//CREATE
+		response.setContentType("application/json; charset=UTF-8");//DELETE
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
 
-		CommentDao dao = new CommentDao();
+		UserDao dao = new UserDao();
 		
-		String seq = request.getParameter("seq");
+		String userId = request.getParameter("id");
 
 		
 		try{
-			JObject.put("result", dao.deleteComment(seq));
+			JObject.put("result", dao.deleteUser(userId));
 		}catch(JSONException e){
 			
 			e.printStackTrace();
@@ -89,5 +115,4 @@ public class CommentServlet extends HttpServlet{
 		printout.print(JObject);
 		printout.flush();
 	}
-
 }

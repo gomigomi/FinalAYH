@@ -1,4 +1,4 @@
-package com.bac.favorite;
+package com.hungry.stats;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,41 +13,31 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//import com.bac.user.UserDao;
+import com.hungry.posting.PostingDao;
 
-public class FavoriteServlet extends HttpServlet{
+//import com.bac.posting.PostingDao;
+
+public class StatsServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
-	
+	/**
+	 * Select 쿼리를 위한 Ajax GET 핸들러
+	 * type=1 : all
+	 * type=2 : login
+	 * login시 결과값은 success or fail
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");//READ
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-//		String type = request.getParameter("type");
+		//String type = request.getParameter("type");
 
-		FavoriteDao dao = new FavoriteDao();
+		PostingDao dao = new PostingDao();
 
 		try{
-//			if(type.equals("1")){	//User Info API
-//				String user_id=request.getParameter("id");
-//				
-//				JObject.put("result", dao.getUser(user_id));
-//			}else if(type.equals("2")){	//Login API
-//				
-//				String id = request.getParameter("id");
-//				String pass = request.getParameter("pass");
-//				
-//				JObject.put("result", dao.loginUser(id, pass));
-//			}else if(type.equals("3")){	//ID중복 API
-//				
-//				String check_id = request.getParameter("id");
-//				
-//				JObject.put("result", dao.checkUser(check_id));
-//			}
-			String bm_id = request.getParameter("id");
-			JObject.put("result", dao.getFavorite(bm_id));
+			JObject.put("result", dao.getPosting());
 
 
 		}catch (JSONException e) {
@@ -59,25 +49,29 @@ public class FavoriteServlet extends HttpServlet{
 		printout.flush();
 	}
 
-	
-	//Post service
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");//CREATE
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
+		String type=request.getParameter("type");
 
-		FavoriteDao dao = new FavoriteDao();
-//		Map<String, String[]> userParam = request.getParameterMap();
+		PostingDao dao = new PostingDao();
+		
 
+		
 		try{
-			//Bookmark controller
+			if(type.equals("1")){
+				Map<String, String[]> postingParam = request.getParameterMap();
+			
+				JObject.put("result", dao.postPosting(postingParam));
+			}else if(type.equals("2")){
+				String seq=request.getParameter("seq");
+				String content=request.getParameter("content");
 				
-				String posting_seq = request.getParameter("posting_seq");
-				String id = request.getParameter("id");
+				JObject.put("result", dao.updatePosting(seq, content));
 				
-				JObject.put("result", dao.postFavorite(posting_seq, id));
-
+			}
 		}catch(JSONException e){
 			
 			e.printStackTrace();
@@ -92,14 +86,13 @@ public class FavoriteServlet extends HttpServlet{
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
 
-		FavoriteDao dao = new FavoriteDao();
+		PostingDao dao = new PostingDao();
 		
-		String id = request.getParameter("id");
-		String posting_seq = request.getParameter("posting_seq");
+		String seq = request.getParameter("seq");
 
 		
 		try{
-			JObject.put("result", dao.deleteFavorite(id, posting_seq));
+			JObject.put("result", dao.deletePosting(seq));
 		}catch(JSONException e){
 			
 			e.printStackTrace();
@@ -107,4 +100,5 @@ public class FavoriteServlet extends HttpServlet{
 		printout.print(JObject);
 		printout.flush();
 	}
+
 }
