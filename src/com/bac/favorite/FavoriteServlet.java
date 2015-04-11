@@ -95,11 +95,11 @@ public class FavoriteServlet extends HttpServlet{
 		FavoriteDao dao = new FavoriteDao();
 		
 		String id = request.getParameter("id");
-		String seq = request.getParameter("seq");
+		String posting_seq = request.getParameter("posting_seq");
 
 		
 		try{
-			JObject.put("result", dao.deleteFavorite(id, seq));
+			JObject.put("result", dao.deleteFavorite(id, posting_seq));
 		}catch(JSONException e){
 			
 			e.printStackTrace();

@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 public class FavoriteDao {
-//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-//	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
-	//DB test
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
+	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
+	//DB test
+//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+//	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
 
 
 	static final String USER = "root";
@@ -44,7 +44,7 @@ public class FavoriteDao {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("Favorite : user "+id+" has used getFavorite");
+		System.out.println("BOOKMARK : user "+id+" has used getFavorite");
 		
 		try{
 			conn = getConnection();
@@ -77,7 +77,7 @@ public class FavoriteDao {
 	
 	
 	
-	public String deleteFavorite(String id, String seq){
+	public String deleteFavorite(String id, String posting_seq){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -86,7 +86,7 @@ public class FavoriteDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "DELETE from bookmark where id='"+id+"' and seq='"+seq+"'";
+			String sql= "DELETE from bookmark where id='"+id+"' and posting_seq='"+posting_seq+"'";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -101,7 +101,7 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-		System.out.println("BOOKMARK : User "+id+" has deleted "+seq);
+		System.out.println("BOOKMARK : User "+id+" has deleted "+posting_seq);
 		return result;
 	}
 	
@@ -113,9 +113,11 @@ public class FavoriteDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql= "UPDATE bookmark SET flag='1' where id='"+id+"' and posting_seq='"+posting_seq+"' ";
-			stmt.executeUpdate(sql);
+			String sql= "INSERT INTO bookmark (flag, id, posting_seq) "+
+						"VALUES('1', '"+id+"', '"+posting_seq+"')";
 
+			stmt.executeUpdate(sql);
+		
 			stmt.close();
 			conn.close();
 
@@ -128,7 +130,7 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-		System.out.println("User "+id+ " added "+posting_seq+" as favorite posting.");
+		System.out.println("BOOKMARK : User "+id+ " added "+posting_seq+" as favorite posting.");
 		return result;
 	}
 
