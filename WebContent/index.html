@@ -85,10 +85,97 @@
 		<div class="content pure-u-1 pure-u-md-3-4">
 			<div id="main-view">
 				<div>
+				<!-- Write-post 부분 아직 덜만졌습니다 손대지말아주세요 ㅜㅜ 헷갈려서 망할수도있어 -->
 					<div class="write-post">
-						<h1>Write Post</h1>
-						<textarea id="write"></textarea>
-						<div id="write_post_btn" class="pure-button">Post</div>
+						<button id="write_post"><h1>Write Post</h1></button>
+						<div id="w_checkbox" style="display:none;">
+							<form action="" id="checkbox-type" enctype="multipart/form-data" method="post">
+								<div class="type_wrapper">
+									<div class=type_name>
+										<h3>TYPE</h3>
+									</div>
+									<div class="type_property">
+										<p>Korean</p>
+										<input type="checkbox" class="property" name="type"
+											value="korean">
+										<p>Chines</p>
+										<input type="checkbox" class="property" name="type"
+											value="chines">
+										<p>Japanes</p>
+										<input type="checkbox" class="property" name="type"
+											value="japanes">
+										<p>European</p>
+										<input type="checkbox" class="property" name="type"
+											value="european">
+										<p>American</p>
+										<input type="checkbox" class="property" name="type"
+											value="american">
+										<p>Mexican</p>
+										<input type="checkbox" class="property" name="type"
+											value="mexican">
+										<p>ETC</p>
+										<input type="checkbox" class="property" name="type" value="etc">
+									</div>
+								</div>
+		
+								<div class="taste_wrapper">
+									<div class="taste_name">
+										<h3>TASTE</h3>
+									</div>
+									<div class="taste_property">
+										<p>Hot</p>
+										<input type="checkbox" class="property" name="taste" value="hot">
+										<p>Sweet</p>
+										<input type="checkbox" class="property" name="taste"
+											value="sweet">
+										<p>신맛</p>
+										<input type="checkbox" class="property" name="taste" value="sin">
+										<p>Saulty</p>
+										<input type="checkbox" class="property" name="taste"
+											value="saulty">
+									</div>
+								</div>
+		
+								<div class="time_wrapper">
+									<div class="time_name">
+										<h3>TIME</h3>
+									</div>
+									<div class="time_property">
+										<p>Breakfast</p>
+										<input type="checkbox" class="property" name="time" value="bf">
+										<p>Lunch</p>
+										<input type="checkbox" class="property" name="time" value="lc">
+										<p>Dinner</p>
+										<input type="checkbox" class="property" name="time" value="dn">
+									</div>
+								</div>
+		
+								<div class="location_wrapper">
+									<div class="location_name">
+										<h3>지역</h3>
+										<!-- select -->
+									</div>
+									<div class="location_property">
+										<select name=location>
+											<option value=1 selected>서울</option>
+											<option value=2>경기</option>
+											<option value=3>강원</option>
+											<option value=4>경상</option>
+											<option value=5>충청</option>
+											<option value=6>전라</option>
+											<option value=7>제주</option>
+										</select>
+									</div>
+								</div>
+								<div id="img_wrapper">
+									<div id="img_upload"><input type="file" id="img_Upload" name="img-Upload"></div>
+									<div id="img_preview"></div>
+								</div>
+								<textarea id="write"></textarea>
+								
+								<div id="write_post_btn" class="pure-button">Post</div>
+							</form>
+						</div>						
 					</div>
 					<!-- A wrapper for all the blog posts -->
 					<!--            <div class="posts">
