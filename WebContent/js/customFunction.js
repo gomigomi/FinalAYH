@@ -23,7 +23,7 @@ var favoriteDatas;
 function getFavoriteData(){
 	var id = window.sessionStorage.getItem('id');
 	$.ajax ({
-		url : 'http://localhost:8080/getFavorite?id='+id,
+		url : 'http://localhost:8080/getFavorite?id='+id+'&type=1',
 		method : 'get',
 		dataType : 'json',
 		success : function(res){
