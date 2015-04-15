@@ -2,8 +2,12 @@ $(function() {
 	console.log("favoriteController Ready!");
 	var flag = 0;
 	
+	
+	
+	
 	$('#favorite-button').click(function(){
-		
+		getCommentData();
+		getFavoriteData();
 	})
 	
 	

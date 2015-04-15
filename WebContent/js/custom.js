@@ -467,10 +467,10 @@ $(function() {
 			'<span class="post-meta bacpost-meta">'+
 			'<p>'+
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
-			'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
+			'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
 			'</span>'+ 
 			'</p>'+
 			'<p>'+
