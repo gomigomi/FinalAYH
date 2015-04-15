@@ -29,8 +29,16 @@ public class FavoriteServlet extends HttpServlet{
 
 		FavoriteDao dao = new FavoriteDao();
 		try{
-			String bm_id = request.getParameter("id");
-			JObject.put("result", dao.getFavorite(bm_id));
+			//type1 = 일반 포스팅 화면을 위한 join
+			if(type.equals("1")) {
+				String bm_id = request.getParameter("id");
+				JObject.put("result", dao.getFavoriteView(bm_id));
+			} //type2 = favorite view에서만 사용 
+			  else if(type.equals("2")) {  
+				String bm_id = request.getParameter("id");
+				JObject.put("result", dao.getFavorite(bm_id));
+			}
+
 		}catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
