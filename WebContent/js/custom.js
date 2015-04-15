@@ -354,7 +354,7 @@ $(function() {
 			dataType: 'json',
 			async : false,
 			success : function(res){
-				console.log("getposting");
+				console.log("renderPostingList()get_posting");
 				
 				postingDatas = res.result;
 				for(var i=0; i<postingDatas.length; i++ ){
