@@ -1,4 +1,4 @@
-package com.bac.user;
+package com.hungry.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

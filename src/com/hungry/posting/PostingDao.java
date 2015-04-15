@@ -1,4 +1,4 @@
-package com.bac.posting;
+package com.hungry.posting;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

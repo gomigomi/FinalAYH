@@ -1,4 +1,4 @@
-package com.bac.comment;
+package com.hungry.comment;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.bac.comment.CommentDao;
+import com.hungry.comment.CommentDao;
 
 //import com.bac.comment.CommentDao;
 

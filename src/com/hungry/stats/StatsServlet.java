@@ -1,4 +1,4 @@
-package com.bac.posting;
+package com.hungry.stats;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.bac.posting.PostingDao;
+import com.hungry.posting.PostingDao;
 
 //import com.bac.posting.PostingDao;
 
-public class PostingServlet extends HttpServlet{
+public class StatsServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,31 +33,14 @@ public class PostingServlet extends HttpServlet{
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
 		//String type = request.getParameter("type");
-		String type = request.getParameter("type");
+
 		PostingDao dao = new PostingDao();
-		
+
 		try{
-			if(type.equals("1")){//get all postings
-				JObject.put("result", dao.getPosting());
-				}
-			else if(type.equals("2")){	//get someones posting
-				
-				String id = request.getParameter("id");
-				
-				JObject.put("result", dao.getUserPosting(id));
-			}
-			else if(type.equals("3")){	//get someones posting
-				
-				String id = request.getParameter("id");
-				
-				JObject.put("result", dao.getUserCommentPosting(id));
-			}
-			else if(type.equals("4")){	//get popular posting
-				
-				JObject.put("result", dao.getPopularPosting());
-			}
-		}
-			catch (JSONException e) {
+			JObject.put("result", dao.getPosting());
+
+
+		}catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
