@@ -25,31 +25,12 @@ public class FavoriteServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-//		String type = request.getParameter("type");
+		String type = request.getParameter("type");
 
 		FavoriteDao dao = new FavoriteDao();
-
 		try{
-//			if(type.equals("1")){	//User Info API
-//				String user_id=request.getParameter("id");
-//				
-//				JObject.put("result", dao.getUser(user_id));
-//			}else if(type.equals("2")){	//Login API
-//				
-//				String id = request.getParameter("id");
-//				String pass = request.getParameter("pass");
-//				
-//				JObject.put("result", dao.loginUser(id, pass));
-//			}else if(type.equals("3")){	//ID중복 API
-//				
-//				String check_id = request.getParameter("id");
-//				
-//				JObject.put("result", dao.checkUser(check_id));
-//			}
 			String bm_id = request.getParameter("id");
 			JObject.put("result", dao.getFavorite(bm_id));
-
-
 		}catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

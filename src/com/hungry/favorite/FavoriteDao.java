@@ -130,7 +130,7 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-		System.out.println("BOOKMARK : User "+id+ " added "+posting_seq+" as favorite posting.");
+		System.out.println("BOOKMARK : User "+id+ " added posting"+posting_seq+" as favorite.");
 		return result;
 	}
 
