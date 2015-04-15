@@ -276,3 +276,9 @@ section{
 	
     font-size: 110%;
 }
+
+#write_post{
+    background-color: white;	
+    border: 0px;
+    height: 60px;
+}

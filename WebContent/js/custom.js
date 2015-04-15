@@ -2,21 +2,6 @@ $(function() {
 	console.log(commentDatas);
 	var postingDatas;	//Posting//Comment
 	var count=0;
-
-	//comment process
-
-
-//	function getCommentData(){
-//		$.ajax({
-//			url : 'http://localhost:8080/getComment',
-//			method : 'get',
-//			dataType : 'json',
-//			success : function(res){
-//				console.log("getCommentData_custom");
-//				commentDatas = res.result;				
-//			}
-//		});
-//	}
 	
 	renderPostingList();
 	
@@ -30,6 +15,15 @@ $(function() {
 		renderPostingList();
 	});
 
+	$('#write_post').click(function(){
+
+		if($('#w_checkbox').css('display') == 'none'){
+		    $('#w_checkbox').show();
+		} else {
+		    $('#w_checkbox').hide();
+		}
+	});
+	
 	
 	//profile edit process
 	$('#profile-edit-submit').click(
