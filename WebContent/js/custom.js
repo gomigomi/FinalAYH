@@ -286,7 +286,7 @@ $(function() {
 		count_num=Number(count_num);
 		
 		var param = {
-			posting_seq : parentElem.attr('id').substring(11),
+			posting_seq : parentElem.attr('id').substring(11, 13),
 			writer : window.sessionStorage.getItem('id'),
 			content : parentElem.find('input.comment').val(),
 			point : parentElem.find('.raty').raty('score')
@@ -390,20 +390,36 @@ $(function() {
 	/**
 	 * 
 	 */
+	
+
 	function renderSectionElem(){
+		var flag = postingDatas[count].flag;
+		
 		if(window.sessionStorage.getItem('id')==postingDatas[count].writer){
-			$('.posts').append(getSectionItem(postingDatas[count], false));
-			handleRaty();
-		}else{
-			$('.posts').append(getSectionItem(postingDatas[count], true));
-			handleRaty();
-		}
+			if (flag == undefined) {
+				$('.posts').append(getSectionItem(postingDatas[count], false, true));
+				handleRaty();
+			} else if (flag != undefined) {
+				$('.posts').append(getSectionItem(postingDatas[count], false, false));
+				handleRaty();
+			}
+			
+		}else if (window.sessionStorage.getItem('id') != postingDatas[count].writer){
+			if (flag == undefined) {
+				$('.posts').append(getSectionItem(postingDatas[count], true, true, true));
+				handleRaty();
+			} else if(flag != undefined){
+				$('.posts').append(getSectionItem(postingDatas[count], true, true, false));
+				handleRaty();
+			}
+			console.log(count+":"+flag);
+		} 
 		count++;
 	}
 //포스팅삭제 
 	$(document).on('click', '.post-delete' , function(){
 		var seq = $(this).closest('section').attr('id');
-		seq= seq.substring(11);
+		seq= seq.substring(11, 13);
 		var check=confirm('Are you sure to delete this post?');
 		if (check){
 			$.ajax({
@@ -420,7 +436,9 @@ $(function() {
 //포스팅 수정 
 	$(document).on('click','.post-edit', function(){
 		var seq = $(this).closest('section').attr('id');
-		seq= seq.substring(11);
+		seq= seq.substring(11, 13);
+
+		console.log(seq);
 		$(document).on('click', '#post-edit-submit' , function(){
 			var content=$('#post_edit_area').val();
 			$.ajax({
@@ -446,10 +464,17 @@ $(function() {
 	 * isHide - boolean
 	 * @desc- render comment elem
 	 */
-	function getSectionItem(postingDatas, isHide){
+	function getSectionItem(postingDatas, isHide, isFavorite){
 		
 		var display = isHide ? 'none' : 'block';
 		
+		//favorite 하트를 변경하기위한 부분 
+		
+		var favoriteDisplay = isFavorite? 'none' : 'block';
+		var favoriteDisplaySub ='block';
+		if(favoriteDisplay == 'block'){
+			var favoriteDisplaySub = 'none';
+		}
 		var countstr=leadingZeros(count,3);
 		
 		var sectionElem = 
@@ -459,13 +484,15 @@ $(function() {
 			'<img src="/img/common/'+postingDatas.thumb+'.jpg"></img>'+
 			'</span>'+
 			'<span class="post-meta bacpost-meta">'+
-			'<p>'+
+			'<p>'+	
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
-			'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
+			
 			'</span>'+ 
+			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
+			
 			'</p>'+
 			'<p>'+
 			'<span class="bac-point">Point '+postingDatas.avg+'</span>'+
@@ -487,6 +514,10 @@ $(function() {
 				'</ul>'+
 			'</div>';
 			'</section>';
+			
+			
+			//'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
+			
 		
 		//alert(JSON.stringify(commentDatas));
 
@@ -582,4 +613,21 @@ $(function() {
 		return datestring;
 	}
 	
+	$(document).on('click', '#favorite-button', function() {
+		var id = window.sessionStorage.getItem('id');
+//		$.ajax({
+//
+//				url : 'http://localhost:8080/getPosting?type=1',
+//				method : 'get',
+//				datatype : 'json',
+//				success : function(res) {
+//					var datas = res.resut;
+//					for (var i = 0; i<datas.length; i++){
+//						console.log(datas);
+//					}
+//					
+//				}
+//			})
+	})
+
 });

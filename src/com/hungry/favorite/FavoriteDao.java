@@ -55,6 +55,7 @@ public class FavoriteDao {
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
 					"JOIN bookmark D ON D.posting_seq = A.seq "+
+					"WHERE D.id = '"+id+"'"+
 					"GROUP BY A.seq "+
 					"ORDER BY A.seq DESC";
 
