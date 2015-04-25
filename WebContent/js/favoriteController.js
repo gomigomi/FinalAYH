@@ -5,7 +5,7 @@ $(document).on('click', '.fa-heart-o', function() {
 			id : window.sessionStorage.getItem('id'),
 			posting_seq : $(this).closest('section').attr('id').substring(11, 13)
 	};
-	
+	console.log(param.posting_seq);
 	$.ajax({
 		url : 'http://localhost:8080/postFavorite',
 		method : 'post',
