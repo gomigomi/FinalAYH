@@ -40,12 +40,11 @@ public class FavoriteDao {
 		return dbConn;
 	}
 	//type1
-
 	public List<HashMap<String, Object>> getFavoriteView(String id) {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("BOOKMARK : user "+id+" is on MainView.");
+		System.out.println("BOOKMARK : user "+id+" is on Favorite-View.");
 		
 		try{
 			conn = getConnection();

@@ -43,30 +43,20 @@ function getSectionItem(favoriteView, isHide) {
 	var display = isHide ? 'none' : 'block';
 
 	var sectionElem = '<section class="post" id="postseq_'
-			+ favoriteView.seq
-			+ '">'
+			+ favoriteView.seq+ '">'
 			+ '<div class="post-header post-top">'
 			+ '<span class="post-avatar post-img">'
-			+ '<img src="/img/common/'
-			+ favoriteView.thumb
-			+ '.jpg"></img>'
+			+ '<img src="/img/common/'+ favoriteView.thumb+ '.jpg"></img>'
 			+ '</span>'
 			+ '<span class="post-meta bacpost-meta">'
 			+ '<p>'
-			+ '<span class="post-writer"><a class="post-author" href="#">'
-			+ favoriteView.writer
-			+ '</a></span>'
-			+ '<span class="posting-buttons" style="display:'
-			+ display
-			+ '">'
+			+ '<span class="post-writer"><a class="post-author" href="#">'+ favoriteView.writer+ '</a></span>'
+			+ '<span class="posting-buttons" style="display:'+ display+ '">'
 			+ '<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'
 			+ '<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'
 			+ '<button class="post-delete"><i class="fa fa-times"></i></button>'
-			+ '</span>' + '</p>' + '<p>' + '<span class="bac-point">Point '
-			+ favoriteView.avg + '</span>' + '<span class="post-regdate">'
-			+ favoriteView.regdate + '</span>' + '</p>' + '</span>' + '</div>'
-			+ '<div class="post-description bac-content">' + '<p>'
-			+ favoriteView.content + '</p>' + '</div>'
+			+ '</span>' + '</p>' + '<p>' + '<span class="bac-point">Point '+ favoriteView.avg + '</span>' + '<span class="post-regdate">'+ favoriteView.regdate + '</span>' + '</p>' + '</span>' + '</div>'
+			+ '<div class="post-description bac-content">' + '<p>'+ favoriteView.content + '</p>' + '</div>'
 			+ '<div class="comment-cnt">' + '<div class="form">'
 			+ '<span class="raty" data-score="2.5"></span>'
 			+ '<div class="pure-button add-comment-btn">Add</div>'
