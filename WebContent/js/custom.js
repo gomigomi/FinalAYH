@@ -1,6 +1,6 @@
 $(function() {
 	console.log(commentDatas);
-	var postingDatas;	//Posting//Comment
+	var postingDatas;	
 	var count=0;
 	
 	renderPostingList();
@@ -355,7 +355,6 @@ $(function() {
 			async : false,
 			success : function(res){
 				console.log("renderPostingList()get_posting");
-				
 				postingDatas = res.result;
 				for(var i=0; i<postingDatas.length; i++ ){
 					renderSectionElem();
@@ -390,29 +389,17 @@ $(function() {
 	/**
 	 * 
 	 */
-	
 
 	function renderSectionElem(){
-		var flag = postingDatas[count].flag;
 		
 		if(window.sessionStorage.getItem('id')==postingDatas[count].writer){
-			if (flag == undefined) {
-				$('.posts').append(getSectionItem(postingDatas[count], false, true));
-				handleRaty();
-			} else if (flag != undefined) {
-				$('.posts').append(getSectionItem(postingDatas[count], false, false));
-				handleRaty();
-			}
+			$('.posts').append(getSectionItem(postingDatas[count], false));
+			handleRaty();
 			
-		}else if (window.sessionStorage.getItem('id') != postingDatas[count].writer){
-			if (flag == undefined) {
-				$('.posts').append(getSectionItem(postingDatas[count], true, true, true));
-				handleRaty();
-			} else if(flag != undefined){
-				$('.posts').append(getSectionItem(postingDatas[count], true, true, false));
-				handleRaty();
-			}
-			console.log(count+":"+flag);
+			} else if (window.sessionStorage.getItem('id') != postingDatas[count].writer){
+			$('.posts').append(getSectionItem(postingDatas[count], true));
+			handleRaty();
+			
 		} 
 		count++;
 	}
@@ -464,17 +451,19 @@ $(function() {
 	 * isHide - boolean
 	 * @desc- render comment elem
 	 */
-	function getSectionItem(postingDatas, isHide, isFavorite){
+	function getSectionItem(postingDatas, isHide){
 		
 		var display = isHide ? 'none' : 'block';
 		
 		//favorite 하트를 변경하기위한 부분 
 		
-		var favoriteDisplay = isFavorite? 'none' : 'block';
+		var favoriteDisplay = "none";
+//		var favoriteDisplay = isFavorite? 'none' : 'block';
 		var favoriteDisplaySub ='block';
 		if(favoriteDisplay == 'block'){
 			var favoriteDisplaySub = 'none';
 		}
+		
 		var countstr=leadingZeros(count,3);
 		
 		var sectionElem = 
@@ -515,11 +504,8 @@ $(function() {
 			'</div>';
 			'</section>';
 			
-			
-			//'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
-			
 		
-		//alert(JSON.stringify(commentDatas));
+//		alert(JSON.stringify(commentDatas));
 
 
 		var	currentCommentDatas = _.filter(commentDatas, function(value){
@@ -613,21 +599,6 @@ $(function() {
 		return datestring;
 	}
 	
-	$(document).on('click', '#favorite-button', function() {
-		var id = window.sessionStorage.getItem('id');
-//		$.ajax({
-//
-//				url : 'http://localhost:8080/getPosting?type=1',
-//				method : 'get',
-//				datatype : 'json',
-//				success : function(res) {
-//					var datas = res.resut;
-//					for (var i = 0; i<datas.length; i++){
-//						console.log(datas);
-//					}
-//					
-//				}
-//			})
-	})
+
 
 });
