@@ -1,12 +1,8 @@
 var commentDatas;
 var favoriteDatas;
-var favoriteView;
-
-$(document).on('click', '#favorite-button', function() {
-	getFavoriteView();	
-})
 
 
+/*comment를 위한 함수 선언*/
 function getCommentData() {
 	$.ajax({
 		url : 'http://localhost:8080/getComment',
@@ -19,13 +15,10 @@ function getCommentData() {
 		}
 	});
 }
-
 getCommentData();
 
 
 /*favorite를 위한 함수 선언*/
-
-
 function getFavoriteData(){
 	var id = window.sessionStorage.getItem('id');
 	$.ajax ({
@@ -33,7 +26,7 @@ function getFavoriteData(){
 		method : 'get',
 		dataType : 'json',
 		success : function(res){
-			console.log('getFavorite');
+			console.log('getFavoriteData()');
 			favoriteDatas = res.result;
 			console.log(favoriteDatas);	
 		}
@@ -64,3 +57,4 @@ function getFavoriteView() {
 		}
 	})
 }
+

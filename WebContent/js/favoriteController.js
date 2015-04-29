@@ -1,4 +1,6 @@
-//bookmark 추가  
+var favoriteView;
+
+//Posting process  
 $(document).on('click', '.fa-heart-o', function() {
 	var param = {
 			id : window.sessionStorage.getItem('id'),
@@ -20,7 +22,7 @@ $(document).on('click', '.fa-heart-o', function() {
 })
 
 
-//bookmark 삭제  
+//Delete porcess 
 $(document).on('click', '.fa-heart', function(){
 	var id  = window.sessionStorage.getItem('id');
 	var posting_seq = $(this).closest('section').attr('id').substring(11, 13);
@@ -35,9 +37,19 @@ $(document).on('click', '.fa-heart', function(){
 })
 
 
+//Main view
+
+
+
+//Favorite View Button
+$(document).on('click', '#favorite-button', function() {
+	getFavoriteView();	
+})
+
+
+
 
 //Rendering section
-
 function getSectionItem(favoriteView, isHide) {
 
 	var display = isHide ? 'none' : 'block';
@@ -64,9 +76,7 @@ function getSectionItem(favoriteView, isHide) {
 			+ '<ul class="comment-list">' + '</ul>' + '</div>';
 	'</section>';
 
-	//alert(JSON.stringify(commentDatas));
 	var currentCommentDatas = _.filter(commentDatas, function(value) {
-		//console.log(JSON.stringify(value) + ' // '+ favoriteView.seq);
 		return value.posting_seq == favoriteView.seq;
 	});
 	var sectionObject = $(sectionElem);
@@ -80,9 +90,6 @@ function getSectionItem(favoriteView, isHide) {
 				+ '</li>';
 
 		sectionObject.find('.comment-list').append(liElem);
-
-		//console.log(idx);
-
 	});
 	return sectionObject.get(0).outerHTML;
 }

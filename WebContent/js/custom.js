@@ -286,7 +286,7 @@ $(function() {
 		count_num=Number(count_num);
 		
 		var param = {
-			posting_seq : parentElem.attr('id').substring(11, 13),
+			posting_seq : parentElem.attr('id').substring(11),
 			writer : window.sessionStorage.getItem('id'),
 			content : parentElem.find('input.comment').val(),
 			point : parentElem.find('.raty').raty('score')
@@ -356,6 +356,7 @@ $(function() {
 			success : function(res){
 				console.log("renderPostingList()get_posting");
 				postingDatas = res.result;
+				getFavoriteData();
 				for(var i=0; i<postingDatas.length; i++ ){
 					renderSectionElem();
 				}
@@ -406,7 +407,7 @@ $(function() {
 //포스팅삭제 
 	$(document).on('click', '.post-delete' , function(){
 		var seq = $(this).closest('section').attr('id');
-		seq= seq.substring(11, 13);
+		seq= seq.substring(11);
 		var check=confirm('Are you sure to delete this post?');
 		if (check){
 			$.ajax({
@@ -423,7 +424,7 @@ $(function() {
 //포스팅 수정 
 	$(document).on('click','.post-edit', function(){
 		var seq = $(this).closest('section').attr('id');
-		seq= seq.substring(11, 13);
+		seq= seq.substring(11);
 
 		console.log(seq);
 		$(document).on('click', '#post-edit-submit' , function(){
@@ -452,11 +453,9 @@ $(function() {
 	 * @desc- render comment elem
 	 */
 	function getSectionItem(postingDatas, isHide){
-		
 		var display = isHide ? 'none' : 'block';
 		
 		//favorite 하트를 변경하기위한 부분 
-		
 		var favoriteDisplay = "none";
 //		var favoriteDisplay = isFavorite? 'none' : 'block';
 		var favoriteDisplaySub ='block';
@@ -467,7 +466,7 @@ $(function() {
 		var countstr=leadingZeros(count,3);
 		
 		var sectionElem = 
-			'<section class="post" id="'+countstr+'postseq_'+postingDatas.seq+'flag'+postingDatas.flag+'">'+
+			'<section class="post" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
 			'<div class="post-header post-top">'+
 			'<span class="post-avatar post-img">'+
 			'<img src="/img/common/'+postingDatas.thumb+'.jpg"></img>'+
