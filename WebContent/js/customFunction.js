@@ -1,5 +1,8 @@
 var commentDatas;
+var favoriteDatas;
 
+
+/*comment를 위한 함수 선언*/
 function getCommentData() {
 	$.ajax({
 		url : 'http://localhost:8080/getComment',
@@ -12,34 +15,46 @@ function getCommentData() {
 		}
 	});
 }
-
 getCommentData();
 
 
 /*favorite를 위한 함수 선언*/
-
-var favoriteDatas;
-
 function getFavoriteData(){
+	var id = window.sessionStorage.getItem('id');
+	$.ajax ({
+		url : 'http://localhost:8080/getFavorite?id='+id+'&type=2',
+		method : 'get',
+		dataType : 'json',
+		success : function(res){
+			console.log('getFavoriteData()');
+			favoriteDatas = res.result;
+			console.log(favoriteDatas);	
+		}
+	})
+}
+
+function getFavoriteView() {
+	$('#favoritePosting').empty();
 	var id = window.sessionStorage.getItem('id');
 	$.ajax ({
 		url : 'http://localhost:8080/getFavorite?id='+id+'&type=1',
 		method : 'get',
 		dataType : 'json',
-		success : function(res){
-			console.log('getFavorite');
-			alert('OK');
-			favoriteDatas = res.result;
-			console.log(favoriteDatas);
-			
+		async : false,
+		success : function(res) {
+			console.log('getFavoriteView');
+			favoriteView = res.result;
+			console.log(favoriteView);
+			for(var i=0; i<favoriteView.length; i++) {
+				if( id == favoriteView[i].writer) {
+					$('#favoritePosting').append(getSectionItem(favoriteView[i], false));
+					handleRaty();
+				} else {
+					$('#favoritePosting').append(getSectionItem(favoriteView[i], true));
+					handleRaty();
+				}
+			}
 		}
 	})
 }
-
-
-//function postFavorite() {
-//	$.()
-//}
-//
-//$(document).on('click','.post-edit', function(){
 

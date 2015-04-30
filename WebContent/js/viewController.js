@@ -50,32 +50,6 @@ $(function() {
 	})
 	
 	
-//	/*history*/
-//	$('#history-button').click(function() {
-//		$('#history').show();
-//		$('#history-posting').show();
-//		$('#history-comment').hide();
-//		$('#search').hide();
-//		$('#favorite').hide();
-//		$('.top_explain').hide();
-//		
-//		$('#history-posting-button').click(function(){
-//			$('#history-posting').show();
-//			$('#history-comment').hide();
-//		})
-//		
-//		$('#history-comment-button').click(function(){
-//			$('#history-comment').show();
-//			$('#history-posting').hide();
-//		})
-//	})
-//	
-	
-	
-	
-	
-
-	
 	/* Timeline을 눌렀을 때 메인페이지 복귀 */
 	$('#timeline-button').click(function() {
 		$('#main-view').show();
@@ -86,22 +60,6 @@ $(function() {
 		$('.top_explain').hide();
 		
 	});
-	
-	/*라겸*/
-	
-	//
-//	function getCommentData(){
-//		$.ajax({
-//			url : 'http://localhost:8080/getComment',
-//			method : 'get',
-//			dataType : 'json',
-//			success : function(res){
-//				console.log("getCommentView");
-//				commentDatas = res.result;			
-//				renderPopularPostingList();
-//			}
-//		});
-//	}
 
 
 	$('#recent_tab_btn').click(function(){
@@ -207,8 +165,6 @@ $(function() {
 			return sectionObject.get(0).outerHTML;
 	}
 	
-	
-	
 	function handleRaty(){
 		$('span.raty').raty({
 			score: function() {
@@ -237,4 +193,16 @@ $(function() {
 	}
 	
 	
+	//posting text box view
+	
+	
 })
+
+
+
+
+
+
+
+
+

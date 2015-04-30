@@ -1,6 +1,6 @@
 $(function() {
 	console.log(commentDatas);
-	var postingDatas;	//Posting//Comment
+	var postingDatas;	
 	var count=0;
 	
 	renderPostingList();
@@ -355,8 +355,8 @@ $(function() {
 			async : false,
 			success : function(res){
 				console.log("renderPostingList()get_posting");
-				
 				postingDatas = res.result;
+				getFavoriteData();
 				for(var i=0; i<postingDatas.length; i++ ){
 					renderSectionElem();
 				}
@@ -390,14 +390,18 @@ $(function() {
 	/**
 	 * 
 	 */
+
 	function renderSectionElem(){
+		
 		if(window.sessionStorage.getItem('id')==postingDatas[count].writer){
 			$('.posts').append(getSectionItem(postingDatas[count], false));
 			handleRaty();
-		}else{
+			
+			} else if (window.sessionStorage.getItem('id') != postingDatas[count].writer){
 			$('.posts').append(getSectionItem(postingDatas[count], true));
 			handleRaty();
-		}
+			
+		} 
 		count++;
 	}
 //포스팅삭제 
@@ -421,6 +425,8 @@ $(function() {
 	$(document).on('click','.post-edit', function(){
 		var seq = $(this).closest('section').attr('id');
 		seq= seq.substring(11);
+
+		console.log(seq);
 		$(document).on('click', '#post-edit-submit' , function(){
 			var content=$('#post_edit_area').val();
 			$.ajax({
@@ -447,25 +453,34 @@ $(function() {
 	 * @desc- render comment elem
 	 */
 	function getSectionItem(postingDatas, isHide){
-		
 		var display = isHide ? 'none' : 'block';
+		
+		//favorite 하트를 변경하기위한 부분 
+		var favoriteDisplay = "none";
+//		var favoriteDisplay = isFavorite? 'none' : 'block';
+		var favoriteDisplaySub ='block';
+		if(favoriteDisplay == 'block'){
+			var favoriteDisplaySub = 'none';
+		}
 		
 		var countstr=leadingZeros(count,3);
 		
 		var sectionElem = 
-			'<section class="post" id="'+countstr+'postseq_'+postingDatas.seq+'flag'+postingDatas.flag+'">'+
+			'<section class="post" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
 			'<div class="post-header post-top">'+
 			'<span class="post-avatar post-img">'+
 			'<img src="/img/common/'+postingDatas.thumb+'.jpg"></img>'+
 			'</span>'+
 			'<span class="post-meta bacpost-meta">'+
-			'<p>'+
+			'<p>'+	
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
-			'<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'+
+			
 			'</span>'+ 
+			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
+			
 			'</p>'+
 			'<p>'+
 			'<span class="bac-point">Point '+postingDatas.avg+'</span>'+
@@ -487,8 +502,9 @@ $(function() {
 				'</ul>'+
 			'</div>';
 			'</section>';
+			
 		
-		//alert(JSON.stringify(commentDatas));
+//		alert(JSON.stringify(commentDatas));
 
 
 		var	currentCommentDatas = _.filter(commentDatas, function(value){
@@ -582,4 +598,6 @@ $(function() {
 		return datestring;
 	}
 	
+
+
 });

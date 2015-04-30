@@ -282,3 +282,8 @@ section{
     border: 0px;
     height: 60px;
 }
+
+#heart-o, #heart {
+	background-color : white;
+	border : none;
+}
