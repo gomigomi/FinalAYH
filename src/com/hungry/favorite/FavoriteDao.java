@@ -20,7 +20,7 @@ public class FavoriteDao {
 
 
 	static final String USER = "root";
-	static final String PASS = "900418";
+	static final String PASS = "0311";
 	
 	/**
 	 * 커넥션 공동 메소드
