@@ -1,12 +1,60 @@
 var favoriteView;
+//Favorite View Button
+$(document).on('click', '#favorite-button', function() {
+	getFavoriteView();	
+})
 
-//Posting process  
-$(document).on('click', '.fa-heart-o', function() {
+
+//Posting process in Favorite view
+$(document).on('click', '#favoriteView .fa-heart-o', function() {
 	var param = {
 			id : window.sessionStorage.getItem('id'),
-			posting_seq : $(this).closest('section').attr('id').substring(11, 13)
+			posting_seq : $(this).closest('section').attr('id').substring(11)
+	};
+
+	$.ajax ({
+		url : 'http://localhost:8080/postFavorite',
+		method : 'post',
+		dataType : 'json',
+		data : param,
+		success : function(res) {
+			console.log("BOOKMARK : UPDATED");
+			getFavoriteView();
+		}
+	})
+})
+
+//Delete process in Favorite view
+$(document).on('click', '#favoriteView .fa-heart', function() {
+	var check = confirm("DELETE this from your FAVORITE?\n\nIf you click OK, this will be disappeared immediately.");
+	
+	if(check) {
+		var id = window.sessionStorage.getItem('id');
+		var posting_seq = $(this).closest('section').attr('id').substring(8);
+		
+		$.ajax ({
+			url : 'http://localhost:8080/deleteFavorite?id='+id+'&posting_seq='+posting_seq,
+			method : 'delete',
+			success : function(res) {
+				console.log('BOOKMARK : User('+id+') deleted favorite seq : '+posting_seq+'.');
+				getFavoriteView();
+			}
+		})
+	} else { return false; }
+})
+
+
+
+/*Main view*/
+
+//Posting process in Main view  
+$(document).on('click', '#mainView_favorite .fa-heart-o', function() {
+	var param = {
+			id : window.sessionStorage.getItem('id'),
+			posting_seq : $(this).closest('section').attr('id').substring(11)
 	};
 	console.log(param.posting_seq);
+	
 	$.ajax({
 		url : 'http://localhost:8080/postFavorite',
 		method : 'post',
@@ -15,43 +63,40 @@ $(document).on('click', '.fa-heart-o', function() {
 		success :  function(res){
 			console.log("BOOKMARK : Updated");
 			//attr과 substring이용해 적용 필요  
-			$(this).closest('div').hide();
-			$(this).closest('button').show();
+//			$(this).closest('div').hide();
+//			$(this).closest('button').show();
+//			$('.')
+			location.reload([false]);
 		}
 	})
 })
 
 
-//Delete porcess 
-$(document).on('click', '.fa-heart', function(){
-	var id  = window.sessionStorage.getItem('id');
-	var posting_seq = $(this).closest('section').attr('id').substring(11, 13);
+//Delete process in Main view
+$(document).on('click', '#mainView_favorite .fa-heart', function(){
+	var check = confirm('DELETE this from your FAVORITE?');
 	
-	$.ajax({
-		url : 'http://localhost:8080/deleteFavorite?id='+id+'&posting_seq='+posting_seq,
-		method : 'delete',
-		success : function(res){
-			console.log('BOOKMARK : User('+id+') deleted favorite seq : '+posting_seq+'.');
-		}
-	})
+	if(check) {
+		var id = window.sessionStorage.getItem('id');
+		var posting_seq = $(this).closest('section').attr('id').substring(11);
+		
+		$.ajax ({
+			url : 'http://localhost:8080/deleteFavorite?id='+id+'&posting_seq='+posting_seq,
+			method : 'delete',
+			success : function(res) {
+				console.log('BOOKMARK : User('+id+') deleted favorite seq : '+posting_seq+'.');
+				location.reload([false]);
+			}
+		})
+	} else { return false; }
 })
-
-
-//Main view
-
-
-
-//Favorite View Button
-$(document).on('click', '#favorite-button', function() {
-	getFavoriteView();	
-})
-
-
-
 
 //Rendering section
 function getSectionItem(favoriteView, isHide) {
 
+	var favoriteDisplay = 'block';
+	var favoriteDisplaySub = 'none';
+	
 	var display = isHide ? 'none' : 'block';
 
 	var sectionElem = '<section class="post" id="postseq_'
@@ -64,10 +109,15 @@ function getSectionItem(favoriteView, isHide) {
 			+ '<p>'
 			+ '<span class="post-writer"><a class="post-author" href="#">'+ favoriteView.writer+ '</a></span>'
 			+ '<span class="posting-buttons" style="display:'+ display+ '">'
-			+ '<button class = "favorite-btn"><div id = "heart-o" class="fa fa-heart-o"></div><div id = "heart" class="fa fa-heart" style = "display : none;"></div></button>'
 			+ '<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'
 			+ '<button class="post-delete"><i class="fa fa-times"></i></button>'
-			+ '</span>' + '</p>' + '<p>' + '<span class="bac-point">Point '+ favoriteView.avg + '</span>' + '<span class="post-regdate">'+ favoriteView.regdate + '</span>' + '</p>' + '</span>' + '</div>'
+			+ '</span>' 
+			
+			+'<span id="favoriteView">'
+			+'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'
+			+'</span>'
+			
+			+ '</p>' + '<p>' + '<span class="bac-point">Point '+ favoriteView.avg + '</span>' + '<span class="post-regdate">'+ favoriteView.regdate + '</span>' + '</p>' + '</span>' + '</div>'
 			+ '<div class="post-description bac-content">' + '<p>'+ favoriteView.content + '</p>' + '</div>'
 			+ '<div class="comment-cnt">' + '<div class="form">'
 			+ '<span class="raty" data-score="2.5"></span>'

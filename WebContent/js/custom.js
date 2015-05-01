@@ -1,6 +1,8 @@
 
 $(function() {
 	console.log(commentDatas);
+	console.log(favoriteDatas);
+
 	var postingDatas;	
 	var count=0;
 
@@ -43,10 +45,11 @@ $(function() {
 	$('#log_out').click(function(){
 		sessionStorage.clear();
 
-		$('.logon').hide();
-		$('.logoff').show();
-
-		renderPostingList();
+//		$('.logon').hide();
+//		$('.logoff').show();
+//
+//		renderPostingList();
+		location.reload([false]);
 	});
 
 	$('#write_post').click(function(){
@@ -165,13 +168,13 @@ $(function() {
 					var pass=res.result.pass;
 					var thumb=res.result.thumb;
 					
-					$('.logon').show();
-					$('.thumb').show();
-					$('info').show();
-					$('.logoff').hide();
-
-					renderPostingList();
-
+//					$('.logon').show();
+//					$('.thumb').show();
+//					$('info').show();
+//					$('.logoff').hide();
+//
+//					renderPostingList();
+					location.reload([false]);
 					$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'.jpg"'+')');
 					$('.info').text(id + '('+name+')');
 
@@ -392,7 +395,6 @@ $(function() {
 			success : function(res){
 				console.log("renderPostingList()get_posting");
 				postingDatas = res.result;
-				getFavoriteData();
 				for(var i=0; i<postingDatas.length; i++ ){
 					renderSectionElem();
 				}
@@ -491,18 +493,29 @@ $(function() {
 	function getSectionItem(postingDatas, isHide){
 		var display = isHide ? 'none' : 'block';
 		
+		
 		//favorite 하트를 변경하기위한 부분 
 		var favoriteDisplay = "none";
-//		var favoriteDisplay = isFavorite? 'none' : 'block';
 		var favoriteDisplaySub ='block';
-		if(favoriteDisplay == 'block'){
-			var favoriteDisplaySub = 'none';
-		}
+		
+		/*favorite와 posting 연결*/
+		var currentFavoriteDatas = _.filter(favoriteDatas, function(value){
+//			alert("flag"+value.posting_seq+"posting"+postingDatas.seq);
+			return value.posting_seq == postingDatas.seq;
+		});
+				
+		$.each(currentFavoriteDatas, function(idx, item){
+			if (item.flag == "1") {
+				favoriteDisplay = "block";
+				favoriteDisplaySub = "none";
+			}
+		});
+
 		
 		var countstr=leadingZeros(count,3);
 		
 		var sectionElem = 
-			'<section class="post" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
+			'<section class="post '+postingDatas.seq+'" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
 			'<div class="post-header post-top">'+
 			'<span class="post-avatar post-img">'+
 			'<img src="/img/common/'+postingDatas.thumb+'.jpg"></img>'+
@@ -515,7 +528,9 @@ $(function() {
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
 			
 			'</span>'+ 
+			'<span id = mainView_favorite>'+
 			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
+			'</span>'+
 			
 			'</p>'+
 			'<p>'+
@@ -538,16 +553,19 @@ $(function() {
 				'</ul>'+
 			'</div>';
 			'</section>';
-			
 		
-//		alert(JSON.stringify(commentDatas));
+		//alert(JSON.stringify(commentDatas));
 
 
+		
+		/*comment와 posting 연결*/
 		var	currentCommentDatas = _.filter(commentDatas, function(value){
 			//console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
+			//alert("comment:"+value.posting_seq+"posting:"+postingDatas.seq);
 			return value.posting_seq ==  postingDatas.seq;
 		});
 		var sectionObject = $(sectionElem);
+
 		
 		$.each(currentCommentDatas, function(idx, item){
 			var liElem = 
