@@ -1,6 +1,7 @@
 $(function() {
 	console.log(commentDatas);
 	console.log(favoriteDatas);
+
 	var postingDatas;	
 	var count=0;
 	
@@ -490,7 +491,9 @@ $(function() {
 			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
 			
 			'</span>'+ 
+			'<span id = mainView_favorite>'+
 			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
+			'</span>'+
 			
 			'</p>'+
 			'<p>'+
