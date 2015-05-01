@@ -18,7 +18,7 @@ public class StatsDao {
 	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
 
 	static final String USER = "root";
-	static final String PASS = "0311";
+	static final String PASS = "900418";
 	
 	
 	/**

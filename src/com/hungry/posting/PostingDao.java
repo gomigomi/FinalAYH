@@ -18,7 +18,7 @@ public class PostingDao {
 	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
 
 	static final String USER = "root";
-	static final String PASS = "0311";
+	static final String PASS = "900418";
 	
 	/**
 	 * 커넥션 공동 메소드
@@ -221,8 +221,8 @@ public class PostingDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "INSERT INTO posting (content, writer, regdate) "+
-						"VALUES('"+postingParam.get("content")[0].toString()+"','"+postingParam.get("writer")[0].toString()+"', now())";
+			String sql= "INSERT INTO posting (content, writer, taste, type, time, regdate) "+
+						"VALUES('"+postingParam.get("content")[0].toString()+"','"+postingParam.get("writer")[0].toString()+"','"+postingParam.get("taste")[0].toString()+"','"+postingParam.get("type")[0].toString()+"','"+postingParam.get("time")[0].toString()+"', now())";
 
 			stmt.executeUpdate(sql);
 

@@ -1,9 +1,43 @@
+
 $(function() {
 	console.log(commentDatas);
 	var postingDatas;	
 	var count=0;
-	
+
 	renderPostingList();
+	
+	var taste,type,time;
+    //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
+    $('input[type="checkbox"][name="type"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="type"]').prop('checked', false);
+            $(this).prop('checked', true);
+            type=this.value;
+            console.log(type);
+        }
+    });
+    $('input[type="checkbox"][name="taste"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="taste"]').prop('checked', false);
+            $(this).prop('checked', true);
+            taste=this.value;
+            console.log(taste);
+        }
+    });
+    $('input[type="checkbox"][name="time"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="time"]').prop('checked', false);
+            $(this).prop('checked', true);
+            time=this.value;
+            console.log(time);
+        }
+    });
 	
 	//log-out process
 	$('#log_out').click(function(){
@@ -241,9 +275,8 @@ $(function() {
 			alert('login first!');
 			return false;
 		}
-
 		var content = $('#write').val();
-
+		
 		if(content == ''){
 			alert('please write something');
 			$('#write').focus();
@@ -255,6 +288,9 @@ $(function() {
 			method : 'post',
 			dataType: 'json',
 			data : {
+				type: type,
+				taste : taste,
+				time : time,
 				content : content,
 				writer : window.sessionStorage.getItem('id')
 			},
@@ -313,7 +349,7 @@ $(function() {
 					
 					
 					//count avg and update posting point
-					var avg = 2.5;
+					var avg = 3;
 					var sum = 0;
 					var currentCommentList = parentElem.find('ul.comment-list > li');
 					
@@ -334,7 +370,7 @@ $(function() {
 					
 					
 					parentElem.find('input.comment').val('');
-					parentElem.find('.raty').raty('score', '2.5');
+					parentElem.find('.raty').raty('score', '3');
 					
 				}else{
 					alert('comment add fail');
@@ -494,7 +530,7 @@ $(function() {
 			'</div>'+
 			'<div class="comment-cnt">'+
 				'<div class="form">'+
-					'<span class="raty" data-score="2.5"></span>'+
+					'<span class="raty" data-score="3"></span>'+
 					'<div class="pure-button add-comment-btn">Add</div>'+
 					'<input type="text" name="comment" class="comment"/>'+
 				'</div>'+
