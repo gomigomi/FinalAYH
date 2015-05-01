@@ -39,15 +39,10 @@ $(document).on('click', '.fa-heart', function(){
 
 //Main view
 
-
-
 //Favorite View Button
 $(document).on('click', '#favorite-button', function() {
 	getFavoriteView();	
 })
-
-
-
 
 //Rendering section
 function getSectionItem(favoriteView, isHide) {

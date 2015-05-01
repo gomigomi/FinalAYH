@@ -10,7 +10,7 @@ function getCommentData() {
 		dataType : 'json',
 		async:false,
 		success : function(res) {
-			console.log("getCommentData_CF");
+			console.log("getCommentData()_CF");
 			commentDatas=res.result;
 		}
 	});
@@ -25,13 +25,14 @@ function getFavoriteData(){
 		url : 'http://localhost:8080/getFavorite?id='+id+'&type=2',
 		method : 'get',
 		dataType : 'json',
+		async : false,
 		success : function(res){
-			console.log('getFavoriteData()');
-			favoriteDatas = res.result;
-			console.log(favoriteDatas);	
+			console.log('getFavoriteData()_CF');
+			favoriteDatas = res.result;	
 		}
 	})
 }
+getFavoriteData();
 
 function getFavoriteView() {
 	$('#favoritePosting').empty();
