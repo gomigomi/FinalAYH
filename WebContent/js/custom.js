@@ -8,16 +8,16 @@ $(function() {
 
 	renderPostingList();
 	
-	var taste,type,time;
+	var taste,f_type,time;
     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
-    $('input[type="checkbox"][name="type"]').click(function(){
+    $('input[type="checkbox"][name="f_type"]').click(function(){
         //클릭 이벤트 발생한 요소가 체크 상태인 경우
         if ($(this).prop('checked')) {
             //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
-            $('input[type="checkbox"][name="type"]').prop('checked', false);
+            $('input[type="checkbox"][name="f_type"]').prop('checked', false);
             $(this).prop('checked', true);
-            type=this.value;
-            console.log(type);
+            f_type=this.value;
+            console.log(f_type);
         }
     });
     $('input[type="checkbox"][name="taste"]').click(function(){
@@ -291,7 +291,7 @@ $(function() {
 			method : 'post',
 			dataType: 'json',
 			data : {
-				type: type,
+				f_type: f_type,
 				taste : taste,
 				time : time,
 				content : content,
