@@ -11,10 +11,11 @@ $(function() {
 	$('#log_out').click(function(){
 		sessionStorage.clear();
 
-		$('.logon').hide();
-		$('.logoff').show();
-
-		renderPostingList();
+//		$('.logon').hide();
+//		$('.logoff').show();
+//
+//		renderPostingList();
+		location.reload([false]);
 	});
 
 	$('#write_post').click(function(){
@@ -133,13 +134,13 @@ $(function() {
 					var pass=res.result.pass;
 					var thumb=res.result.thumb;
 					
-					$('.logon').show();
-					$('.thumb').show();
-					$('info').show();
-					$('.logoff').hide();
-
-					renderPostingList();
-
+//					$('.logon').show();
+//					$('.thumb').show();
+//					$('info').show();
+//					$('.logoff').hide();
+//
+//					renderPostingList();
+					location.reload([false]);
 					$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'.jpg"'+')');
 					$('.info').text(id + '('+name+')');
 
