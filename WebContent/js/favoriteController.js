@@ -54,6 +54,7 @@ $(document).on('click', '#mainView_favorite .fa-heart-o', function() {
 			posting_seq : $(this).closest('section').attr('id').substring(11)
 	};
 	console.log(param.posting_seq);
+	
 	$.ajax({
 		url : 'http://localhost:8080/postFavorite',
 		method : 'post',
@@ -64,7 +65,8 @@ $(document).on('click', '#mainView_favorite .fa-heart-o', function() {
 			//attr과 substring이용해 적용 필요  
 //			$(this).closest('div').hide();
 //			$(this).closest('button').show();
-			renderPostingList();
+//			$('.')
+			location.reload([false]);
 		}
 	})
 })
@@ -83,7 +85,7 @@ $(document).on('click', '#mainView_favorite .fa-heart', function(){
 			method : 'delete',
 			success : function(res) {
 				console.log('BOOKMARK : User('+id+') deleted favorite seq : '+posting_seq+'.');
-				renderPostingList();
+				location.reload([false]);
 			}
 		})
 	} else { return false; }

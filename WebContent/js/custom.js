@@ -478,7 +478,7 @@ $(function() {
 		var countstr=leadingZeros(count,3);
 		
 		var sectionElem = 
-			'<section class="post" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
+			'<section class="post '+postingDatas.seq+'" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
 			'<div class="post-header post-top">'+
 			'<span class="post-avatar post-img">'+
 			'<img src="/img/common/'+postingDatas.thumb+'.jpg"></img>'+
