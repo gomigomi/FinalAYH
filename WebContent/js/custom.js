@@ -1,3 +1,21 @@
+var formData=new FormData();
+
+function readURL(input) {
+	$('#img_preview').empty();
+	for (i = 0; i < input.files.length; i++) {
+		if (input.files && input.files[i]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#img_preview').append(
+						'<img width="200px" height="200px" id="blah" src="'
+								+ e.target.result + '" alt="your image" />');
+			}
+		}
+		reader.readAsDataURL(input.files[i]);
+		formData.append(i,input.files[i]);
+	}
+}
+
 
 $(function() {
 	console.log(commentDatas);
@@ -270,7 +288,10 @@ $(function() {
 		//auto log-in
 		
 	});
-
+	
+    $("#img_Upload").on('change', function(){
+        readURL(this);
+    });
 	
 	//posting process
 	$('#write_post_btn').click(function(){
@@ -311,7 +332,23 @@ $(function() {
 			},
 			error : function(){}
 		});
-	});
+		
+		$.ajax({
+             url: 'http://localhost:8080/postImg',
+             method : 'post',
+             dataType : 'multipart/form-data',
+             processData: false,
+             contentType: false,
+             data: formData,
+             type: 'POST',
+             success: function(result){
+                 alert("업로드 성공!!");
+                 $('#img_preview').empty();
+                 $('#img_upload_frm')[0].reset();
+                 formData=new FormData();
+             }
+         });
+      });
 	
 	
 	//add comment handler
@@ -612,26 +649,6 @@ $(function() {
 		  }
 		  return zero + n;
 	}
-	
-	/*파일 입출력 처리 
-    $("#uploadbutton").click(function(){
-        var form = $('#postingimg')[0];
-        var formData = new FormData(form);
-            $.ajax({
-               url: '/fileupload',
-               processData: false,
-                   contentType: false,
-               data: formData,
-               type: 'POST',
-               success: function(result){
-                   alert("업로드 성공!!");
-               }
-           });
-        });
-	*/
-
-	
-	
 	
 	function getNowDate(){
 		// GET CURRENT DATE

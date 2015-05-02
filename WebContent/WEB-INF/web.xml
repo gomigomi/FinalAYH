@@ -114,4 +114,14 @@
     <servlet-name>deleteFavorite</servlet-name>
     <url-pattern>/deleteFavorite</url-pattern>
   </servlet-mapping>
+  
+  <!-- img upload -->
+  <servlet>
+    <servlet-name>postImg</servlet-name>            
+    <servlet-class>com.hungry.img.imgServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>postImg</servlet-name>
+    <url-pattern>/postImg</url-pattern>
+  </servlet-mapping>
 </web-app>

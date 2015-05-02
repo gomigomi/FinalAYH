@@ -16,6 +16,7 @@
 <script src="js/viewController.js"></script>
 <script src="js/historyController.js"></script>
 <script src="js/favoriteController.js"></script>
+<script src="js/imgUpload.js"></script>
 
 <!-- 	<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script> -->
 
@@ -170,8 +171,8 @@
 						</form>
 					</div>	
 					<div id="img_wrapper">
-						<div id="img_upload"><input type="file" id="img_Upload" name="img-Upload"></div>
-						<div id="img_preview"></div>
+						<div id="img_upload_div"><form method="POST" enctype="multipart/form-data" action="" id="img_upload_frm"><input type="file" id="img_Upload" name="img-Upload" multiple></form></div>
+						<div id="img_preview"><img width="200px" height="200px" alt="" src=""></div>
 					</div>
 					<textarea id="write"></textarea>		
 					<div id="write_post_btn" class="pure-button">Post</div>
