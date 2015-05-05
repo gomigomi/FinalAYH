@@ -221,8 +221,8 @@ public class PostingDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "INSERT INTO posting (content, writer, taste, type, time, regdate) "+
-						"VALUES('"+postingParam.get("content")[0].toString()+"','"+postingParam.get("writer")[0].toString()+"','"+postingParam.get("taste")[0].toString()+"','"+postingParam.get("f_type")[0].toString()+"','"+postingParam.get("time")[0].toString()+"', now())";
+			String sql= "INSERT INTO posting (content, writer, taste, type, time, location, regdate) "+
+						"VALUES('"+postingParam.get("content")[0].toString()+"','"+postingParam.get("writer")[0].toString()+"','"+postingParam.get("taste")[0].toString()+"','"+postingParam.get("f_type")[0].toString()+"','"+postingParam.get("time")[0].toString()+"','"+postingParam.get("location")[0].toString()+"', now())";
 
 			stmt.executeUpdate(sql);
 

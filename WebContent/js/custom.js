@@ -3,6 +3,16 @@ var formData=new FormData();
 function readURL(input) {
 	$('#img_preview').empty();
 	for (i = 0; i < input.files.length; i++) {
+		var file=input.files[i].name
+		if(file !=""){
+			var fileExt=file.substring(file.lastIndexOf(".") +1);
+			var reg=/gif|jpg|jpeg|png/i;
+			if(reg.test(fileExt)==false){
+				alert("첨부파일은 gif, jpg, png로 된 이미지만 가능합니다.");
+				 $('#img_upload_frm')[0].reset();
+				return;
+			}
+		}
 		if (input.files && input.files[i]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
@@ -26,7 +36,7 @@ $(function() {
 
 	renderPostingList();
 	
-	var taste,f_type,time;
+	var taste="",f_type="",time="";
     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
     $('input[type="checkbox"][name="f_type"]').click(function(){
         //클릭 이벤트 발생한 요소가 체크 상태인 경우
@@ -35,7 +45,6 @@ $(function() {
             $('input[type="checkbox"][name="f_type"]').prop('checked', false);
             $(this).prop('checked', true);
             f_type=this.value;
-            console.log(f_type);
         }
     });
     $('input[type="checkbox"][name="taste"]').click(function(){
@@ -45,7 +54,6 @@ $(function() {
             $('input[type="checkbox"][name="taste"]').prop('checked', false);
             $(this).prop('checked', true);
             taste=this.value;
-            console.log(taste);
         }
     });
     $('input[type="checkbox"][name="time"]').click(function(){
@@ -55,7 +63,6 @@ $(function() {
             $('input[type="checkbox"][name="time"]').prop('checked', false);
             $(this).prop('checked', true);
             time=this.value;
-            console.log(time);
         }
     });
 	
@@ -299,14 +306,22 @@ $(function() {
 			alert('login first!');
 			return false;
 		}
+
+		var location=$("#locationSel option:selected").val();
 		var content = $('#write').val();
 		
-		if(content == ''){
+		console.log(f_type, taste, time, content);
+		
+		if(content==false){
 			alert('please write something');
 			$('#write').focus();
 			return false;
+		}else if(location == 'none' || f_type=="" || taste=="" || time==""){
+			alert('please fill out the location');
+			return false;
 		}
-
+		
+		
 		$.ajax({
 			url: 'http://localhost:8080/postPosting?type=1',
 			method : 'post',
@@ -316,6 +331,7 @@ $(function() {
 				taste : taste,
 				time : time,
 				content : content,
+				location : location,
 				writer : window.sessionStorage.getItem('id')
 			},
 			success : function(res){
