@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 var formData=new FormData();
 
 function readURL(input) {
@@ -29,7 +27,6 @@ function readURL(input) {
 }
 
 
->>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 $(function() {
 	console.log(commentDatas);
 	console.log(favoriteDatas);
@@ -37,9 +34,9 @@ $(function() {
 	var postingDatas;	
 	var count=0;
 	
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	renderPostingList();
-=======
+//=======
 	var taste="",f_type="",time="";
     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
     $('input[type="checkbox"][name="f_type"]').click(function(){
@@ -69,7 +66,7 @@ $(function() {
             time=this.value;
         }
     });
->>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
+//>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 	
 	//log-out process
 	$('#log_out').click(function(){
@@ -309,18 +306,18 @@ $(function() {
 			return false;
 		}
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		var content = $('#write').val();
 
 		if(content == ''){
-=======
+//=======
 		var location=$("#locationSel option:selected").val();
 		var content = $('#write').val();
 		
 		console.log(f_type, taste, time, content);
 		
 		if(content==false){
->>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
+//>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 			alert('please write something');
 			$('#write').focus();
 			return false;
@@ -353,7 +350,7 @@ $(function() {
 			},
 			error : function(){}
 		});
-	});
+	}});
 	
 	
 	//add comment handler
