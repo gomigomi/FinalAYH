@@ -1,3 +1,35 @@
+<<<<<<< HEAD
+=======
+var formData=new FormData();
+
+function readURL(input) {
+	$('#img_preview').empty();
+	for (i = 0; i < input.files.length; i++) {
+		var file=input.files[i].name
+		if(file !=""){
+			var fileExt=file.substring(file.lastIndexOf(".") +1);
+			var reg=/gif|jpg|jpeg|png/i;
+			if(reg.test(fileExt)==false){
+				alert("첨부파일은 gif, jpg, png로 된 이미지만 가능합니다.");
+				 $('#img_upload_frm')[0].reset();
+				return;
+			}
+		}
+		if (input.files && input.files[i]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#img_preview').append(
+						'<img width="200px" height="200px" id="blah" src="'
+								+ e.target.result + '" alt="your image" />');
+			}
+		}
+		reader.readAsDataURL(input.files[i]);
+		formData.append(i,input.files[i]);
+	}
+}
+
+
+>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 $(function() {
 	console.log(commentDatas);
 	console.log(favoriteDatas);
@@ -5,7 +37,39 @@ $(function() {
 	var postingDatas;	
 	var count=0;
 	
+<<<<<<< HEAD
 	renderPostingList();
+=======
+	var taste="",f_type="",time="";
+    //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
+    $('input[type="checkbox"][name="f_type"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="f_type"]').prop('checked', false);
+            $(this).prop('checked', true);
+            f_type=this.value;
+        }
+    });
+    $('input[type="checkbox"][name="taste"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="taste"]').prop('checked', false);
+            $(this).prop('checked', true);
+            taste=this.value;
+        }
+    });
+    $('input[type="checkbox"][name="time"]').click(function(){
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="time"]').prop('checked', false);
+            $(this).prop('checked', true);
+            time=this.value;
+        }
+    });
+>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 	
 	//log-out process
 	$('#log_out').click(function(){
@@ -245,20 +309,34 @@ $(function() {
 			return false;
 		}
 
+<<<<<<< HEAD
 		var content = $('#write').val();
 
 		if(content == ''){
+=======
+		var location=$("#locationSel option:selected").val();
+		var content = $('#write').val();
+		
+		console.log(f_type, taste, time, content);
+		
+		if(content==false){
+>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 			alert('please write something');
 			$('#write').focus();
 			return false;
+		}else if(location == 'none' || f_type=="" || taste=="" || time==""){
+			alert('please fill out the location');
+			return false;
 		}
-
+		
+		
 		$.ajax({
 			url: 'http://localhost:8080/postPosting?type=1',
 			method : 'post',
 			dataType: 'json',
 			data : {
 				content : content,
+				location : location,
 				writer : window.sessionStorage.getItem('id')
 			},
 			success : function(res){
