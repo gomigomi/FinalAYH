@@ -15,7 +15,7 @@ public class PostingDao {
 //	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH_test";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
 
 	static final String USER = "root";
 	static final String PASS = "900418";
@@ -47,11 +47,10 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2) AS avg "+
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
-					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"GROUP BY A.seq "+
 					"ORDER BY A.seq DESC";
 
@@ -92,11 +91,10 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(S.point), 3) AS avg "+
+			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
 						"FROM posting AS A "+
 						"LEFT OUTER JOIN user B ON B.id = A.writer "+
 						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+
-						"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+ 
 						"where A.writer='"+id+"' "+ 
 						"GROUP BY A.seq "+ 
 						"ORDER BY A.regdate DESC";
@@ -136,11 +134,10 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(S.point), 2.5) AS avg "+
+			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
 						"FROM posting AS A "+
 						"LEFT OUTER JOIN user B ON B.id = A.writer "+
 						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+
-						"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+ 
 						"where C.writer='"+id+"' "+ 
 						"GROUP BY A.seq "+ 
 						"ORDER BY A.regdate DESC";
@@ -181,7 +178,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq"+
+			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
 						"FROM posting AS A "+
 						"LEFT OUTER JOIN user B ON B.id = A.writer "+
 						"INNER JOIN comment C ON C.posting_seq = A.seq "+
@@ -196,6 +193,7 @@ public class PostingDao {
 				item.put("writer", rs.getString("writer"));
 				item.put("regdate", rs.getString("regdate"));
 				item.put("thumb", rs.getString("thumb"));
+				item.put("avg", rs.getString("avg"));
 				
 				result.add(item);
 			}
@@ -223,12 +221,8 @@ public class PostingDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-//<<<<<<< HEAD
-
-//=======
 			String sql= "INSERT INTO posting (content, writer, taste, type, time, location, regdate) "+
 						"VALUES('"+postingParam.get("content")[0].toString()+"','"+postingParam.get("writer")[0].toString()+"','"+postingParam.get("taste")[0].toString()+"','"+postingParam.get("f_type")[0].toString()+"','"+postingParam.get("time")[0].toString()+"','"+postingParam.get("location")[0].toString()+"', now())";
-//>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 
 			stmt.executeUpdate(sql);
 

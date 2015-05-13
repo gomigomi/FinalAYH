@@ -33,10 +33,9 @@ $(function() {
 
 	var postingDatas;	
 	var count=0;
-	
-//<<<<<<< HEAD
+
 	renderPostingList();
-//=======
+	
 	var taste="",f_type="",time="";
     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
     $('input[type="checkbox"][name="f_type"]').click(function(){
@@ -66,16 +65,16 @@ $(function() {
             time=this.value;
         }
     });
-//>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 	
 	//log-out process
 	$('#log_out').click(function(){
 		sessionStorage.clear();
-		location.reload([false]);
+
 //		$('.logon').hide();
 //		$('.logoff').show();
 //
 //		renderPostingList();
+		location.reload([false]);
 	});
 
 	$('#write_post').click(function(){
@@ -201,7 +200,6 @@ $(function() {
 //
 //					renderPostingList();
 					location.reload([false]);
-					
 					$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'.jpg"'+')');
 					$('.info').text(id + '('+name+')');
 
@@ -297,7 +295,10 @@ $(function() {
 		//auto log-in
 		
 	});
-
+	
+    $("#img_Upload").on('change', function(){
+        readURL(this);
+    });
 	
 	//posting process
 	$('#write_post_btn').click(function(){
@@ -306,18 +307,12 @@ $(function() {
 			return false;
 		}
 
-//<<<<<<< HEAD
-		var content = $('#write').val();
-
-		if(content == ''){
-//=======
 		var location=$("#locationSel option:selected").val();
 		var content = $('#write').val();
 		
 		console.log(f_type, taste, time, content);
 		
 		if(content==false){
-//>>>>>>> b9166a397c6cf2cfbe8a06b62ebc659dad9ab38c
 			alert('please write something');
 			$('#write').focus();
 			return false;
@@ -332,6 +327,9 @@ $(function() {
 			method : 'post',
 			dataType: 'json',
 			data : {
+				f_type: f_type,
+				taste : taste,
+				time : time,
 				content : content,
 				location : location,
 				writer : window.sessionStorage.getItem('id')
@@ -350,7 +348,23 @@ $(function() {
 			},
 			error : function(){}
 		});
-	}});
+		
+		$.ajax({
+             url: 'http://localhost:8080/postImg',
+             method : 'post',
+             dataType : 'multipart/form-data',
+             processData: false,
+             contentType: false,
+             data: formData,
+             type: 'POST',
+             success: function(result){
+                 alert("업로드 성공!!");
+                 $('#img_preview').empty();
+                 $('#img_upload_frm')[0].reset();
+                 formData=new FormData();
+             }
+         });
+      });
 	
 	
 	//add comment handler
@@ -381,6 +395,7 @@ $(function() {
 				if(res.result=='success'){
 					//Append comment to comment list
 					var commentItem = '<li>'+
+						'<span class="raty-view" data-score="'+param.point+'"></span>'+
 						'<span class="user">'+param.writer+'</span>'+
 						'<span class="regdate view">'+getNowDate()+'</span>'+
 						'<span class="comment view">'+param.content+'</span>'+
@@ -390,7 +405,7 @@ $(function() {
 					
 					
 					//count avg and update posting point
-					var avg = 2.5;
+					var avg = 3;
 					var sum = 0;
 					var currentCommentList = parentElem.find('ul.comment-list > li');
 					
@@ -411,7 +426,7 @@ $(function() {
 					
 					
 					parentElem.find('input.comment').val('');
-					parentElem.find('.raty').raty('score', '2.5');
+					parentElem.find('.raty').raty('score', '3');
 					
 				}else{
 					alert('comment add fail');
@@ -434,7 +449,6 @@ $(function() {
 				console.log("renderPostingList()get_posting");
 				postingDatas = res.result;
 				for(var i=0; i<postingDatas.length; i++ ){
-					
 					renderSectionElem();
 				}
 			}
@@ -552,98 +566,98 @@ $(function() {
 
 		
 		var countstr=leadingZeros(count,3);
-		console.log(postingDatas.avg);
-		var sectionElem = 			
-			'<section class="post '+postingDatas.seq+'" id="'+countstr+'posting_'+postingDatas.seq+'">'+
-					'<div class="post-header post-top">'+
-						'<span class="post-avatar post-img"> '+
-							'<img src="/img/common/'+postingDatas.thumb+'.jpg"/>'+
-						'</span>'+ 
-						'<span class="post-meta bacpost-meta">'+ 
-							'<span class="post-writer">'+ 
-								'<a class="post-author" href="#">'+postingDatas.writer+'</a>'+
-							'</span>'+ 
-							'<span class="posting-buttons" style="display:'+display+'"> '+
-								'<a href="#post_edit" rel="modal:open">'+
-									'<button class="post-edit">'+
-										'<i class="fa fa-pencil-square-o"></i>'+
-									'</button>'+
-								'</a>'+
-								'<button class="post-delete">'+
-									'<i class="fa fa-times"></i>'+
-								'</button>'+
-							'</span>'+
-							'<span id=mainView_favorite>'+
-								'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
-								'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
-							'</span>'+
-							'<p>'+
-								'<span class="bac-point">Point '+postingDatas.avg+'</span>'+
-								'<span class="comment-raty-form">'+
-									'<span class="raty" data-score="3"></span>'+
-									'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
-								'</span>'+
-								'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
-							'</p>'+
-						'</span>'+
-					'</div>'+
-					'<div class="post-description bac-content">'+
-						'<span id = "postingImg_view">이미지 공간</span>'+
-						'<span id = "postingContent_div">'+
-							'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
-							'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
-							'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-swe.png"/></span>'+
-							'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-classification/time-morning.png"/></span>'+
-							'<div id = "postingContent_view">'+postingDatas.content+'</div>'+
-						'</span>'+
-					'</div>'+
-					'<div class="comment-cnt">'+
-						'<div class="comment-text-form">'+
-							'<input type="text" name="comment" class="comment" />'+
-							'<div class="pure-button add-comment-btn">Add</div>'+
-						'</div>'+
-						'<div class = "comment-list">'+
+		var sectionElem = 
+		'<section class="post '+postingDatas.seq+'" id="'+countstr+'posting_'+postingDatas.seq+'">'+
+		'<div class="post-header post-top">'+
+			'<span class="post-avatar post-img"> '+
+				'<img src="/img/common/'+postingDatas.thumb+'.jpg"/>'+
+			'</span>'+ 
+			'<span class="post-meta bacpost-meta">'+ 
+				'<span class="post-writer">'+ 
+					'<a class="post-author" href="#">'+postingDatas.writer+'</a>'+
+				'</span>'+ 
+				'<span class="posting-buttons" style="display:'+display+'"> '+
+					'<a href="#post_edit" rel="modal:open">'+
+						'<button class="post-edit">'+
+							'<i class="fa fa-pencil-square-o"></i>'+
+						'</button>'+
+					'</a>'+
+					'<button class="post-delete">'+
+						'<i class="fa fa-times"></i>'+
+					'</button>'+
+				'</span>'+
+				'<span id=mainView_favorite>'+
+					'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
+					'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
+				'</span>'+
+				'<p>'+
+					'<span class="bac-point">Point '+postingDatas.avg+'</span>'+
+					'<span class="comment-raty-form">'+
+						'<span class="raty" data-score="3"></span>'+
+						'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
+					'</span>'+
+					'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
+				'</p>'+
+			'</span>'+
+		'</div>'+
+		'<div class="post-description bac-content">'+
+			'<span id = "postingImg_view">이미지 공간</span>'+
+			'<span id = "postingContent_div">'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-swe.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-classification/time-morning.png"/></span>'+
+				'<div id = "postingContent_view">'+postingDatas.content+'</div>'+
+			'</span>'+
+		'</div>'+
+		'<div class="comment-cnt">'+
+			'<div class="comment-text-form">'+
+				'<input type="text" name="comment" class="comment" />'+
+				'<div class="pure-button add-comment-btn">Add</div>'+
+			'</div>'+
+			'<div class = "comment-list">'+
 
-						'</div>'+
-//						'<ul class="comment-list">'+
+			'</div>'+
+//			'<ul class="comment-list">'+
 //
-//						'</ul>'+
-					'</div>'+
-				'</section>'
-			 
+//			'</ul>'+
+		'</div>'+
+	'</section>'
+ 
 
 
-		
-		/*comment와 posting 연결*/
-		var	currentCommentDatas = _.filter(commentDatas, function(value){
-			//console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
-			//alert("comment:"+value.posting_seq+"posting:"+postingDatas.seq);
-			return value.posting_seq ==  postingDatas.seq;
-		});
-		var sectionObject = $(sectionElem);
 
-		
-		$.each(currentCommentDatas, function(idx, item){
-			var liElem = 
-				'<li class = "comment-list-sub">'+
-					'<span class="user" id="commentView-user">'+item.writer+'</span>'+
-					'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+'</span>'+
-				'</li>'+
-				'<span class="comment view" id="commentView-content">'+item.content+'</span>'
-				
-//				'<li>'+
-//					'<span class="user">'+item.writer+'</span>'+
-//					'<span class="regdate view">'+item.regdate.substr(0,10)+'</span>'+
-//					'<span class="comment view">'+item.content+'</span>'+
-//				'</li>';
-			
-			sectionObject.find('.comment-list').append(liElem);
-			
-			//console.log(idx);
-			
-		});
-			return sectionObject.get(0).outerHTML;
-	}
+/*comment와 posting 연결*/
+var	currentCommentDatas = _.filter(commentDatas, function(value){
+//console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
+//alert("comment:"+value.posting_seq+"posting:"+postingDatas.seq);
+return value.posting_seq ==  postingDatas.seq;
+});
+var sectionObject = $(sectionElem);
+
+
+$.each(currentCommentDatas, function(idx, item){
+var liElem = 
+	'<li class = "comment-list-sub">'+
+		'<span class="user" id="commentView-user">'+item.writer+'</span>'+
+		'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+'</span>'+
+	'</li>'+
+	'<span class="comment view" id="commentView-content">'+item.content+'</span>'
+	
+//	'<li>'+
+//		'<span class="user">'+item.writer+'</span>'+
+//		'<span class="regdate view">'+item.regdate.substr(0,10)+'</span>'+
+//		'<span class="comment view">'+item.content+'</span>'+
+//	'</li>';
+
+sectionObject.find('.comment-list').append(liElem);
+
+//console.log(idx);
+
+});
+return sectionObject.get(0).outerHTML;
+}
+
 	
 	
 	
@@ -673,26 +687,6 @@ $(function() {
 		  }
 		  return zero + n;
 	}
-	
-	/*파일 입출력 처리 
-    $("#uploadbutton").click(function(){
-        var form = $('#postingimg')[0];
-        var formData = new FormData(form);
-            $.ajax({
-               url: '/fileupload',
-               processData: false,
-                   contentType: false,
-               data: formData,
-               type: 'POST',
-               success: function(result){
-                   alert("업로드 성공!!");
-               }
-           });
-        });
-	*/
-
-	
-	
 	
 	function getNowDate(){
 		// GET CURRENT DATE

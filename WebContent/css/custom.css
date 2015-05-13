@@ -298,17 +298,17 @@ section{
 .post-description {
 	display : inline-flex;
 	width : 100%;
-	height : 250px;
-	margin : 1% 0 1% 5%;
+	height : 210px;
+	margin : 1% 0 0 5%;
 }
 
 #postingImg_view {
 	display : inline;
 	background-color : orange;
-	width : 250px;
-	height : 250px;
+	width : 200px;
+	height : 200px;
 	
-	margin-right : 1%;
+	margin-right : 2%;
 	
 }
 
@@ -331,9 +331,15 @@ input.comment {
 	overflow : scroll;
 }
 
-#postingClassImg {
+#postingClassifyImg {
 	width : 30px;
+	height : 30px;
+	margin-right : 1%;
 	
+}
+
+#postingContent_view {
+	font-size : 1.3em;
 }
 
 #postingClassification_view {

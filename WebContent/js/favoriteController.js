@@ -48,7 +48,7 @@ $(document).on('click', '#favoriteView .fa-heart', function() {
 /*Main view*/
 
 //Posting process in Main view  
-$(document).on('click', '#mainView_favorite .fa-heart-o', function() {
+$(document).on('click', '#mainView_favorite .fa-heart-o', function(e) {
 	var param = {
 			id : window.sessionStorage.getItem('id'),
 			posting_seq : $(this).closest('section').attr('id').substring(11)
