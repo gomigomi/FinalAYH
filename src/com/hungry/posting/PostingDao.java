@@ -47,10 +47,11 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"GROUP BY A.seq "+
 					"ORDER BY A.seq DESC";
 
@@ -91,13 +92,13 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
-						"FROM posting AS A "+
-						"LEFT OUTER JOIN user B ON B.id = A.writer "+
-						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+
-						"where A.writer='"+id+"' "+ 
-						"GROUP BY A.seq "+ 
-						"ORDER BY A.regdate DESC";
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+					"FROM posting AS A "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
+					"GROUP BY A.seq "+
+					"ORDER BY A.seq DESC";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
@@ -134,13 +135,13 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
-						"FROM posting AS A "+
-						"LEFT OUTER JOIN user B ON B.id = A.writer "+
-						"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+
-						"where C.writer='"+id+"' "+ 
-						"GROUP BY A.seq "+ 
-						"ORDER BY A.regdate DESC";
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+					"FROM posting AS A "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
+					"GROUP BY A.seq "+
+					"ORDER BY A.seq DESC";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
@@ -178,12 +179,13 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql ="SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
-						"FROM posting AS A "+
-						"LEFT OUTER JOIN user B ON B.id = A.writer "+
-						"INNER JOIN comment C ON C.posting_seq = A.seq "+
-						"GROUP BY A.seq "+
-						"ORDER BY avg DESC";
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+					"FROM posting AS A "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
+					"GROUP BY A.seq "+
+					"ORDER BY A.seq DESC";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
