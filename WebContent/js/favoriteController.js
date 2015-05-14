@@ -63,10 +63,10 @@ $(document).on('click', '#mainView_favorite .fa-heart-o', function(e) {
 		success :  function(res){
 			console.log("BOOKMARK : Updated");
 //			attr과 substring이용해 적용 필요  
-//			$('section[id$="'+param.posting_seq+'"] .fa-heart').show();
-//			$('section[id$="'+param.posting_seq+'"] .fa-heart-o').hide();
+			$('section[id$="'+param.posting_seq+'"] .fa-heart').show();
+			$('section[id$="'+param.posting_seq+'"] .fa-heart-o').hide();
 			
-			location.reload([false]);
+			//location.reload([false]);
 		}
 	})
 })
@@ -85,7 +85,9 @@ $(document).on('click', '#mainView_favorite .fa-heart', function(){
 			method : 'delete',
 			success : function(res) {
 				console.log('BOOKMARK : User('+id+') deleted favorite seq : '+posting_seq+'.');
-				location.reload([false]);
+				
+				$('section[id$="'+posting_seq+'"] .fa-heart-o').show();
+				$('section[id$="'+posting_seq+'"] .fa-heart').hide();
 			}
 		})
 	} else { return false; }
