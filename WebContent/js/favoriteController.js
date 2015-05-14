@@ -62,10 +62,10 @@ $(document).on('click', '#mainView_favorite .fa-heart-o', function(e) {
 		data : param,
 		success :  function(res){
 			console.log("BOOKMARK : Updated");
-			//attr과 substring이용해 적용 필요  
-//			$(this).closest('div').hide();
-//			$(this).closest('button').show();
-//			$('.')
+//			attr과 substring이용해 적용 필요  
+//			$('section[id$="'+param.posting_seq+'"] .fa-heart').show();
+//			$('section[id$="'+param.posting_seq+'"] .fa-heart-o').hide();
+			
 			location.reload([false]);
 		}
 	})
@@ -114,7 +114,8 @@ function getSectionItem(favoriteView, isHide) {
 			+ '</span>' 
 			
 			+'<span id="favoriteView">'
-			+'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'
+			+'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'">'
+			+'</button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'
 			+'</span>'
 			
 			+ '</p>' + '<p>' + '<span class="bac-point">Point '+ favoriteView.avg + '</span>' + '<span class="post-regdate">'+ favoriteView.regdate + '</span>' + '</p>' + '</span>' + '</div>'

@@ -6,14 +6,13 @@ var postingDatas;
 /*comment를 위한 함수 선언*/
 function getCommentData() {
 	$.ajax({
-		url : 'http://localhost:8080/getComment?writer="'+id+'"',
+		url : 'http://localhost:8080/getComment',
 		method : 'get',
 		dataType : 'json',
 		async:false,
 		success : function(res) {
 			console.log("getCommentData()_CF");
 			commentDatas=res.result;
-			console.log(commentDatas);
 		}
 	});
 }

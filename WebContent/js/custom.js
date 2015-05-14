@@ -1,4 +1,7 @@
 var formData=new FormData();
+var favoriteDatas;
+var commentDatas;
+var postingDatas;
 
 function readURL(input) {
 	$('#img_preview').empty();
@@ -601,7 +604,7 @@ $(function() {
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+
-			'<span id = "postingImg_view">이미지 공간</span>'+
+			'<span id = "postingImg_view"></span>'+
 			'<span id = "postingContent_div">'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
@@ -616,11 +619,8 @@ $(function() {
 				'<div class="pure-button add-comment-btn">Add</div>'+
 			'</div>'+
 			'<div class = "comment-list">'+
-
+			
 			'</div>'+
-//			'<ul class="comment-list">'+
-//
-//			'</ul>'+
 		'</div>'+
 	'</section>'
  
@@ -644,22 +644,11 @@ var liElem =
 	'</li>'+
 	'<span class="comment view" id="commentView-content">'+item.content+'</span>'
 	
-//	'<li>'+
-//		'<span class="user">'+item.writer+'</span>'+
-//		'<span class="regdate view">'+item.regdate.substr(0,10)+'</span>'+
-//		'<span class="comment view">'+item.content+'</span>'+
-//	'</li>';
 
 sectionObject.find('.comment-list').append(liElem);
-
-//console.log(idx);
-
 });
 return sectionObject.get(0).outerHTML;
 }
-
-	
-	
 	
 	function handleRaty(){
 		$('span.raty').raty({
