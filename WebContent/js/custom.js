@@ -383,8 +383,8 @@ $(function() {
 		var param = {
 			posting_seq : parentElem.attr('id').substring(11),
 			writer : window.sessionStorage.getItem('id'),
-			content : parentElem.find('input.comment').val(),
-			point : parentElem.find('.raty').raty('score')
+			content : parentElem.find('input.comment').val()
+//			point : parentElem.find('.raty').raty('score')
 		};
 		
 		
@@ -397,15 +397,13 @@ $(function() {
 				console.log("postcomment");
 				if(res.result=='success'){
 					//Append comment to comment list
-					var commentItem = '<li>'+
-						'<span class="raty-view" data-score="'+param.point+'"></span>'+
-						'<span class="user">'+param.writer+'</span>'+
-						'<span class="regdate view">'+getNowDate()+'</span>'+
-						'<span class="comment view">'+param.content+'</span>'+
-					'</li>';
-					parentElem.find('ul.comment-list').append(commentItem);
-					handleRaty();
-					
+					var commentItem = 
+					'<li class = "comment-list-sub">'+
+						'<span class="user" id="commentView-user">'+param.writer+'</span>'+
+						'<span class="regdate view" id="commentView-regdate">'+getNowDate()+'</span>'+
+					'</li>'+
+					'<span class="comment view" id="commentView-content">'+param.content+'</span>';
+					parentElem.find('.comment-list').append(commentItem);					
 					
 					//count avg and update posting point
 					var avg = 3;
@@ -570,25 +568,6 @@ $(function() {
 		
 		var countstr=leadingZeros(count,3);
 		var sectionElem = 
-<<<<<<< HEAD
-			'<section class="post '+postingDatas.seq+'" id="'+countstr+'postseq_'+postingDatas.seq+'">'+
-			'<div class="post-header post-top">'+
-			'<span class="post-avatar post-img">'+
-			'<img src="/img/common/'+postingDatas.thumb+'.jpg"></img>'+
-			'</span>'+
-			'<span class="post-meta bacpost-meta">'+
-			'<p>'+	
-			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
-			'<span class="posting-buttons" style="display:'+display+'">'+
-			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
-			'<button class="post-delete"><i class="fa fa-times"></i></button>'+		
-			'</span>'+ 
-
-			'<a href="#more_content" rel="modal:open"><button class="more-content"><i class="fa fa-star"></i></button></a>'+
-			'<span id = mainView_favorite>'+
-			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
-			'<button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
-=======
 		'<section class="post '+postingDatas.seq+'" id="'+countstr+'posting_'+postingDatas.seq+'">'+
 		'<div class="post-header post-top">'+
 			'<span class="post-avatar post-img"> '+
@@ -608,6 +587,7 @@ $(function() {
 						'<i class="fa fa-times"></i>'+
 					'</button>'+
 				'</span>'+
+				'<a href="#more_content" rel="modal:open"><button class="more-content"><i class="fa fa-star"></i></button></a>'+
 				'<span id=mainView_favorite>'+
 					'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
 					'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
@@ -620,7 +600,7 @@ $(function() {
 					'</span>'+
 					'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
 				'</p>'+
->>>>>>> 9645304b4da97954a90e6dc142a5cbe259767301
+//>>>>>>> 9645304b4da97954a90e6dc142a5cbe259767301
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+

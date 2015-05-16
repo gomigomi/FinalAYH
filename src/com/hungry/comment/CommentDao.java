@@ -65,7 +65,6 @@ public class CommentDao {
 				item.put("content", rs.getString("content"));
 				item.put("writer", rs.getString("writer"));
 				item.put("regdate", rs.getString("regdate"));
-				item.put("point",rs.getString("point"));
 				
 				result.add(item);
 			}
@@ -122,8 +121,8 @@ public class CommentDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "INSERT INTO comment (posting_seq, content, writer, regdate, point) "+
-						"VALUES('"+commentParam.get("posting_seq")[0].toString()+"', '"+commentParam.get("content")[0].toString()+"', '"+commentParam.get("writer")[0].toString()+"', now(), '"+commentParam.get("point")[0].toString()+"')";
+			String sql= "INSERT INTO comment (posting_seq, content, writer, regdate) "+
+						"VALUES('"+commentParam.get("posting_seq")[0].toString()+"', '"+commentParam.get("content")[0].toString()+"', '"+commentParam.get("writer")[0].toString()+"', now())";
 
 			stmt.executeUpdate(sql);
 
