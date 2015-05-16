@@ -587,7 +587,7 @@ $(function() {
 						'<i class="fa fa-times"></i>'+
 					'</button>'+
 				'</span>'+
-				'<a href="#more_content" rel="modal:open"><button class="more-content"><i class="fa fa-star"></i></button></a>'+
+				'<a href="#more_content" rel="modal:open"><button class="more-content"><img src="#"/></button></a>'+
 				'<span id=mainView_favorite>'+
 					'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
 					'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
@@ -604,7 +604,9 @@ $(function() {
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+
-			'<span id = "postingImg_view"></span>'+
+			'<span id = "postingImg_view">'+
+			'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/no-image.jpg"/></button></a>'+
+			'</span>'+
 			'<span id = "postingContent_div">'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
