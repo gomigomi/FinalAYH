@@ -227,7 +227,6 @@ section{
 }
 
 .comment-cnt .comment-list li span.comment{
-	float: right;
     
 	width: 50%;
     margin-right: 5px;
@@ -241,11 +240,10 @@ section{
     height: 25px;
     line-height: 25px;
     display: inline-block;
-    float: left;
 }
 
 .comment-cnt .comment-list li span.regdate{
-	float: right;
+
     height: 25px;
     line-height: 25px;
     
@@ -286,4 +284,101 @@ section{
 #heart-o, #heart {
 	background-color : white;
 	border : none;
+}
+
+<!-- posting -->
+.post-author {
+	
+}
+
+.bac-point {
+	
+}
+
+.post-description {
+	display : inline-flex;
+	width : 100%;
+	height : 210px;
+	margin : 1% 0 0 5%;
+}
+
+#postingImg_view {
+	display : inline;
+	background-color : orange;
+	width : 200px;
+	height : 200px;
+	
+	margin-right : 2%;
+	
+}
+
+.comment-text-form {
+	margin-left : 5%;
+}
+
+input.comment {
+	width : 85%;
+}
+
+#postingCI {
+	width : 20px;
+	height : 20px;
+}
+
+#postingContent_div {
+	display : inline;
+	width : 60%;
+	overflow : scroll;
+}
+
+#postingClassifyImg {
+	width : 30px;
+	height : 30px;
+	margin-right : 1%;
+	
+}
+
+#postingContent_view {
+	font-size : 1.3em;
+}
+
+#postingClassification_view {
+	
+}
+
+#postingContent_div > #postingContent_view {
+	
+}
+
+.user-raty {
+	margin : 0 2% 0 5%;
+}
+
+//comment
+comment-list-sub {
+	background : black;
+}
+#commentView-user {
+	margin : 0 1% 1% 3%;
+	font-size : 1.3em;
+	
+}
+
+#commentView-content {
+	margin : 0 5% 0 3%;
+}
+
+.bac-point {
+	font-size : 1.5em;
+}
+
+.comment-raty-form {
+	position : relative;
+	left : 23%;
+}
+
+.add-commentRaty-btn {
+	position : relative;
+	top : -8px;
+	margin-left : 1%;
 }

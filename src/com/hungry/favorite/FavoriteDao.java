@@ -49,11 +49,12 @@ public class FavoriteDao {
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(AVG(C.point), 2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2), 2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
 					"LEFT OUTER JOIN bookmark D ON D.posting_seq = A.seq "+
+					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"WHERE D.id = '"+id+"'"+
 					"GROUP BY A.seq "+
 					"ORDER BY A.seq DESC";

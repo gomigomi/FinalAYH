@@ -1,18 +1,18 @@
 $(function() {
 	//console.log(commentDatas);
 ////	//모든 코멘트를 불러온
-//	var commentDatas = getCommentData();
-//	function getCommentData(){
-//		$.ajax({
-//			url : 'http://localhost:8080/getComment',
-//			method : 'get',
-//			dataType : 'json',
-//			success : function(res){
-//				console.log("get comment");
-//				commentDatas = res.result;
-//			}
-//		})
-//	}
+	var commentDatas = getCommentData();
+	function getCommentData(){
+		$.ajax({
+			url : 'http://localhost:8080/getComment',
+			method : 'get',
+			dataType : 'json',
+			success : function(res){
+				console.log("get comment");
+				commentDatas = res.result;
+			}
+		})
+	}
 
 	
 	$('#history-button').click(function() {
@@ -75,6 +75,14 @@ $(function() {
 			}
 		})
 	}	
+	function getCommentUser() {
+		$('#history-comment').empty();
+		var id = window.sessionStorage.getItem('id');
+		$.ajax ({
+			url : 'http://localhost:8080/getComment?'
+		})
+	}
+	
 	function getSectionItem(postingDatas, isHide){
 		
 		var display = isHide ? 'none' : 'block';
