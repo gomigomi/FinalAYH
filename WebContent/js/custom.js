@@ -578,11 +578,13 @@ $(function() {
 			'<span class="post-writer"><a class="post-author" href="#">'+postingDatas.writer+'</a></span>'+
 			'<span class="posting-buttons" style="display:'+display+'">'+
 			'<a href="#post_edit" rel="modal:open"><button class="post-edit"><i class="fa fa-pencil-square-o"></i></button></a>'+
-			'<button class="post-delete"><i class="fa fa-times"></i></button>'+
-			
+			'<button class="post-delete"><i class="fa fa-times"></i></button>'+		
 			'</span>'+ 
+
+			'<a href="#more_content" rel="modal:open"><button class="more-content"><i class="fa fa-star"></i></button></a>'+
 			'<span id = mainView_favorite>'+
-			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button><button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
+			'<button id = "heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
+			'<button id = "heart" class="fa fa-heart favorite-btn" style = "display :'+favoriteDisplay+'"></button>'+
 			'</span>'+
 			
 			'</p>'+
