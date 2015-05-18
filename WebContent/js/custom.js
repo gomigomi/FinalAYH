@@ -383,8 +383,8 @@ $(function() {
 		var param = {
 			posting_seq : parentElem.attr('id').substring(11),
 			writer : window.sessionStorage.getItem('id'),
-			content : parentElem.find('input.comment').val(),
-			point : parentElem.find('.raty').raty('score')
+			content : parentElem.find('input.comment').val()
+//			point : parentElem.find('.raty').raty('score')
 		};
 		
 		//durl
@@ -399,6 +399,7 @@ $(function() {
 					//Append comment to comment list
 					var commentItem = 
 					'<li class = "comment-list-sub">'+
+<<<<<<< HEAD
 						'<span class="user" id="commentView-user">'+item.writer+'</span>'+
 						'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+'</span>'+
 					'</li>'+
@@ -412,6 +413,13 @@ $(function() {
 					parentElem.find('ul.comment-list').append(commentItem);
 					handleRaty();
 					
+=======
+						'<span class="user" id="commentView-user">'+param.writer+'</span>'+
+						'<span class="regdate view" id="commentView-regdate">'+getNowDate()+'</span>'+
+					'</li>'+
+					'<span class="comment view" id="commentView-content">'+param.content+'</span>';
+					parentElem.find('.comment-list').append(commentItem);					
+>>>>>>> 2a1bb253bed44480bb514699c0bc0eb5554a8559
 					
 					//count avg and update posting point
 					var avg = 3;
@@ -595,6 +603,7 @@ $(function() {
 						'<i class="fa fa-times"></i>'+
 					'</button>'+
 				'</span>'+
+				'<a href="#more_content" rel="modal:open"><button class="more-content"><img src="#"/></button></a>'+
 				'<span id=mainView_favorite>'+
 					'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
 					'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
@@ -607,10 +616,13 @@ $(function() {
 					'</span>'+
 					'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
 				'</p>'+
+//>>>>>>> 9645304b4da97954a90e6dc142a5cbe259767301
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+
-			'<span id = "postingImg_view"></span>'+
+			'<span id = "postingImg_view">'+
+			'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/no-image.jpg"/></button></a>'+
+			'</span>'+
 			'<span id = "postingContent_div">'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
