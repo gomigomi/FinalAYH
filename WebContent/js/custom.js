@@ -387,7 +387,7 @@ $(function() {
 			point : parentElem.find('.raty').raty('score')
 		};
 		
-		
+		//durl
 		$.ajax({
 			url: 'http://localhost:8080/postComment',
 			method: 'post',
@@ -397,12 +397,18 @@ $(function() {
 				console.log("postcomment");
 				if(res.result=='success'){
 					//Append comment to comment list
-					var commentItem = '<li>'+
-						'<span class="raty-view" data-score="'+param.point+'"></span>'+
-						'<span class="user">'+param.writer+'</span>'+
-						'<span class="regdate view">'+getNowDate()+'</span>'+
-						'<span class="comment view">'+param.content+'</span>'+
-					'</li>';
+					var commentItem = 
+					'<li class = "comment-list-sub">'+
+						'<span class="user" id="commentView-user">'+item.writer+'</span>'+
+						'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+'</span>'+
+					'</li>'+
+					'<span class="comment view" id="commentView-content">'+item.content+'</span>'
+//					'<li>'+
+//						'<span class="raty-view" data-score="'+param.point+'"></span>'+
+//						'<span class="user">'+param.writer+'</span>'+
+//						'<span class="regdate view">'+getNowDate()+'</span>'+
+//						'<span class="comment view">'+param.content+'</span>'+
+//					'</li>';
 					parentElem.find('ul.comment-list').append(commentItem);
 					handleRaty();
 					

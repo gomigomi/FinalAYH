@@ -1,4 +1,4 @@
-package com.hungry.comment;
+package com.hungry.favorite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,24 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommentDao {
-//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-//	static final String DB_URL = "jdbc:mysql://ec2-54-199-180-105.ap-northeast-1.compute.amazonaws.com:3306/bac-krk";
-//
-//	static final String USER = "root";
-//	static final String PASS = "wjsxo123";
+public class ScoreDao {
 //	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 //	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
-//
-//	static final String USER = "root";
-//	static final String PASS = "900418";
-//	
+	//DB test
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
+
 
 	static final String USER = "root";
 	static final String PASS = "900418";
@@ -45,26 +39,72 @@ public class CommentDao {
 		}
 		return dbConn;
 	}
-
-	public List<HashMap<String, Object>> getComment() {
+	//type1
+	public List<HashMap<String, Object>> getScoreView(String id) {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-
+		System.out.println("BOOKMARK : user "+id+" is on Score-View.");
+		
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
-			
-			String sql ="SELECT * FROM comment";
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2), 2.5) AS avg "+
+					"FROM posting AS A "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN bookmark D ON D.posting_seq = A.seq "+
+					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
+					"WHERE D.id = '"+id+"'"+
+					"GROUP BY A.seq "+
+					"ORDER BY A.seq DESC";
+
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next()){
 				HashMap<String, Object> item = new HashMap<String, Object>();
 				item.put("seq", rs.getString("seq"));
-				item.put("posting_seq", rs.getString("posting_seq"));
 				item.put("content", rs.getString("content"));
 				item.put("writer", rs.getString("writer"));
 				item.put("regdate", rs.getString("regdate"));
+				item.put("thumb", rs.getString("thumb"));
+				item.put("avg", rs.getString("avg"));
+				
+				result.add(item);
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		}catch(SQLException se){
+			se.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+		}
+
+		return result;
+	}
+	
+	//type2
+	public List<HashMap<String, Object>> getScore(String id) {
+		Connection conn = null;
+		Statement stmt = null;
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+		System.out.println("BOOKMARK : user "+id+" has used getScore");
+		
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			String sql ="SELECT * FROM bookmark where id='"+id+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while(rs.next()){
+				HashMap<String, Object> item = new HashMap<String, Object>();
+				item.put("flag", rs.getString("flag"));
+				item.put("posting_seq", rs.getString("posting_seq"));
+				item.put("id", rs.getString("id"));
 				
 				result.add(item);
 			}
@@ -84,7 +124,8 @@ public class CommentDao {
 	}
 	
 	
-	public String deleteComment(String seq){
+	
+	public String deleteScore(String id, String posting_seq){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -93,7 +134,7 @@ public class CommentDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "DELETE from comment where seq='"+seq+"'";
+			String sql= "DELETE from bookmark where id='"+id+"' and posting_seq='"+posting_seq+"'";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -108,24 +149,23 @@ public class CommentDao {
 		}finally{
 			
 		}
-
+		System.out.println("BOOKMARK : User "+id+" has deleted "+posting_seq);
 		return result;
 	}
 	
-	public String postComment(Map<String, String[]> commentParam){
+	public String postScore(String posting_seq, String id){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
-
 		try{
 			conn = getConnection();
-
 			stmt = conn.createStatement();
-			String sql= "INSERT INTO comment (posting_seq, content, writer, regdate, point) "+
-						"VALUES('"+commentParam.get("posting_seq")[0].toString()+"', '"+commentParam.get("content")[0].toString()+"', '"+commentParam.get("writer")[0].toString()+"', now(), '"+commentParam.get("point")[0].toString()+"')";
+			
+			String sql= "INSERT INTO bookmark (flag, id, posting_seq) "+
+						"VALUES('1', '"+id+"', '"+posting_seq+"')";
 
 			stmt.executeUpdate(sql);
-
+		
 			stmt.close();
 			conn.close();
 
@@ -138,7 +178,8 @@ public class CommentDao {
 		}finally{
 			
 		}
-
+		System.out.println("BOOKMARK : User "+id+ " added posting"+posting_seq+" as favorite.");
 		return result;
 	}
-}//end FirstExample
+
+}
