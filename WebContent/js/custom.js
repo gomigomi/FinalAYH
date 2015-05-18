@@ -399,27 +399,21 @@ $(function() {
 					//Append comment to comment list
 					var commentItem = 
 					'<li class = "comment-list-sub">'+
-<<<<<<< HEAD
 						'<span class="user" id="commentView-user">'+item.writer+'</span>'+
 						'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+'</span>'+
 					'</li>'+
 					'<span class="comment view" id="commentView-content">'+item.content+'</span>'
+						parentElem.find('.comment-list').append(commentItem);	
 //					'<li>'+
 //						'<span class="raty-view" data-score="'+param.point+'"></span>'+
 //						'<span class="user">'+param.writer+'</span>'+
 //						'<span class="regdate view">'+getNowDate()+'</span>'+
 //						'<span class="comment view">'+param.content+'</span>'+
 //					'</li>';
-					parentElem.find('ul.comment-list').append(commentItem);
+
 					handleRaty();
 					
-=======
-						'<span class="user" id="commentView-user">'+param.writer+'</span>'+
-						'<span class="regdate view" id="commentView-regdate">'+getNowDate()+'</span>'+
-					'</li>'+
-					'<span class="comment view" id="commentView-content">'+param.content+'</span>';
-					parentElem.find('.comment-list').append(commentItem);					
->>>>>>> 2a1bb253bed44480bb514699c0bc0eb5554a8559
+				
 					
 					//count avg and update posting point
 					var avg = 3;
