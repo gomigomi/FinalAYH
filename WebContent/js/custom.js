@@ -610,7 +610,6 @@ $(function() {
 					'</span>'+
 					'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
 				'</p>'+
-//>>>>>>> 9645304b4da97954a90e6dc142a5cbe259767301
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+
