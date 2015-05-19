@@ -404,12 +404,6 @@ $(function() {
 					'</li>'+
 					'<span class="comment view" id="commentView-content">'+param.content+'</span>'
 						parentElem.find('.comment-list').append(commentItem);	
-//					'<li>'+
-//						'<span class="raty-view" data-score="'+param.point+'"></span>'+
-//						'<span class="user">'+param.writer+'</span>'+
-//						'<span class="regdate view">'+getNowDate()+'</span>'+
-//						'<span class="comment view">'+param.content+'</span>'+
-//					'</li>';
 
 					handleRaty();
 					
@@ -597,7 +591,6 @@ $(function() {
 						'<i class="fa fa-times"></i>'+
 					'</button>'+
 				'</span>'+
-				'<a href="#more_content" rel="modal:open"><button class="more-content"><img src="#"/></button></a>'+
 				'<span id=mainView_favorite>'+
 					'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
 					'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
