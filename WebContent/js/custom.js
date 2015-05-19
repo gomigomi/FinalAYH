@@ -399,10 +399,10 @@ $(function() {
 					//Append comment to comment list
 					var commentItem = 
 					'<li class = "comment-list-sub">'+
-						'<span class="user" id="commentView-user">'+item.writer+'</span>'+
-						'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+'</span>'+
+						'<span class="user" id="commentView-user">'+param.writer+'</span>'+
+						'<span class="regdate view" id="commentView-regdate">'+getNowDate()+'</span>'+
 					'</li>'+
-					'<span class="comment view" id="commentView-content">'+item.content+'</span>'
+					'<span class="comment view" id="commentView-content">'+param.content+'</span>'
 						parentElem.find('.comment-list').append(commentItem);	
 //					'<li>'+
 //						'<span class="raty-view" data-score="'+param.point+'"></span>'+
