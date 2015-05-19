@@ -140,6 +140,7 @@ public class PostingDao {
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
 					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
+					"WHERE C.writer = '"+id+"'"+
 					"GROUP BY A.seq "+
 					"ORDER BY A.seq DESC";
 			ResultSet rs = stmt.executeQuery(sql);

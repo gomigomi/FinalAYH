@@ -75,13 +75,13 @@ $(function() {
 			}
 		})
 	}	
-	function getCommentUser() {
-		$('#history-comment').empty();
-		var id = window.sessionStorage.getItem('id');
-		$.ajax ({
-			url : 'http://localhost:8080/getComment?'
-		})
-	}
+//	function getCommentUser() {
+//		$('#history-comment').empty();
+//		var id = window.sessionStorage.getItem('id');
+//		$.ajax ({
+//			url : 'http://localhost:8080/getComment?'
+//		})
+//	}
 	
 	function getSectionItem(postingDatas, isHide){
 		
