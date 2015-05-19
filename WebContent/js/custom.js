@@ -341,7 +341,9 @@ $(function() {
 				console.log("postposting");
 				if(res.result == 'success'){
 					$('#write').val('');
-
+					$('input[type="checkbox"][name="f_type"]').prop('checked', false);
+					$('input[type="checkbox"][name="taste"]').prop('checked', false);
+					$('input[type="checkbox"][name="time"]').prop('checked', false);
 					//renew posting list
 					renderPostingList();
 
