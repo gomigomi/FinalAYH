@@ -18,7 +18,7 @@ $(function() {
 				imgDatas = res.result;
 			}
 		});
-		alert(imgDatas);
+		
 		if(imgDatas.length==1){
 			slidecontent=
 				'<div id="img-slider" style="display: inline-block">'+
