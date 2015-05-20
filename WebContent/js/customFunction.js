@@ -100,7 +100,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 				return false;
 			} else if (res.result == "0"){
 				$.ajax ({
-					url : 'http://localhost:8080/postScore&type=1',
+					url : 'http://localhost:8080/postScore?type=1',
 					method : 'POST',
 					dataType : 'JSON',
 					data : param,

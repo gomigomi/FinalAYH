@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.hungry.user.UserDao;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -37,7 +38,7 @@ public class imgServlet extends HttpServlet{
 		imgDao dao=new imgDao();
 		
 		try{
-		        String pathname = "/Users/gomi/workspace/test/WebContent/img";
+		        String pathname = "/Users/gomi/workspace/FinalAYH/WebContent/img";
 		        System.out.println(req);
 		        
 		        File f = new File(pathname);
@@ -87,4 +88,28 @@ public class imgServlet extends HttpServlet{
 		printout.print(JObject);
 		printout.flush();         
     }
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json; charset=UTF-8");//READ
+
+		PrintWriter printout = response.getWriter();
+		JSONObject JObject = new JSONObject();
+
+		imgDao dao = new imgDao();
+
+		try{{	//User Info API
+				String posting_seq=request.getParameter("posting_seq");
+				
+				JObject.put("result", dao.getImg(posting_seq));
+			}
+
+
+		}catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		printout.print(JObject);
+		printout.flush();
+	}
 }

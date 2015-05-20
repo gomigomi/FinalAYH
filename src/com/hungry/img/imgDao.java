@@ -44,13 +44,14 @@ public class imgDao {
 			
 			for(int i=0;i<list.size();i++){
 				
-			stmt = conn.createStatement();
-			String sql= "INSERT INTO image (img, posting_seq) "+
+				stmt = conn.createStatement();
+				String sql= "INSERT INTO image (img, posting_seq) "+
 						"VALUES('"+list.get(i)+"',(select max(seq) from posting))";
 
-			stmt.executeUpdate(sql);
-			stmt.close();
+				stmt.executeUpdate(sql);
 			
+				stmt.close();
+				
 			}
 			conn.close();
 
@@ -62,6 +63,35 @@ public class imgDao {
 			result = "fail";
 		}finally{
 			
+		}
+
+		return result;
+	}
+	
+	public ArrayList<String> getImg(String posting_seq) {
+		Connection conn = null;
+		Statement stmt = null;
+		ArrayList<String> result = new ArrayList<String>();
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			String sql ="SELECT * FROM image where posting_seq='"+posting_seq+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while(rs.next()){
+				result.add(rs.getString("img"));
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		}catch(SQLException se){
+			se.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
 		}
 
 		return result;
