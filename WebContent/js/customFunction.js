@@ -77,16 +77,10 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 		method : 'GET',
 		dataType : 'JSON',
 		success : function(res) {
-			scoreDatas = res.result;
-			console.log(scoreDatas);
-			
-			if(scoreDatas.id == param.id) {
+			if(res.result == "1") {
 				alert("You already participated!");
 				return false;
-			} else if (scoreDatas.id != param.id){
-				console.log(scoreDatas.id);
-				console.log(param.id);
-				console.log(param.posting_seq);
+			} else if (res.result == "0"){
 				$.ajax ({
 					url : 'http://localhost:8080/postScore',
 					method : 'POST',
@@ -95,7 +89,6 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 					success : function(res) {
 						if(res.result =='success') {
 							console.log("postScore_CF");
-
 							alert("Thank you!");
 							return false;
 						} else if(!window.sessionStorage.getItem('id')){

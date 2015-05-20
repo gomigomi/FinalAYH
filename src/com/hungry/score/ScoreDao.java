@@ -40,10 +40,12 @@ public class ScoreDao {
 		return dbConn;
 	}
 	
-	public List<HashMap<String, Object>> getScore(String id, String posting_seq) {
+//	public List<HashMap<String, Object>> getScore(String id, String posting_seq) {
+	public String getScore(String id, String posting_seq) {
 		Connection conn = null;
 		Statement stmt = null;
-		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+//		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+		String result = "0";
 		System.out.println("SCORE : user "+id+" used getScore");
 		
 		try{
@@ -52,14 +54,9 @@ public class ScoreDao {
 			String sql ="SELECT * FROM score where id='"+id+"' and posting_seq='"+posting_seq+"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			while(rs.next()){
-				HashMap<String, Object> item = new HashMap<String, Object>();
-				item.put("point", rs.getString("point"));
-				item.put("posting_seq", rs.getString("posting_seq"));
-				item.put("id", rs.getString("id"));
-
-				result.add(item);
-			}
+			if(rs.next()){
+				result="1";
+				}
 			rs.close();
 			stmt.close();
 			conn.close();
