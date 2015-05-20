@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ScoreDao {
-//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-//	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
-	//DB test
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
 
@@ -40,11 +37,10 @@ public class ScoreDao {
 		return dbConn;
 	}
 	
-//	public List<HashMap<String, Object>> getScore(String id, String posting_seq) {
+
 	public String getScore(String id, String posting_seq) {
 		Connection conn = null;
 		Statement stmt = null;
-//		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 		String result = "0";
 		System.out.println("SCORE : user "+id+" used getScore");
 		
@@ -70,36 +66,6 @@ public class ScoreDao {
 		}finally{
 		}
 
-		return result;
-	}
-	
-	
-	
-	public String deleteScore(String id, String posting_seq){
-		Connection conn = null;
-		Statement stmt = null;
-		String result = "success";
-
-		try{
-			conn = getConnection();
-
-			stmt = conn.createStatement();
-			String sql= "DELETE from score where id='"+id+"' and posting_seq='"+posting_seq+"'";
-			stmt.executeUpdate(sql);
-
-			stmt.close();
-			conn.close();
-
-		}catch(SQLException se){
-			se.printStackTrace();
-			result = "fail";
-		}catch(Exception e){
-			e.printStackTrace();
-			result = "fail";
-		}finally{
-			
-		}
-		System.out.println("SCORE : User "+id+" has deleted "+posting_seq);
 		return result;
 	}
 	
