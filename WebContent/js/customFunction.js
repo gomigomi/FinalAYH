@@ -61,30 +61,56 @@ function getFavoriteView() {
 	});
 }
 
+
+
 //Score
 $(document).on('click', '.add-commentRaty-btn', function() {
 	var parentElem = $(this).parents('section');
-	
 	var param = {
 			posting_seq : parentElem.attr('id').substring(11),
 			id : window.sessionStorage.getItem('id'),
-			point : parentElem.find('raty').raty('score')
+			point : parentElem.find('.raty').raty('score')
 	};
 	
 	$.ajax ({
-		url : 'http://localhost:8080/postScore',
-		method : 'POST',
+		url : 'http://localhost:8080/getScore?id='+param.id+'&posting_seq='+param.posting_seq,
+		method : 'GET',
 		dataType : 'JSON',
-		data : param,
 		success : function(res) {
-			if(res.result =='success') {
-				console.log("postScore_CF : success");
-			} else {
-				alert("Point has not uploaded.");
-			}
+			scoreDatas = res.result;
+			console.log(scoreDatas);
 			
-		} 
+			if(scoreDatas.id == param.id) {
+				alert("You already participated!");
+				return false;
+			} else if (scoreDatas.id != param.id){
+				console.log(scoreDatas.id);
+				console.log(param.id);
+				console.log(param.posting_seq);
+				$.ajax ({
+					url : 'http://localhost:8080/postScore',
+					method : 'POST',
+					dataType : 'JSON',
+					data : param,
+					success : function(res) {
+						if(res.result =='success') {
+							console.log("postScore_CF");
+
+							alert("Thank you!");
+							return false;
+						} else if(!window.sessionStorage.getItem('id')){
+							alert ("Please Log-in first!");
+							return false;
+						} else {
+							alert("Point has not uploaded.");
+							return false;
+						}	
+					} 
+				})
+			}
+		}
 	})
+
 })
 
 

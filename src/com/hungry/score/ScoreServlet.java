@@ -25,7 +25,6 @@ public class ScoreServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-		String type = request.getParameter("type");
 
 		ScoreDao dao = new ScoreDao();
 		try{
@@ -51,15 +50,13 @@ public class ScoreServlet extends HttpServlet{
 		JSONObject JObject = new JSONObject();
 
 		ScoreDao dao = new ScoreDao();
-//		Map<String, String[]> userParam = request.getParameterMap();
+		Map<String, String[]> scoreParam = request.getParameterMap();
 
 		try{
-			//Bookmark controller
-				String point = request.getParameter("point");
-				String posting_seq = request.getParameter("posting_seq");
-				String id = request.getParameter("id");
-				
-				JObject.put("result", dao.postScore(point, posting_seq, id));
+//				String point = request.getParameter("point");
+//				String posting_seq = request.getParameter("posting_seq");
+//				String id = request.getParameter("id");
+				JObject.put("result", dao.postScore(scoreParam));
 
 		}catch(JSONException e){
 			

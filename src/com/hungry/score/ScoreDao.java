@@ -51,24 +51,25 @@ public class ScoreDao {
 			stmt = conn.createStatement();
 			String sql ="SELECT * FROM score where id='"+id+"' and posting_seq='"+posting_seq+"'";
 			ResultSet rs = stmt.executeQuery(sql);
-
+			
 			while(rs.next()){
 				HashMap<String, Object> item = new HashMap<String, Object>();
 				item.put("point", rs.getString("point"));
 				item.put("posting_seq", rs.getString("posting_seq"));
 				item.put("id", rs.getString("id"));
-				
+
 				result.add(item);
 			}
-
 			rs.close();
 			stmt.close();
 			conn.close();
 
 		}catch(SQLException se){
 			se.printStackTrace();
+
 		}catch(Exception e){
 			e.printStackTrace();
+
 		}finally{
 		}
 
@@ -105,7 +106,7 @@ public class ScoreDao {
 		return result;
 	}
 	
-	public String postScore(String point, String posting_seq, String id){
+	public String postScore(Map<String, String[]> scoreParam){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -114,8 +115,8 @@ public class ScoreDao {
 			stmt = conn.createStatement();
 			
 			String sql= "INSERT INTO score (point, id, posting_seq) "+
-						"VALUES('"+point+"', '"+id+"', '"+posting_seq+"')";
-
+						"VALUES('"+scoreParam.get("point")[0].toString()+"', '"+scoreParam.get("id")[0].toString()+"', '"+scoreParam.get("posting_seq")[0].toString()+"')";
+				
 			stmt.executeUpdate(sql);
 		
 			stmt.close();
@@ -130,7 +131,7 @@ public class ScoreDao {
 		}finally{
 			
 		}
-		System.out.println("BOOKMARK : User "+id+ " added posting"+posting_seq+" as favorite.");
+		System.out.println("SCORE : User "+scoreParam.get("id")[0].toString()+" gave "+scoreParam.get("point")[0].toString()+" on "+scoreParam.get("posting_seq")[0].toString()+" .");
 		return result;
 	}
 

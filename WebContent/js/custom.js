@@ -2,6 +2,7 @@ var formData=new FormData();
 var favoriteDatas;
 var commentDatas;
 var postingDatas;
+var scoreDatas;
 
 function readURL(input) {
 	$('#img_preview').empty();
