@@ -98,4 +98,31 @@ public class ScoreDao {
 		return result;
 	}
 
+	public String updateScore(Map<String, String[]> scoreParam) {
+		Connection conn = null;
+		Statement stmt = null;
+		String result = "success";
+		
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			String sql= "UPDATE score SET point ='"+scoreParam.get("point")[0].toString()+"' WHERE score.id='"+scoreParam.get("id")[0].toString()+"' and score.posting_seq='"+scoreParam.get("posting_seq")[0].toString()+"'";	
+			stmt.executeUpdate(sql);
+		
+			stmt.close();
+			conn.close();
+
+		}catch(SQLException se){
+			se.printStackTrace();
+			result = "fail";
+		}catch(Exception e){
+			e.printStackTrace();
+			result = "fail";
+		}finally{
+			
+		}
+		System.out.println("SCORE : User "+scoreParam.get("id")[0].toString()+" re-gave "+scoreParam.get("point")[0].toString()+" on "+scoreParam.get("posting_seq")[0].toString()+" .");
+		return result;
+	}
 }

@@ -143,11 +143,11 @@
   	<url-pattern>/getScore</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>deleteScore</servlet-name>
+  	<servlet-name>updateScore</servlet-name>
   	<servlet-class>com.hungry.score.ScoreServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>deleteScore</servlet-name>
-  	<url-pattern>/deleteScore</url-pattern>
+  	<servlet-name>updateScore</servlet-name>
+  	<url-pattern>/updateScore</url-pattern>
   </servlet-mapping>
 </web-app>

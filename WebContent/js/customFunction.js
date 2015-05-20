@@ -78,7 +78,25 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 		dataType : 'JSON',
 		success : function(res) {
 			if(res.result == "1") {
-				alert("You already participated!");
+				var check = confirm("Do you want to re-estimate?")
+				if(check) {
+					$.ajax({
+						url : 'http://localhost:8080/updateScore',
+						method : 'POST',
+						dataType : 'JSON',
+						data : param,
+						success : function(res) {
+							if(res.result == 'success') {
+								alert("Thank you again!");
+								return false;
+							} else {
+								alert("Point has not been changed.");
+							}
+						}
+					})
+				} else {
+					return false;
+				}
 				return false;
 			} else if (res.result == "0"){
 				$.ajax ({

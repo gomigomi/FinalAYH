@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//import com.bac.user.UserDao;
-
 public class ScoreServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -53,9 +51,6 @@ public class ScoreServlet extends HttpServlet{
 		Map<String, String[]> scoreParam = request.getParameterMap();
 
 		try{
-//				String point = request.getParameter("point");
-//				String posting_seq = request.getParameter("posting_seq");
-//				String id = request.getParameter("id");
 				JObject.put("result", dao.postScore(scoreParam));
 
 		}catch(JSONException e){
@@ -66,25 +61,22 @@ public class ScoreServlet extends HttpServlet{
 		printout.flush();
 	}
 
-//	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json; charset=UTF-8");//DELETE
-//
-//		PrintWriter printout = response.getWriter();
-//		JSONObject JObject = new JSONObject();
-//
-//		ScoreDao dao = new ScoreDao();
-//		
-//		String id = request.getParameter("id");
-//		String posting_seq = request.getParameter("posting_seq");
-//
-//		
-//		try{
-//			JObject.put("result", dao.deleteScore(id, posting_seq));
-//		}catch(JSONException e){
-//			
-//			e.printStackTrace();
-//		}
-//		printout.print(JObject);
-//		printout.flush();
-//	}
+	
+	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json; charset=UTF-8");
+		
+		PrintWriter printout = response.getWriter();
+		JSONObject JObject = new JSONObject();
+		
+		ScoreDao dao = new ScoreDao();
+		Map<String, String[]> scoreParam = request.getParameterMap();
+		
+		try {
+			JObject.put("result", dao.updateScore(scoreParam));
+		} catch(JSONException e) {
+			e.printStackTrace();
+		}
+		printout.print(JObject);
+		printout.flush();
+	}
 }
