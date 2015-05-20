@@ -124,4 +124,30 @@
     <servlet-name>postImg</servlet-name>
     <url-pattern>/postImg</url-pattern>
   </servlet-mapping>
+  
+  <!--  score -->
+  <servlet>
+  	<servlet-name>postScore</servlet-name>
+  	<servlet-class>com.hungry.score.ScoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>postScore</servlet-name>
+  	<url-pattern>/postScore</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>getScore</servlet-name>
+  	<servlet-class>com.hungry.score.ScoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getScore</servlet-name>
+  	<url-pattern>/getScore</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>deleteScore</servlet-name>
+  	<servlet-class>com.hungry.score.ScoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deleteScore</servlet-name>
+  	<url-pattern>/deleteScore</url-pattern>
+  </servlet-mapping>
 </web-app>

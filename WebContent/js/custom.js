@@ -385,8 +385,8 @@ $(function() {
 		var param = {
 			posting_seq : parentElem.attr('id').substring(11),
 			writer : window.sessionStorage.getItem('id'),
-			content : parentElem.find('input.comment').val()
-//			point : parentElem.find('.raty').raty('score')
+			content : parentElem.find('input.comment').val(),
+			point : parentElem.find('.raty').raty('score')
 		};
 		
 		//durl
@@ -597,14 +597,14 @@ $(function() {
 					'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
 					'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
 				'</span>'+
-				'<p>'+
+				'<div class = "comment-form">'+
 					'<span class="bac-point">Point '+postingDatas.avg+'</span>'+
 					'<span class="comment-raty-form">'+
-						'<span class="raty" data-score="3"></span>'+
+						'<span class="raty" data-score="2.5" style="cursor:pointer;"></span>'+
 						'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
 					'</span>'+
 					'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
-				'</p>'+
+				'</div>'+
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+

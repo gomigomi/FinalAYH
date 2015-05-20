@@ -29,15 +29,9 @@ public class ScoreServlet extends HttpServlet{
 
 		ScoreDao dao = new ScoreDao();
 		try{
-			//type1 = 일반 포스팅 화면을 위한 join
-			if(type.equals("1")) {
-				String bm_id = request.getParameter("id");
-				JObject.put("result", dao.getScoreView(bm_id));
-			} //type2 = favorite view에서만 사용 
-			  else if(type.equals("2")) {  
-				String bm_id = request.getParameter("id");
-				JObject.put("result", dao.getScore(bm_id));
-			}
+			String point_id = request.getParameter("id");
+			String posting_seq = request.getParameter("posting_seq");
+			JObject.put("result",  dao.getScore(point_id, posting_seq));
 
 		}catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -61,11 +55,11 @@ public class ScoreServlet extends HttpServlet{
 
 		try{
 			//Bookmark controller
-				
+				String point = request.getParameter("point");
 				String posting_seq = request.getParameter("posting_seq");
 				String id = request.getParameter("id");
 				
-				JObject.put("result", dao.postScore(posting_seq, id));
+				JObject.put("result", dao.postScore(point, posting_seq, id));
 
 		}catch(JSONException e){
 			
@@ -75,25 +69,25 @@ public class ScoreServlet extends HttpServlet{
 		printout.flush();
 	}
 
-	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=UTF-8");//DELETE
-
-		PrintWriter printout = response.getWriter();
-		JSONObject JObject = new JSONObject();
-
-		ScoreDao dao = new ScoreDao();
-		
-		String id = request.getParameter("id");
-		String posting_seq = request.getParameter("posting_seq");
-
-		
-		try{
-			JObject.put("result", dao.deleteScore(id, posting_seq));
-		}catch(JSONException e){
-			
-			e.printStackTrace();
-		}
-		printout.print(JObject);
-		printout.flush();
-	}
+//	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.setContentType("application/json; charset=UTF-8");//DELETE
+//
+//		PrintWriter printout = response.getWriter();
+//		JSONObject JObject = new JSONObject();
+//
+//		ScoreDao dao = new ScoreDao();
+//		
+//		String id = request.getParameter("id");
+//		String posting_seq = request.getParameter("posting_seq");
+//
+//		
+//		try{
+//			JObject.put("result", dao.deleteScore(id, posting_seq));
+//		}catch(JSONException e){
+//			
+//			e.printStackTrace();
+//		}
+//		printout.print(JObject);
+//		printout.flush();
+//	}
 }

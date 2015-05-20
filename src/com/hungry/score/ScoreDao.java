@@ -1,4 +1,4 @@
-package com.hungry.favorite;
+package com.hungry.score;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,70 +39,22 @@ public class ScoreDao {
 		}
 		return dbConn;
 	}
-	//type1
-	public List<HashMap<String, Object>> getScoreView(String id) {
-		Connection conn = null;
-		Statement stmt = null;
-		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("BOOKMARK : user "+id+" is on Score-View.");
-		
-		try{
-			conn = getConnection();
-			stmt = conn.createStatement();
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2), 2.5) AS avg "+
-					"FROM posting AS A "+
-					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
-					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
-					"LEFT OUTER JOIN bookmark D ON D.posting_seq = A.seq "+
-					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
-					"WHERE D.id = '"+id+"'"+
-					"GROUP BY A.seq "+
-					"ORDER BY A.seq DESC";
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while(rs.next()){
-				HashMap<String, Object> item = new HashMap<String, Object>();
-				item.put("seq", rs.getString("seq"));
-				item.put("content", rs.getString("content"));
-				item.put("writer", rs.getString("writer"));
-				item.put("regdate", rs.getString("regdate"));
-				item.put("thumb", rs.getString("thumb"));
-				item.put("avg", rs.getString("avg"));
-				
-				result.add(item);
-			}
-
-			rs.close();
-			stmt.close();
-			conn.close();
-
-		}catch(SQLException se){
-			se.printStackTrace();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-		}
-
-		return result;
-	}
 	
-	//type2
-	public List<HashMap<String, Object>> getScore(String id) {
+	public List<HashMap<String, Object>> getScore(String id, String posting_seq) {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("BOOKMARK : user "+id+" has used getScore");
+		System.out.println("SCORE : user "+id+" used getScore");
 		
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql ="SELECT * FROM bookmark where id='"+id+"'";
+			String sql ="SELECT * FROM score where id='"+id+"' and posting_seq='"+posting_seq+"'";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next()){
 				HashMap<String, Object> item = new HashMap<String, Object>();
-				item.put("flag", rs.getString("flag"));
+				item.put("point", rs.getString("point"));
 				item.put("posting_seq", rs.getString("posting_seq"));
 				item.put("id", rs.getString("id"));
 				
@@ -134,7 +86,7 @@ public class ScoreDao {
 			conn = getConnection();
 
 			stmt = conn.createStatement();
-			String sql= "DELETE from bookmark where id='"+id+"' and posting_seq='"+posting_seq+"'";
+			String sql= "DELETE from score where id='"+id+"' and posting_seq='"+posting_seq+"'";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -149,11 +101,11 @@ public class ScoreDao {
 		}finally{
 			
 		}
-		System.out.println("BOOKMARK : User "+id+" has deleted "+posting_seq);
+		System.out.println("SCORE : User "+id+" has deleted "+posting_seq);
 		return result;
 	}
 	
-	public String postScore(String posting_seq, String id){
+	public String postScore(String point, String posting_seq, String id){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -161,8 +113,8 @@ public class ScoreDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql= "INSERT INTO bookmark (flag, id, posting_seq) "+
-						"VALUES('1', '"+id+"', '"+posting_seq+"')";
+			String sql= "INSERT INTO score (point, id, posting_seq) "+
+						"VALUES('"+point+"', '"+id+"', '"+posting_seq+"')";
 
 			stmt.executeUpdate(sql);
 		
