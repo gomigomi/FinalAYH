@@ -142,12 +142,4 @@
   	<servlet-name>getScore</servlet-name>
   	<url-pattern>/getScore</url-pattern>
   </servlet-mapping>
-  <servlet>
-  	<servlet-name>updateScore</servlet-name>
-  	<servlet-class>com.hungry.score.ScoreServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>updateScore</servlet-name>
-  	<url-pattern>/updateScore</url-pattern>
-  </servlet-mapping>
 </web-app>

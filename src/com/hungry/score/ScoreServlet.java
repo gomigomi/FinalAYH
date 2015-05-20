@@ -49,9 +49,15 @@ public class ScoreServlet extends HttpServlet{
 
 		ScoreDao dao = new ScoreDao();
 		Map<String, String[]> scoreParam = request.getParameterMap();
+		String type = request.getParameter("type");
 
 		try{
-				JObject.put("result", dao.postScore(scoreParam));
+				
+				if(type.equals("1")){	//User Info API
+					JObject.put("result", dao.postScore(scoreParam));
+				}else if(type.equals("2")){	//Login API
+					JObject.put("result", dao.updateScore(scoreParam));
+				}
 
 		}catch(JSONException e){
 			
@@ -62,21 +68,21 @@ public class ScoreServlet extends HttpServlet{
 	}
 
 	
-	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=UTF-8");
-		
-		PrintWriter printout = response.getWriter();
-		JSONObject JObject = new JSONObject();
-		
-		ScoreDao dao = new ScoreDao();
-		Map<String, String[]> scoreParam = request.getParameterMap();
-		
-		try {
-			JObject.put("result", dao.updateScore(scoreParam));
-		} catch(JSONException e) {
-			e.printStackTrace();
-		}
-		printout.print(JObject);
-		printout.flush();
-	}
+//	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.setContentType("application/json; charset=UTF-8");
+//		
+//		PrintWriter printout = response.getWriter();
+//		JSONObject JObject = new JSONObject();
+//		
+//		ScoreDao dao = new ScoreDao();
+//		Map<String, String[]> scoreParam = request.getParameterMap();
+//		
+//		try {
+//			JObject.put("result", dao.updateScore(scoreParam));
+//		} catch(JSONException e) {
+//			e.printStackTrace();
+//		}
+//		printout.print(JObject);
+//		printout.flush();
+//	}
 }

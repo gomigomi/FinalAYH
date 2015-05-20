@@ -81,7 +81,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 				var check = confirm("Do you want to re-estimate?")
 				if(check) {
 					$.ajax({
-						url : 'http://localhost:8080/updateScore',
+						url : 'http://localhost:8080/postScore?type=2',
 						method : 'POST',
 						dataType : 'JSON',
 						data : param,
@@ -100,7 +100,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 				return false;
 			} else if (res.result == "0"){
 				$.ajax ({
-					url : 'http://localhost:8080/postScore',
+					url : 'http://localhost:8080/postScore&type=1',
 					method : 'POST',
 					dataType : 'JSON',
 					data : param,
