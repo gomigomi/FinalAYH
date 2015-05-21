@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.util.HashMap" %>
 
@@ -61,7 +61,7 @@
 <%
 	if(!(userHash.isEmpty())){
 		System.out.println("it works");
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.html");
 	}else{
 		System.out.println("wrong");
 		request.setAttribute("errMsg", "¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
