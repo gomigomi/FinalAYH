@@ -105,7 +105,7 @@ function getSectionItem(favoriteView, isHide) {
 	'<section class="post '+favoriteView.seq+'" id="posting_'+favoriteView.seq+'">'+
 		'<div class="post-header post-top">'+
 		'<span class="post-avatar post-img"> '+
-			'<img src="/img/common/'+favoriteView.thumb+'.jpg"/>'+
+			'<img src="/img/common/'+favoriteView.thumb+'"/>'+
 		'</span>'+ 
 		'<span class="post-meta bacpost-meta">'+ 
 			'<span class="post-writer">'+ 

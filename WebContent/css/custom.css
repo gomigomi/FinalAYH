@@ -392,3 +392,13 @@ comment-list-sub {
     width: 300px;
     height: 300px;
 }
+.thumb img{
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  border-radius: 100px;
+  position: relative;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+}

@@ -23,7 +23,7 @@ function getSectionItem(postingDatas, isHide){
 	'<section class="post '+postingDatas.seq+'" id="posting_'+postingDatas.seq+'">'+
 	'<div class="post-header post-top">'+
 		'<span class="post-avatar post-img"> '+
-			'<img src="/img/common/'+postingDatas.thumb+'.jpg"/>'+
+			'<img src="/img/common/'+postingDatas.thumb+'"/>'+
 		'</span>'+ 
 		'<span class="post-meta bacpost-meta">'+ 
 			'<span class="post-writer">'+ 
