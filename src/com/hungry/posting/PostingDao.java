@@ -93,10 +93,10 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
-					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
 					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"WHERE A.writer = '"+id+"'"+
 					"GROUP BY A.seq "+
@@ -111,6 +111,7 @@ public class PostingDao {
 				item.put("regdate", rs.getString("regdate"));
 				item.put("thumb", rs.getString("thumb"));
 				item.put("avg", rs.getString("avg"));
+				item.put("img", rs.getString("img"));
 				
 				result.add(item);
 			}
@@ -137,10 +138,11 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(D.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN image D ON D.posting_seq = A.seq "+ 
 					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"WHERE C.writer = '"+id+"'"+
 					"GROUP BY A.seq "+
@@ -155,6 +157,7 @@ public class PostingDao {
 				item.put("regdate", rs.getString("regdate"));
 				item.put("thumb", rs.getString("thumb"));
 				item.put("avg", rs.getString("avg"));
+				item.put("img", rs.getString("img"));
 				
 				result.add(item);
 			}
@@ -182,13 +185,13 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
-					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
 					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"GROUP BY A.seq "+
-					"ORDER BY A.seq DESC";
+					"ORDER BY avg DESC";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
@@ -199,6 +202,7 @@ public class PostingDao {
 				item.put("regdate", rs.getString("regdate"));
 				item.put("thumb", rs.getString("thumb"));
 				item.put("avg", rs.getString("avg"));
+				item.put("img", rs.getString("img"));
 				
 				result.add(item);
 			}
