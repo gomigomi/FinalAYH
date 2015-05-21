@@ -656,6 +656,9 @@ return sectionObject.get(0).outerHTML;
 	function handleRaty(){
 		$('span.raty').raty({
 			half : true,
+//			cancel : true,
+//			cancelPlace : 'left',
+//			noRatedMsg : "I'am readOnly and I haven't rated yet!",
 			score: function() {
 				return $(this).attr('data-score');
 			}
@@ -665,6 +668,7 @@ return sectionObject.get(0).outerHTML;
 		$('span.raty-view').raty({
 			score: function() {
 				half : true;
+				noRatedMsg : "I'am readOnly and I haven't rated yet!";
 				return $(this).attr('data-score');
 			},
 			readOnly: true,
