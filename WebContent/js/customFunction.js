@@ -67,7 +67,7 @@ function getFavoriteView() {
 $(document).on('click', '.add-commentRaty-btn', function() {
 	var parentElem = $(this).parents('section');
 	var param = {
-			posting_seq : parentElem.attr('id').substring(11),
+			posting_seq : parentElem.attr('id').substring(8),
 			id : window.sessionStorage.getItem('id'),
 			point : parentElem.find('.raty').raty('score')
 	};

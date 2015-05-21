@@ -428,7 +428,7 @@ $(function() {
 //포스팅삭제 
 	$(document).on('click', '.post-delete' , function(){
 		var seq = $(this).closest('section').attr('id');
-		seq= seq.substring(11);
+		seq= seq.substring(8);
 		var check=confirm('Are you sure to delete this post?');
 		if (check){
 			$.ajax({
@@ -445,7 +445,7 @@ $(function() {
 //포스팅 수정 
 	$(document).on('click','.post-edit', function(){
 		var seq = $(this).closest('section').attr('id');
-		seq= seq.substring(11);
+		seq= seq.substring(8);
 
 		console.log(seq);
 		$(document).on('click', '#post-edit-submit' , function(){
