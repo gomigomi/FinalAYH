@@ -16,7 +16,7 @@ $(function() {
 		$('.logon').show();
 		$('.logoff').hide();
 		
-		$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'.jpg"'+')');
+		$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'"'+')');
 		$('.info').text(session.id + '('+session.name+')');
 		$('#user_edit_id').val(session.id);
 		$('#user_edit_name').val(session.name);

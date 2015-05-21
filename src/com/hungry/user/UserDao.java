@@ -147,7 +147,7 @@ public class UserDao {
 
 			stmt = conn.createStatement();
 			String sql= "INSERT INTO user (id, pass, name, regdate,thumb) "+
-						"VALUES('"+userParam.get("id")[0].toString()+"', '"+userParam.get("pass")[0].toString()+"', '"+userParam.get("name")[0].toString()+"', now(), '1')";
+						"VALUES('"+userParam.get("id")[0].toString()+"', '"+userParam.get("pass")[0].toString()+"', '"+userParam.get("name")[0].toString()+"', now(),'"+userParam.get("thumb")[0].toString()+"')";
 
 			stmt.executeUpdate(sql);
 

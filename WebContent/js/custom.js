@@ -204,7 +204,7 @@ $(function() {
 //
 //					renderPostingList();
 					location.reload([false]);
-					$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'.jpg"'+')');
+					$('.thumb').css("background-image", 'url('+'"/img/common/'+thumb+'"'+')');
 					$('.info').text(id + '('+name+')');
 
 					$('#user_edit_id').val(id);
