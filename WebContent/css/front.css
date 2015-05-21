@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+#front-wrapper{
+	background: rgb(255, 255, 255);
+}
+
+#top-wrapper{
+	display:inline;
+}
+
+.top-menu{
+	display:inline;
+}
+
+#bot-wrapper{
+	display:display;
+}
+
+#signin-bot{
+	display:none;
+}
