@@ -14,18 +14,8 @@
 <%
 	HashMap<String, Object> userHash = new HashMap<String, Object>();
 	userHash = udao.loginUser(form_id, form_pw);
-
-	if(!(userHash.isEmpty())){
-		System.out.println("it works");
-		response.sendRedirect("index.jsp");
-	}else{
-		System.out.println("wrong");
-		request.setAttribute("errMsg", "¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
-		RequestDispatcher rd = request.getRequestDispatcher("NewFront.jsp");
-		rd.forward(request, response);
-	}
 	
-	//¼­ºí¸´ ÇÔ¼ö->ÇØ½¬¸Ê->½ºÆ®¸µ->jsp¼¼¼Ç½ºÅä¸®Áö
+	//Â¼Â­ÂºÃ­Â¸Â´ Ã‡Ã”Â¼Ã¶->Ã‡Ã˜Â½Â¬Â¸ÃŠ->Â½ÂºÃ†Â®Â¸Âµ->jspÂ¼Â¼Â¼Ã‡Â½ÂºÃ…Ã¤Â¸Â®ÃÃ¶
 	String idHash = (String)userHash.get("id");
 	String pwHash = (String)userHash.get("pass");
 	String nameHash = (String)userHash.get("name");
@@ -39,7 +29,7 @@
 	session.setAttribute("thumb", thumbHash);
 %>		
 
-<%--jsp ¼¼¼Ç session to js jquery ¼¼¼Ç session --%>
+<%--jsp Â¼Â¼Â¼Ã‡ session to js jquery Â¼Â¼Â¼Ã‡ session --%>
 <%
 	String id = (String)session.getAttribute("id");
 	String pw = (String)session.getAttribute("pw");
@@ -52,7 +42,7 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -65,8 +55,20 @@
 	sessionStorage.setItem("pw", "<%=pw%>")
 	sessionStorage.setItem("name", "<%=name%>")
 	sessionStorage.setItem("thumb", "<%=thumb%>")
-	
+
 </script>
+
+<%
+	if(!(userHash.isEmpty())){
+		System.out.println("it works");
+		response.sendRedirect("index.jsp");
+	}else{
+		System.out.println("wrong");
+		request.setAttribute("errMsg", "Â¾Ã†Ã€ÃŒÂµÃ° Â¶Ã‡Â´Ã‚ ÂºÃ±Â¹ÃÂ¹Ã¸ÃˆÂ£Â°Â¡ Ã€ÃÃ„Â¡Ã‡ÃÃÃ¶ Â¾ÃŠÂ½Ã€Â´ÃÂ´Ã™.");
+		RequestDispatcher rd = request.getRequestDispatcher("NewFront.jsp");
+		rd.forward(request, response);
+	}
+%>
 
 </body>
 </html>
