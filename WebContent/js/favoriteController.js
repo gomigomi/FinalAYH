@@ -9,7 +9,7 @@ $(document).on('click', '#favorite-button', function() {
 $(document).on('click', '#favoriteView .fa-heart-o', function() {
 	var param = {
 			id : window.sessionStorage.getItem('id'),
-			posting_seq : $(this).closest('section').attr('id').substring(11)
+			posting_seq : $(this).closest('section').attr('id').substring(8)
 	};
 
 	$.ajax ({
@@ -51,7 +51,7 @@ $(document).on('click', '#favoriteView .fa-heart', function() {
 $(document).on('click', '#mainView_favorite .fa-heart-o', function(e) {
 	var param = {
 			id : window.sessionStorage.getItem('id'),
-			posting_seq : $(this).closest('section').attr('id').substring(11)
+			posting_seq : $(this).closest('section').attr('id').substring(8)
 	};
 	console.log(param.posting_seq);
 	
@@ -78,7 +78,7 @@ $(document).on('click', '#mainView_favorite .fa-heart', function(){
 	
 	if(check) {
 		var id = window.sessionStorage.getItem('id');
-		var posting_seq = $(this).closest('section').attr('id').substring(11);
+		var posting_seq = $(this).closest('section').attr('id').substring(8);
 		
 		$.ajax ({
 			url : 'http://localhost:8080/deleteFavorite?id='+id+'&posting_seq='+posting_seq,
