@@ -630,8 +630,6 @@ $(function() {
 	'</section>'
  
 
-
-
 /*comment와 posting 연결*/
 var	currentCommentDatas = _.filter(commentDatas, function(value){
 //console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);

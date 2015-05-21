@@ -127,6 +127,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 
 function handleRaty(){
 	$('span.raty').raty({
+		half : true,
 		score: function() {
 			return $(this).attr('data-score');
 		}
@@ -135,6 +136,7 @@ function handleRaty(){
 	//List
 	$('span.raty-view').raty({
 		score: function() {
+			//half : true,
 			return $(this).attr('data-score');
 		},
 		readOnly: true,
