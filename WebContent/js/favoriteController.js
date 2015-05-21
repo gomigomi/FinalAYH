@@ -138,10 +138,10 @@ function getSectionItem(favoriteView, isHide) {
 		'<div class="post-description bac-content">'+
 			'<span id = "postingImg_view"></span>'+
 			'<span id = "postingContent_div">'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-swe.png"/></span>'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-classification/time-morning.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-'+favoriteView.type+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-'+location+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-'+taste+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-classification/time-'+time+'.png"/></span>'+
 				'<div id = "postingContent_view">'+favoriteView.content+'</div>'+
 			'</span>'+
 		'</div>'+

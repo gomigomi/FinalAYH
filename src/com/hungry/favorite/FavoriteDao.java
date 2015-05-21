@@ -71,6 +71,10 @@ public class FavoriteDao {
 				item.put("thumb", rs.getString("thumb"));
 				item.put("avg", rs.getString("avg"));
 				item.put("img", rs.getString("img"));
+				item.put("taste", rs.getString("taste"));
+				item.put("time", rs.getString("time"));
+				item.put("type", rs.getString("type"));
+				item.put("location", rs.getString("location"));
 				
 				result.add(item);
 			}
