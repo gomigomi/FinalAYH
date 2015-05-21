@@ -66,6 +66,10 @@ public class PostingDao {
 				item.put("thumb", rs.getString("thumb"));
 				item.put("avg", rs.getString("avg"));
 				item.put("img", rs.getString("img"));
+				item.put("type", rs.getString("type"));
+				item.put("taste", rs.getString("taste"));
+				item.put("time", rs.getString("time"));
+				item.put("location", rs.getString("location"));
 				
 				result.add(item);
 			}

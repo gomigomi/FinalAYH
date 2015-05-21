@@ -58,10 +58,10 @@ function getSectionItem(postingDatas, isHide){
 		'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/'+postingDatas.img+'"/></button></a>'+
 		'</span>'+
 		'<span id = "postingContent_div">'+
-			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+
-			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-seoul.png"/></span>'+
-			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-swe.png"/></span>'+
-			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-classification/time-morning.png"/></span>'+
+			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-'+postingDatas.type+'.png"/></span>'+
+			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-'+postingDatas.location+'.png"/></span>'+
+			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-'+postingDatas.taste+'.png"/></span>'+
+			'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-time/time-'+postingDatas.time+'.png"/></span>'+
 			'<div id = "postingContent_view">'+postingDatas.content+'</div>'+
 		'</span>'+
 	'</div>'+
