@@ -14,16 +14,6 @@
 <%
 	HashMap<String, Object> userHash = new HashMap<String, Object>();
 	userHash = udao.loginUser(form_id, form_pw);
-
-	if(!(userHash.isEmpty())){
-		System.out.println("it works");
-		response.sendRedirect("index.html");
-	}else{
-		System.out.println("wrong");
-		request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-		RequestDispatcher rd = request.getRequestDispatcher("NewFront.jsp");
-		rd.forward(request, response);
-	}
 	
 	//서블릿 함수->해쉬맵->스트링->jsp세션스토리지
 	String idHash = (String)userHash.get("id");
@@ -70,3 +60,14 @@
 
 </body>
 </html>
+<%
+	if(!(userHash.isEmpty())){
+		System.out.println("it works");
+		response.sendRedirect("index.html");
+	}else{
+		System.out.println("wrong");
+		request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		RequestDispatcher rd = request.getRequestDispatcher("NewFront.jsp");
+		rd.forward(request, response);
+	}
+%>
