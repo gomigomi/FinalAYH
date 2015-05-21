@@ -17,7 +17,7 @@
 
 	if(!(userHash.isEmpty())){
 		System.out.println("it works");
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.html");
 	}else{
 		System.out.println("wrong");
 		request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
