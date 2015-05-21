@@ -125,18 +125,22 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 })
 
 
-function handleRaty(){
-	$('span.raty').raty({
-		score: function() {
-			return $(this).attr('data-score');
-		}
-	});
-
-	//List
-	$('span.raty-view').raty({
-		score: function() {
-			return $(this).attr('data-score');
-		},
-		readOnly: true,
-	});
-}
+//function handleRaty(){
+//	$('span.raty').raty({
+//		half : true,
+//		cancle : true,
+//		canclePlace : 'left',
+//		score: function() {
+//			return $(this).attr('data-score');
+//		}
+//	});
+//
+//	//List
+//	$('span.raty-view').raty({
+//		score: function() {
+//			//half : true,
+//			return $(this).attr('data-score');
+//		},
+//		readOnly: true,
+//	});
+//}

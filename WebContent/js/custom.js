@@ -467,12 +467,15 @@ $(function() {
 			});
 		});
 	});
-
 });
+
 
 function handleRaty(){
 	$('span.raty').raty({
 		half : true,
+//		cancel : true,
+//		cancelPlace : 'left',
+//		noRatedMsg : "I'am readOnly and I haven't rated yet!",
 		score: function() {
 			return $(this).attr('data-score');
 		}
@@ -482,6 +485,7 @@ function handleRaty(){
 	$('span.raty-view').raty({
 		score: function() {
 			half : true;
+			noRatedMsg : "I'am readOnly and I haven't rated yet!";
 			return $(this).attr('data-score');
 		},
 		readOnly: true,

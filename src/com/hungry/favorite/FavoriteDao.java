@@ -49,10 +49,17 @@ public class FavoriteDao {
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
+<<<<<<< .merge_file_pMUYMM
 			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2), 2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+=======
+			String sql = "SELECT A.*, B.thumb, C.posting_seq, IFNULL(round(avg(S.point), 2), 2.5) AS avg "+
+					"FROM posting AS A "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
+					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
+>>>>>>> .merge_file_6gDs9v
 					"LEFT OUTER JOIN bookmark D ON D.posting_seq = A.seq "+
 					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
 					"WHERE D.id = '"+id+"'"+
