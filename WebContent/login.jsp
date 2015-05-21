@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.util.HashMap" %>
 
@@ -45,30 +45,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>log-ining...</title>
-</head>
-<body>
 <script type="text/javascript">
 
 	sessionStorage.setItem("id", "<%=id%>")
 	sessionStorage.setItem("pw", "<%=pw%>")
 	sessionStorage.setItem("name", "<%=name%>")
 	sessionStorage.setItem("thumb", "<%=thumb%>")
+	document.location.href= "index.html"
 
 </script>
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>log-ining...</title>
+</head>
+<body>
+
+</body>
+</html>
 
 <%
-	if(!(userHash.isEmpty())){
-		System.out.println("it works");
-		response.sendRedirect("index.html");
-	}else{
+	if(userHash.isEmpty()){
 		System.out.println("wrong");
-		request.setAttribute("errMsg", "¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+		request.setAttribute("errMsg", "아이디나 비밀번호가 일치하지 않습니다.");
 		RequestDispatcher rd = request.getRequestDispatcher("NewFront.jsp");
 		rd.forward(request, response);
 	}
 %>
-
-</body>
-</html>
