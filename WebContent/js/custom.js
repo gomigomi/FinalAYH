@@ -321,7 +321,7 @@ $(function() {
 			$('#write').focus();
 			return false;
 		}else if(location == 'none' || f_type=="" || taste=="" || time==""){
-			alert('please fill out the location');
+			alert('please fill out the form');
 			return false;
 		}
 		
@@ -345,6 +345,7 @@ $(function() {
 					$('input[type="checkbox"][name="f_type"]').prop('checked', false);
 					$('input[type="checkbox"][name="taste"]').prop('checked', false);
 					$('input[type="checkbox"][name="time"]').prop('checked', false);
+					$("#locationSel > option[value=none]").attr("selected", "ture");
 					//renew posting list
 					renderPostingList();
 
@@ -357,17 +358,14 @@ $(function() {
 		
 		$.ajax({
              url: 'http://localhost:8080/postImg',
-             method : 'post',
-             dataType : 'multipart/form-data',
              processData: false,
              contentType: false,
              data: formData,
              type: 'POST',
              success: function(result){
-                 alert("업로드 성공!!");
-                 $('#img_preview').empty();
-                 $('#img_upload_frm')[0].reset();
-                 formData=new FormData();
+                   $('#img_preview').empty();
+                   $('#img_upload_frm')[0].reset();
+                   formData=new FormData();
              }
          });
       });
@@ -610,7 +608,7 @@ $(function() {
 		'</div>'+
 		'<div class="post-description bac-content">'+
 			'<span id = "postingImg_view">'+
-			'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/no-image.jpg"/></button></a>'+
+			'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/'+postingDatas.img+'"/></button></a>'+
 			'</span>'+
 			'<span id = "postingContent_div">'+
 				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-korea.png"/></span>'+

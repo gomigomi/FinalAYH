@@ -124,6 +124,14 @@
     <servlet-name>postImg</servlet-name>
     <url-pattern>/postImg</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>getImg</servlet-name>            
+    <servlet-class>com.hungry.img.imgServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getImg</servlet-name>
+    <url-pattern>/getImg</url-pattern>
+  </servlet-mapping>
   
   <!--  score -->
   <servlet>
