@@ -659,6 +659,7 @@ return sectionObject.get(0).outerHTML;
 	
 	function handleRaty(){
 		$('span.raty').raty({
+			half : true,
 			score: function() {
 				return $(this).attr('data-score');
 			}
@@ -667,6 +668,7 @@ return sectionObject.get(0).outerHTML;
 		//List
 		$('span.raty-view').raty({
 			score: function() {
+				half : true;
 				return $(this).attr('data-score');
 			},
 			readOnly: true,
