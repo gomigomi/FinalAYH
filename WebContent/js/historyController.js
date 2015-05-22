@@ -1,6 +1,4 @@
 $(function() {
-	//console.log(commentDatas);
-////	//모든 코멘트를 불러온
 	var commentDatas = getCommentData();
 	function getCommentData(){
 		$.ajax({
@@ -14,7 +12,6 @@ $(function() {
 		})
 	}
 
-	
 	$('#history-button').click(function() {
 		$('#history').show();
 		$('#history-posting').show();
@@ -35,7 +32,7 @@ $(function() {
 		})
 	})
 
-//쓴 포스팅 불러오기 
+	//쓴 포스팅 불러오기 
 	function getPostingUser(){
 		$('#history-posting').empty();
 		var id=window.sessionStorage.getItem('id');
@@ -54,7 +51,7 @@ $(function() {
 			}
 		})
 	}	
-//쓴 코멘트 게시물 불러오기 
+	//쓴 코멘트 게시물 불러오기 
 	function getCommentUser(){
 		$('#history-comment').empty();
 		var id=window.sessionStorage.getItem('id');

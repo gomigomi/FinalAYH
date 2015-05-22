@@ -1,7 +1,6 @@
 function getSectionItem(postingDatas, isHide){
 	var display = isHide ? 'none' : 'block';
 	
-	
 	//favorite 하트를 변경하기위한 부분 
 	var favoriteDisplay = "none";
 	var favoriteDisplaySub ='block';

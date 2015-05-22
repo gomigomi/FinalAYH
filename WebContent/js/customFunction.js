@@ -61,8 +61,6 @@ function getFavoriteView() {
 	});
 }
 
-
-
 //Score
 $(document).on('click', '.add-commentRaty-btn', function() {
 	var parentElem = $(this).parents('section');
@@ -87,7 +85,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 						data : param,
 						success : function(res) {
 							if(res.result == 'success') {
-								alert("Thank you again!");
+								alert("감사합니다!!");
 								return false;
 							} else {
 								alert("Point has not been changed.");
@@ -107,7 +105,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 					success : function(res) {
 						if(res.result =='success') {
 							console.log("postScore_CF");
-							alert("Thank you!");
+							alert("감사합니다!\n점수는 재평가가 가능합니다.");
 							return false;
 						} else if(!window.sessionStorage.getItem('id')){
 							alert ("Please Log-in first!");

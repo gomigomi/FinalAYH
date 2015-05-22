@@ -1,7 +1,6 @@
 $(function(){
 	$(document).on('click','.add-comment-btn', function(){
 		var parentElem = $(this).parents('section');
-
 		
 		var section_id=parentElem.attr('id').substring(8);
 		console.log(section_id);

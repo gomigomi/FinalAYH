@@ -19,6 +19,7 @@
 <script src="js/favoriteController.js"></script>
 <script src="js/imgUpload.js"></script>
 <script src="js/imgslide.js"></script>
+<script src="searchController.js"></script>
 <script src="js/addComment.js"></script>
 <script src="js/addPosting.js"></script>
 
@@ -181,27 +182,6 @@
 					<textarea id="write"></textarea>		
 					<div id="write_post_btn" class="pure-button">Post</div>				
 					</div>
-					<!-- A wrapper for all the blog posts -->
-					<!--            <div class="posts">
-	                <h1 class="content-subhead">Pinned Post</h1>
-	                <section class="post">
-	                    <header class="post-header">
-	                        <img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="img/common/tilo-avatar.png">
-	
-	                        <h2 class="post-title">Introducing Pure</h2>
-	
-	                        <p class="post-meta">
-	                            By <a href="#" class="post-author">Tilo Mitra</a> under <a class="post-category post-category-design" href="#">CSS</a> <a class="post-category post-category-pure" href="#">Pure</a>
-	                        </p>
-	                    </header>
-	
-	                    <div class="post-description">
-	                        <p>
-	                            Yesterday at CSSConf, we launched Pure – a new CSS library. Phew! Here are the <a href="https://speakerdeck.com/tilomitra/pure-bliss">slides from the presentation</a>. Although it looks pretty minimalist, we’ve been working on Pure for several months. After many iterations, we have released Pure as a set of small, responsive, CSS modules that you can use in every web project.
-	                        </p>
-	                    </div>
-	                </section>
-	                 -->
 				</div>
 				<div class="tab-layer content-subhead">
 					<ul class="tab-btn">
@@ -214,10 +194,8 @@
 					</ul>
 				</div>
 				<div id="recent_post" class="posts"></div>
-				<div id="popular_post" style = "display : none;">여기는 백지장같이 하얀곳입니다
-					커스텀.js고칠생각하니 막막하네욯 냉면과 물만두 만두와 맥주</div>
+				<div id="popular_post" style = "display : none;"></div>
 			</div>
-
 
 			<!-- 현우 collection -->
 			<!-- top-button -->
@@ -234,18 +212,12 @@
 				<button id="history-button">
 					<h1>History</h1>
 				</button>
-
 				<h2 class="top_explain">Please click a menu.</h2>
 			</div>
-			<div id = top-line>
-			
-			</div>
-
+			<div id = top-line></div>
 
 			<!-- How About -->
-			<div id = "howAbout">
-				코드
-			</div>
+			<div id = "howAbout">코드</div>
 			<!-- end of How About -->
 			<!-- search -->
 			<div id="search">
@@ -447,7 +419,7 @@
 	<form action="" class="more-contentmd modal" id="more_content"
 		style="position: fixed; top: 50%; left: 50%; width: 80%; height: 60%; margin-top: -80px; margin-left: -200px; z-index: 2; display: none;">
 		<div id="more_content_body">
-			<span>글글글 글이들어가신다</span>
+			<span id = "slideContent">글글글 글이들어가신다</span>
 		</div>
 	</form>
 	<!-- Modal End -->
