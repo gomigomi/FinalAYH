@@ -257,8 +257,7 @@ $(function() {
 					$('#user_signin_id').val('');
 					$('#user_signin_id').focus();
 					return false;
-				}
-				else{
+				} else {
 					$.ajax({	//Request Signin API
 						url: 'http://localhost:8080/postUser?type=1&id='+id+'&pass='+pass+'&name='+name,
 						method : 'post',
@@ -276,28 +275,21 @@ $(function() {
 							window.sessionStorage.setItem('id', id);
 							window.sessionStorage.setItem('name', name);
 							
-							
 							$('.logon').show();
 							$('.thumb').show()
 							$('.info').show();
 							$('.logoff').hide();
-							
-							
 						},
 						error : function(){
-
+							
 						}
-
 					});
 				}
 			},
 			error : function(){
-
+				
 			}
-
 		});
-		//auto log-in
-		
 	});
 	
     $("#img_Upload").on('change', function(){
@@ -386,7 +378,7 @@ $(function() {
 			}
 		})
 	}
-/* 스크롤 내릴때마다 자동 로딩되게 해주는
+   //스크롤 내릴때마다 자동 로딩되게 해주는
 	var timer = setInterval(function() {scrollOK = true;}, 100);
 	var scrollOK = true;
 	$(window).bind('scroll',function() {
@@ -408,11 +400,8 @@ $(function() {
 			}
 		}
 	});
-	*/
 	
-	/**
-	 * 
-	 */
+
 	//1번.posts 2번#popular_post 3번#favoritePosting 4번#history-posting 5번#history-comment 6번# 7번#
 	function renderSectionElem(int){
 		if(window.sessionStorage.getItem('id')==postingDatas[count].writer){
@@ -482,14 +471,14 @@ function handleRaty(){
 	});
 
 	//List
-	$('span.raty-view').raty({
-		score: function() {
-			half : true;
-			noRatedMsg : "I'am readOnly and I haven't rated yet!";
-			return $(this).attr('data-score');
-		},
-		readOnly: true,
-	});
+//	$('span.raty-view').raty({
+//		score: function() {
+//			half : true;
+//			noRatedMsg : "I'am readOnly and I haven't rated yet!";
+//			return $(this).attr('data-score');
+//		},
+//		readOnly: true,
+//	});
 }
 
 function getNowDate(){

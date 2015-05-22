@@ -46,7 +46,6 @@ $(document).on('click', '#favoriteView .fa-heart', function() {
 
 
 /*Main view*/
-
 //Posting process in Main view  
 $(document).on('click', '#mainView_favorite .fa-heart-o', function(e) {
 	var param = {
@@ -181,14 +180,6 @@ function handleRaty() {
 			return $(this).attr('data-score');
 		}
 	});
-
-	//List
-//	$('span.raty-view').raty({
-//		score : function() {
-//			return $(this).attr('data-score');
-//		},
-//		readOnly : true,
-//	});
 }
 
 function leadingZeros(n, digits) {
