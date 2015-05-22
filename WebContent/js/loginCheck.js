@@ -10,8 +10,7 @@ $(function() {
 	
 	
 	if(!session.id){
-		
-		
+		location.href="/NewFront.jsp";		
 	}else{
 		$('.logon').show();
 		$('.logoff').hide();

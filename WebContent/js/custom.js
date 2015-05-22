@@ -78,7 +78,7 @@ $(function() {
 //		$('.logoff').show();
 //
 //		renderPostingList();
-		location.reload([false]);
+		location.href="/NewFront.jsp";
 	});
 
 	$('#write_post').click(function(){
