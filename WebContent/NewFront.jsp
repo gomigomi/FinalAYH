@@ -35,28 +35,25 @@
 		회원가입
 		</div>
 	</div>
-
 	<div id="bot-wrapper">
 		<div id="login-bot">
 			<form name="form-login" id="form-login" method="POST" action="login.jsp">
-				<div class="login-item"><input type="text" name="id" value="write the ID"/></div>
-				<div class="login-item"><input type="password" name="pw" value=""/></div>
-				<div class="login-item"><input type="submit" value="OK"></div>
+				<div class="login-item"><input type="text" name="id" placeholder="Your ID"/></div>
+				<div class="login-item"><input type="password" name="pw" placeholder="Password"/></div>
+				<div class="login-item"><input type="submit" value="LOG-IN"></div>
 			</form>
 			<div id="error"><%=errMsg %></div>
 		</div>
 		<div id="signin-bot">
 			<form name="form-sign" id="form-sign" method="POST" action="signin.jsp" enctype="multipart/form-data">
-			    <div class="signin-item">ID       <input type="text" name="id" id="id"></div>
-			    <div class="signin-item">name     <input type="text" name="name" id="name"></div>
-			    <div class="signin-item">password <input type="password" name="pw" id="pw"></div>
-			    <div class="signin-item">thumbnail<input type="file" name="thumbnail" id="thumbnail"></div>
-			    <input type="submit" value="전송">
+			    <div class="signin-item">ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="id" id="id"></div>
+			    <div class="signin-item">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="name" id="name"></div>
+			    <div class="signin-item">Password&nbsp;&nbsp;<input type="password" name="pw" id="pw"></div>
+			    <div class="signin-item">Thumbnail<input type="file" name="thumbnail" id="thumbnail"></div>
+			    <input type="submit" value="SIGN-UP">
 			</form>
 		</div>
 	</div>
-
 </div>
-
 </body>
 </html>
