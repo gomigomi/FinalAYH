@@ -20,7 +20,7 @@
 <script src="js/favoriteController.js"></script>
 <script src="js/imgUpload.js"></script>
 <script src="js/imgslide.js"></script>
-<script src="searchController.js"></script>
+<script src="js/searchController.js"></script>
 <script src="js/addComment.js"></script>
 <script src="js/addPosting.js"></script>
 
@@ -113,12 +113,12 @@
 										<p>European</p>
 										<input type="checkbox" class="property" name="f_type"
 											value="european">
-										<p>American</p>
-										<input type="checkbox" class="property" name="f_type"
+<!--									<p>American</p>
+ 										<input type="checkbox" class="property" name="f_type"
 											value="american">
 										<p>Mexican</p>
 										<input type="checkbox" class="property" name="f_type"
-											value="mexican">
+											value="mexican"> -->
 										<p>ETC</p>
 										<input type="checkbox" class="property" name="f_type" value="etc">
 									</div>
@@ -230,26 +230,22 @@
 								<h3>TYPE</h3>
 							</div>
 							<div class="type_property">
-								<p>Korean</p>
-								<input type="checkbox" class="property" name="type"
-									value="korean">
-								<p>Chines</p>
-								<input type="checkbox" class="property" name="type"
-									value="chines">
-								<p>Japanes</p>
-								<input type="checkbox" class="property" name="type"
-									value="japanes">
-								<p>European</p>
-								<input type="checkbox" class="property" name="type"
-									value="european">
-								<p>American</p>
-								<input type="checkbox" class="property" name="type"
-									value="american">
-								<p>Mexican</p>
-								<input type="checkbox" class="property" name="type"
-									value="mexican">
-								<p>ETC</p>
-								<input type="checkbox" class="property" name="type" value="etc">
+								<p>한식</p>
+								<input type="checkbox" class="property" name="f_type" value="korean">
+								<p>중식</p>
+								<input type="checkbox" class="property" name="f_type" value="chines">
+								<p>일식</p>
+								<input type="checkbox" class="property" name="f_type" value="japanes">
+								<p>유럽</p>
+								<input type="checkbox" class="property" name="f_type" value="european">
+								<p>미국</p>
+								<input type="checkbox" class="property" name="f_type" value="american">
+								<p>멕시칸</p>
+								<input type="checkbox" class="property" name="f_type" value="mexican">
+								<p>기타</p>
+								<input type="checkbox" class="property" name="f_type" value="etc">
+								<p>모두</p>
+								<input type="checkbox" class="property" name="f_type" value="ty-all">
 							</div>
 						</div>
 
@@ -268,6 +264,8 @@
 								<input type="checkbox" class="property" name="taste" value="sal">
 								<p>쓴맛</p>
 								<input type="checkbox" class="property" name="taste" value="bit">
+								<p>모두</p>
+								<input type="checkbox" class="property" name="taste" value="ta-all">
 							</div>
 						</div>
 
@@ -276,12 +274,14 @@
 								<h3>TIME</h3>
 							</div>
 							<div class="time_property">
-								<p>Breakfast</p>
+								<p>아침</p>
 								<input type="checkbox" class="property" name="time" value="bf">
-								<p>Lunch</p>
+								<p>점심</p>
 								<input type="checkbox" class="property" name="time" value="lc">
-								<p>Dinner</p>
+								<p>저녁</p>
 								<input type="checkbox" class="property" name="time" value="dn">
+								<p>모두</p>
+								<input type="checkbox" class="property" name="time" value="ti-all">
 							</div>
 						</div>
 
@@ -291,14 +291,14 @@
 								<!-- select -->
 							</div>
 							<div class="location_property">
-								<select name=location>
-									<option value=1 selected>서울</option>
-									<option value=2>경기</option>
-									<option value=3>강원</option>
-									<option value=4>경상</option>
-									<option value=5>충청</option>
-									<option value=6>전라</option>
-									<option value=7>제주</option>
+								<select name=location id="location_search">
+									<option value=Seoul selected>서울</option>
+									<option value=KK>경기</option>
+									<option value=KW>강원</option>
+									<option value=KS>경상</option>
+									<option value=CC>충청</option>
+									<option value=JR>전라</option>
+									<option value=JJ>제주</option>
 								</select> 
 								<input type="button" value="SEARCH" id="search-submit-button">
 								<input type = "button" value = "CLEAR" id = "search-clear-button">

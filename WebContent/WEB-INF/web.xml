@@ -151,4 +151,15 @@
   	<servlet-name>getScore</servlet-name>
   	<url-pattern>/getScore</url-pattern>
   </servlet-mapping>
+  
+  <!-- search -->
+  <servlet>
+  	<servlet-name>doSearch</servlet-name>
+  	<servlet-class>com.hungry.search.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>doSearch</servlet-name>
+  	<url-pattern>/doSearch</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

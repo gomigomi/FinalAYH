@@ -282,8 +282,8 @@
 								<p>Mexican</p>
 								<input type="checkbox" class="property" name="type"
 									value="mexican">
-								<p>ETC</p>
-								<input type="checkbox" class="property" name="type" value="etc">
+								<p>All</p>
+								<input type="checkbox" class="property" name="type" value="ty-all">
 							</div>
 						</div>
 
@@ -292,16 +292,16 @@
 								<h3>TASTE</h3>
 							</div>
 							<div class="taste_property">
-								<p>Hot</p>
+								<p>매운맛</p>
 								<input type="checkbox" class="property" name="taste" value="hot">
-								<p>Sweet</p>
-								<input type="checkbox" class="property" name="taste"
-									value="sweet">
+								<p>단맛</p>
+								<input type="checkbox" class="property" name="taste" value="sweet">
 								<p>신맛</p>
 								<input type="checkbox" class="property" name="taste" value="sin">
-								<p>Saulty</p>
-								<input type="checkbox" class="property" name="taste"
-									value="saulty">
+								<p>짠맛</p>
+								<input type="checkbox" class="property" name="taste" value="saulty">
+								<p>모두</p>
+								<input type="checkbox" class="property" name="taste" value="ta-all">	
 							</div>
 						</div>
 
@@ -310,12 +310,14 @@
 								<h3>TIME</h3>
 							</div>
 							<div class="time_property">
-								<p>Breakfast</p>
+								<p>아침</p>
 								<input type="checkbox" class="property" name="time" value="bf">
-								<p>Lunch</p>
+								<p>점심</p>
 								<input type="checkbox" class="property" name="time" value="lc">
-								<p>Dinner</p>
+								<p>저녁</p>
 								<input type="checkbox" class="property" name="time" value="dn">
+								<p>모두</p>
+								<input type="checkbox" class="property" name="time" value="ti-all">
 							</div>
 						</div>
 

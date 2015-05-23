@@ -52,6 +52,7 @@ public class ScoreDao {
 			
 			if(rs.next()){
 				result="1";
+				System.out.println("ScoreDao.getScore1");
 				}
 			rs.close();
 			stmt.close();
@@ -79,18 +80,20 @@ public class ScoreDao {
 			
 			String sql= "INSERT INTO score (point, id, posting_seq) "+
 						"VALUES('"+scoreParam.get("point")[0].toString()+"', '"+scoreParam.get("id")[0].toString()+"', '"+scoreParam.get("posting_seq")[0].toString()+"')";
-				
+			
 			stmt.executeUpdate(sql);
-		
+			System.out.println("ScoreDao.Post");
 			stmt.close();
 			conn.close();
 
 		}catch(SQLException se){
 			se.printStackTrace();
+			System.out.println("ScoreDao.SQLEx");
 			result = "fail";
 		}catch(Exception e){
 			e.printStackTrace();
 			result = "fail";
+			System.out.println("ScoreDao.Exc");
 		}finally{
 			
 		}
