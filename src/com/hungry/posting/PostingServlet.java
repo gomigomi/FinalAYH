@@ -55,6 +55,9 @@ public class PostingServlet extends HttpServlet{
 			else if(type.equals("4")){	//get popular posting
 				
 				JObject.put("result", dao.getPopularPosting());
+			} else if(type.equals("5")) { //get Modal posting
+				String posting_seq = request.getParameter("posting_seq");
+				JObject.put("result", dao.getModalPosting(posting_seq));
 			}
 		}
 			catch (JSONException e) {

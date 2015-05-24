@@ -43,14 +43,14 @@ $(function() {
 				'<img data-slidr="two" src="img/'+imgDatas[1]+'"/>'+
 				'<img data-slidr="three" src="img/'+imgDatas[2]+'"/>'+
 				'</div>'
-			$('#more_content_body').append(slidecontent);
+			$('#slidePicture').append(slidecontent);
 			
 			var slider=slidr.create('img-slider',{overflow:true});
 			slider.add('h',['one','two','three','one']);
 			slider.start();
 				
 		}
-		
+		slideContent(posting_seq);
 
 	})
 	

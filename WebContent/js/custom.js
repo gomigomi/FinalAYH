@@ -1,3 +1,4 @@
+var count = 0;
 var formData=new FormData();
 var favoriteDatas;
 var commentDatas;
@@ -36,7 +37,6 @@ $(function() {
 	console.log(favoriteDatas);
 
 	var postingDatas;	
-	var count=0;
 
 	renderPostingList();
 	
