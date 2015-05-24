@@ -9,8 +9,10 @@ function slideContent(posting_seq){
 		async : false,
 		success : function(res) {
 			additionalPosting = res.result;
+			
 			console.log(posting_seq);
 			console.log(additionalPosting);
+			
 			$('#slideContent').empty();
 			console.log(additionalPosting[0].content);
 			$('#slideContent').append(getModalItem(additionalPosting));
@@ -101,6 +103,7 @@ function getModalItem(additionalPosting){
 //	});
 	var sectionObject = $(sectionElem);
 
-
+	
 	return sectionObject.get(0).outerHTML;
+	additionalPosting = null;
 }

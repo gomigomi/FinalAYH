@@ -24,14 +24,14 @@ $(function() {
 				'<div id="img-slider" style="display: inline-block">'+
 				'<img data-slidr="one" src="img/'+imgDatas[0]+'"/>'+
 				'</div>'
-			$('#more_content_body').append(slidecontent);
+			$('#slidePicture').append(slidecontent);
 		}else if(imgDatas.length==2){
 			slidecontent=
 				'<div id="img-slider" style="display: inline-block">'+
 				'<img data-slidr="one" src="img/'+imgDatas[0]+'"/>'+
 				'<img data-slidr="two" src="img/'+imgDatas[1]+'"/>'+
 				'</div>'
-			$('#more_content_body').append(slidecontent);
+			$('#slidePicture').append(slidecontent);
 			
 			var slider=slidr.create('img-slider',{overflow:true});
 			slider.add('h',['one','two','one']);
@@ -48,10 +48,8 @@ $(function() {
 			var slider=slidr.create('img-slider',{overflow:true});
 			slider.add('h',['one','two','three','one']);
 			slider.start();
-				
 		}
 		slideContent(posting_seq);
-
 	})
 	
 	$('#more_content').on($.modal.BEFORE_CLOSE, function(event, modal) {
