@@ -403,7 +403,7 @@ $(function() {
 	
 
 	//1번.posts 2번#popular_post 3번#favoritePosting 4번#history-posting 5번#history-comment 6번# 7번#
-	function renderSectionElem(int){
+	function renderSectionElem(){
 		if(window.sessionStorage.getItem('id')==postingDatas[count].writer){
 			$('.posts').append(getSectionItem(postingDatas[count], false));
 			handleRaty();
