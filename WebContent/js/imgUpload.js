@@ -17,9 +17,9 @@ $(function(){
  			dataType: 'json',
  			async : false,
  			success : function(res){
- 				console.log("get user-written-posting");
- 				postingPreferenceDatas = res.result;
  				$('#howAbout').empty();
+ 				postingPreferenceDatas = res.result;
+ 				console.log(postingPreferenceDatas);
  				for(var i=0; i<postingPreferenceDatas.length; i++ ){
 					if(window.sessionStorage.getItem('id')==postingPreferenceDatas[i].writer){
 						$('#howAbout').append(getSectionItem(postingPreferenceDatas[i], false));
