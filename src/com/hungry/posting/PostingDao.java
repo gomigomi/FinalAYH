@@ -371,5 +371,121 @@ public class PostingDao {
 
 		return result;
 	}
+	
+	public List<HashMap<String, Object>> getPreferencePosting(String id) {
+		Connection conn = null;
+		Statement stmt = null;
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			String sql1 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+  
+					"FROM posting AS A "+
+					"LEFT JOIN score S ON S.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+					"where S.id != '"+id+"' "+
+					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As taste) "+ 
+					"and A.type IN (Select * from (SELECT A.type FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As type) "+
+					"and A.time IN (Select * from (SELECT A.time FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As time) "+
+					"group by S.posting_seq "+
+					"order by A.seq desc";
+			
+			String sql2 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+  
+					"FROM posting AS A "+
+					"LEFT JOIN score S ON S.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+					"where S.id != '"+id+"' "+
+					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As taste) "+ 
+					"and A.type IN (Select * from (SELECT A.type FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As type) "+
+					"group by S.posting_seq "+
+					"order by A.seq desc";
+			
+			String sql3 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+  
+					"FROM posting AS A "+
+					"LEFT JOIN score S ON S.posting_seq = A.seq "+ 
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+					"where S.id != '"+id+"' "+
+					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As taste) "+
+					"group by S.posting_seq "+
+					"order by A.seq desc";
+
+			ResultSet rs = stmt.executeQuery(sql1);
+			
+			if (!rs.next()){
+				ResultSet rs2=stmt.executeQuery(sql2);
+				
+				if(!rs2.next()){
+					ResultSet rs3=stmt.executeQuery(sql3);
+					
+					while(rs3.next()){
+						HashMap<String, Object> item = new HashMap<String, Object>();
+						item.put("seq", rs.getString("seq"));
+						item.put("content", rs.getString("content"));
+						item.put("writer", rs.getString("writer"));
+						item.put("regdate", rs.getString("regdate"));
+						item.put("thumb", rs.getString("thumb"));
+						item.put("avg", rs.getString("avg"));
+						item.put("img", rs.getString("img"));
+						item.put("type", rs.getString("type"));
+						item.put("taste", rs.getString("taste"));
+						item.put("time", rs.getString("time"));
+						item.put("location", rs.getString("location"));
+						
+						result.add(item);
+					}
+				}else{
+					while(rs.next()){
+						HashMap<String, Object> item = new HashMap<String, Object>();
+						item.put("seq", rs.getString("seq"));
+						item.put("content", rs.getString("content"));
+						item.put("writer", rs.getString("writer"));
+						item.put("regdate", rs.getString("regdate"));
+						item.put("thumb", rs.getString("thumb"));
+						item.put("avg", rs.getString("avg"));
+						item.put("img", rs.getString("img"));
+						item.put("type", rs.getString("type"));
+						item.put("taste", rs.getString("taste"));
+						item.put("time", rs.getString("time"));
+						item.put("location", rs.getString("location"));
+						
+						result.add(item);
+					}
+				}
+			} else{
+				while(rs.next()){
+					HashMap<String, Object> item = new HashMap<String, Object>();
+					item.put("seq", rs.getString("seq"));
+					item.put("content", rs.getString("content"));
+					item.put("writer", rs.getString("writer"));
+					item.put("regdate", rs.getString("regdate"));
+					item.put("thumb", rs.getString("thumb"));
+					item.put("avg", rs.getString("avg"));
+					item.put("img", rs.getString("img"));
+					item.put("type", rs.getString("type"));
+					item.put("taste", rs.getString("taste"));
+					item.put("time", rs.getString("time"));
+					item.put("location", rs.getString("location"));
+					
+					result.add(item);
+				}
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		}catch(SQLException se){
+			se.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+		}
+		return result;
+	}
 
 }//end FirstExample

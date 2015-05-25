@@ -1,41 +1,35 @@
-//	
-//var formData=new FormData();
-//
-//function readURL(input) {
-//	$('#img_preview').empty();
-//	for (i = 0; i < input.files.length; i++) {
-//		if (input.files && input.files[i]) {
-//			var reader = new FileReader();
-//			reader.onload = function(e) {
-//				$('#img_preview').append(
-//						'<img width="200px" height="200px" id="blah" src="'
-//								+ e.target.result + '" alt="your image" />');
-//			}
-//		}
-//		reader.readAsDataURL(input.files[i]);
-//		formData.append(i,input.files[i]);
-//	}
-//}
-//
-//$(function(){
-//    $("#img_Upload").on('change', function(){
-//        readURL(this);
-//    });
-//    
-//     $("#write_post_btn").click(function(){ 
-//             $.ajax({
-//                url: 'img',
-//                processData: false,
-//                contentType: false,
-//                data: formData,
-//                type: 'POST',
-//                success: function(result){
-//                    alert("업로드 성공!!");
-//                    $('#img_preview').empty();
-//                    $('#img_upload_frm')[0].reset();
-//                    formData=new FormData();
-//                }
-//            });
-//         });
-//     
-//})
+$(function(){
+	var postingPreferenceDatas;
+	
+     $("#howAbout-button").click(function(){ 
+    	 
+    	var id=window.sessionStorage.getItem('id');
+ 		
+    	$('#howAbout').show();
+		$('#search').hide();
+		$('#favorite').hide();
+		$('#history').hide();
+		$('.top_explain').hide();
+		
+ 		$.ajax({
+ 			url: 'http://localhost:8080/getPosting?type=6&id='+id,
+ 			method: 'get',
+ 			dataType: 'json',
+ 			async : false,
+ 			success : function(res){
+ 				console.log("get user-written-posting");
+ 				postingPreferenceDatas = res.result;
+ 				$('#howAbout').empty();
+ 				for(var i=0; i<postingPreferenceDatas.length; i++ ){
+					if(window.sessionStorage.getItem('id')==postingPreferenceDatas[i].writer){
+						$('#howAbout').append(getSectionItem(postingPreferenceDatas[i], false));
+						handleRaty();
+					}else{
+						$('#howAbout').append(getSectionItem(postingPreferenceDatas[i], true));
+						handleRaty();
+					}
+				}
+ 			}
+ 		})
+     })
+})

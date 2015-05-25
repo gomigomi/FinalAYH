@@ -38,7 +38,7 @@ public class imgServlet extends HttpServlet{
 		imgDao dao=new imgDao();
 		
 		try{
-		        String pathname = "/Users/John/git/FinalAYH/WebContent/img";
+		        String pathname = "/Users/gomi/FinalAYH/WebContent/img";
 		        System.out.println(req);
 		        
 		        File f = new File(pathname);
