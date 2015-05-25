@@ -374,7 +374,7 @@ public class PostingDao {
 	
 	public List<HashMap<String, Object>> getPreferencePosting(String id) {
 		Connection conn = null;
-		Statement stmt1, stmt2, stmt3, stmt4 = null;
+		Statement stmt1, stmt2, stmt3, stmt4, stmt5 = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 
 		try{
@@ -383,6 +383,7 @@ public class PostingDao {
 			stmt2 = conn.createStatement();
 			stmt3 = conn.createStatement();
 			stmt4 = conn.createStatement();
+			stmt5 = conn.createStatement();
 			
 			String sql = "Create View TempScoreView As SELECT * FROM score WHERE score.id = '"+id+"'";
 
@@ -424,76 +425,84 @@ public class PostingDao {
 			
 			String sql4 = "Drop View if exists TempScoreView";
 
-			stmt4.executeUpdate(sql4);
-			stmt1.executeUpdate(sql);
-			ResultSet rs = stmt2.executeQuery(sql1);
+			stmt5.executeUpdate(sql4);
+			System.out.println("sql4 exeute");
 			
-			if (!rs.next()){
-				ResultSet rs2=stmt3.executeQuery(sql2);
+			stmt1.executeUpdate(sql);
+			System.out.println("sql exeute");
+			
+			ResultSet rs = stmt2.executeQuery(sql1);
+			System.out.println("sql1 exeute");
+			
+			while(rs.next()){
+				HashMap<String, Object> item = new HashMap<String, Object>();
+				item.put("seq", rs.getString("seq"));
+				item.put("content", rs.getString("content"));
+				item.put("writer", rs.getString("writer"));
+				item.put("regdate", rs.getString("regdate"));
+				item.put("thumb", rs.getString("thumb"));
+				item.put("avg", rs.getString("avg"));
+				item.put("img", rs.getString("img"));
+				item.put("type", rs.getString("type"));
+				item.put("taste", rs.getString("taste"));
+				item.put("time", rs.getString("time"));
+				item.put("location", rs.getString("location"));
 				
-				if(!rs2.next()){
-					ResultSet rs3=stmt4.executeQuery(sql3);
-					
-					while(rs3.next()){
-						HashMap<String, Object> item = new HashMap<String, Object>();
-						item.put("seq", rs3.getString("seq"));
-						item.put("content", rs3.getString("content"));
-						item.put("writer", rs3.getString("writer"));
-						item.put("regdate", rs3.getString("regdate"));
-						item.put("thumb", rs3.getString("thumb"));
-						item.put("avg", rs3.getString("avg"));
-						item.put("img", rs3.getString("img"));
-						item.put("type", rs3.getString("type"));
-						item.put("taste", rs3.getString("taste"));
-						item.put("time", rs3.getString("time"));
-						item.put("location", rs3.getString("location"));
-						
-						result.add(item);
-					}
-				}else{
-					while(rs2.next()){
-						HashMap<String, Object> item = new HashMap<String, Object>();
-						item.put("seq", rs2.getString("seq"));
-						item.put("content", rs2.getString("content"));
-						item.put("writer", rs2.getString("writer"));
-						item.put("regdate", rs2.getString("regdate"));
-						item.put("thumb", rs2.getString("thumb"));
-						item.put("avg", rs2.getString("avg"));
-						item.put("img", rs2.getString("img"));
-						item.put("type", rs2.getString("type"));
-						item.put("taste", rs2.getString("taste"));
-						item.put("time", rs2.getString("time"));
-						item.put("location", rs2.getString("location"));
-						
-						result.add(item);
-					}
-				}
-			} else{
-				while(rs.next()){
-					HashMap<String, Object> item = new HashMap<String, Object>();
-					item.put("seq", rs.getString("seq"));
-					item.put("content", rs.getString("content"));
-					item.put("writer", rs.getString("writer"));
-					item.put("regdate", rs.getString("regdate"));
-					item.put("thumb", rs.getString("thumb"));
-					item.put("avg", rs.getString("avg"));
-					item.put("img", rs.getString("img"));
-					item.put("type", rs.getString("type"));
-					item.put("taste", rs.getString("taste"));
-					item.put("time", rs.getString("time"));
-					item.put("location", rs.getString("location"));
-					
-					result.add(item);
-				}
+				result.add(item);
 			}
 			
-			stmt3.executeUpdate(sql4);
+			if (result.isEmpty()){
+				ResultSet rs2=stmt3.executeQuery(sql2);
+				System.out.println("sql2 exeute");
+				
+				while(rs2.next()){
+					HashMap<String, Object> item2 = new HashMap<String, Object>();
+					item2.put("seq", rs2.getString("seq"));
+					item2.put("content", rs2.getString("content"));
+					item2.put("writer", rs2.getString("writer"));
+					item2.put("regdate", rs2.getString("regdate"));
+					item2.put("thumb", rs2.getString("thumb"));
+					item2.put("avg", rs2.getString("avg"));
+					item2.put("img", rs2.getString("img"));
+					item2.put("type", rs2.getString("type"));
+					item2.put("taste", rs2.getString("taste"));
+					item2.put("time", rs2.getString("time"));
+					item2.put("location", rs2.getString("location"));
+					
+					result.add(item2);
+					
+					if(result.isEmpty()){
+						ResultSet rs3=stmt4.executeQuery(sql3);
+						System.out.println("sql3 exeute");
+						
+						while(rs3.next()){
+							HashMap<String, Object> item3 = new HashMap<String, Object>();
+							item3.put("seq", rs3.getString("seq"));
+							item3.put("content", rs3.getString("content"));
+							item3.put("writer", rs3.getString("writer"));
+							item3.put("regdate", rs3.getString("regdate"));
+							item3.put("thumb", rs3.getString("thumb"));
+							item3.put("avg", rs3.getString("avg"));
+							item3.put("img", rs3.getString("img"));
+							item3.put("type", rs3.getString("type"));
+							item3.put("taste", rs3.getString("taste"));
+							item3.put("time", rs3.getString("time"));
+							item3.put("location", rs3.getString("location"));
+							
+							result.add(item3);
+						}
+					}
+				}
+			}
+						
+			System.out.println(result);
 			
 			rs.close();
 			stmt1.close();
 			stmt2.close();
 			stmt3.close();
 			stmt4.close();
+			stmt5.close();
 			conn.close();
 
 		}catch(SQLException se){
