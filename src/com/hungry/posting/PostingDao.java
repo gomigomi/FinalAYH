@@ -374,84 +374,96 @@ public class PostingDao {
 	
 	public List<HashMap<String, Object>> getPreferencePosting(String id) {
 		Connection conn = null;
-		Statement stmt = null;
+		Statement stmt1, stmt2, stmt3, stmt4 = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 
 		try{
 			conn = getConnection();
-			stmt = conn.createStatement();
+			stmt1 = conn.createStatement();
+			stmt2 = conn.createStatement();
+			stmt3 = conn.createStatement();
+			stmt4 = conn.createStatement();
 			
-			String sql1 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+  
-					"FROM posting AS A "+
-					"LEFT JOIN score S ON S.posting_seq = A.seq "+ 
-					"LEFT OUTER JOIN user B ON B.id = A.writer "+
-					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
-					"where S.id != '"+id+"' "+
-					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As taste) "+ 
-					"and A.type IN (Select * from (SELECT A.type FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As type) "+
-					"and A.time IN (Select * from (SELECT A.time FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As time) "+
-					"group by S.posting_seq "+
-					"order by A.seq desc";
-			
-			String sql2 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+  
-					"FROM posting AS A "+
-					"LEFT JOIN score S ON S.posting_seq = A.seq "+ 
-					"LEFT OUTER JOIN user B ON B.id = A.writer "+
-					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
-					"where S.id != '"+id+"' "+
-					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As taste) "+ 
-					"and A.type IN (Select * from (SELECT A.type FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As type) "+
-					"group by S.posting_seq "+
-					"order by A.seq desc";
-			
-			String sql3 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+  
-					"FROM posting AS A "+
-					"LEFT JOIN score S ON S.posting_seq = A.seq "+ 
-					"LEFT OUTER JOIN user B ON B.id = A.writer "+
-					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
-					"where S.id != '"+id+"' "+
-					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='user2' ORDER BY s.point desc limit 1) As taste) "+
-					"group by S.posting_seq "+
-					"order by A.seq desc";
+			String sql = "Create View TempScoreView As SELECT * FROM score WHERE score.id = '"+id+"'";
 
-			ResultSet rs = stmt.executeQuery(sql1);
+			String sql1 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(D.point), 2),'not rated') AS avg "+
+								"FROM posting AS A "+
+								"LEFT JOIN TempScoreView S ON S.posting_seq = A.seq "+
+								"LEFT JOIN score D ON D.posting_seq = A.seq "+
+								"LEFT OUTER JOIN user B ON B.id = A.writer "+
+								"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+								"where S.seq is null "+
+								"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='"+id+"' ORDER BY s.point desc limit 1) As taste) "+ 
+								"and A.type IN (Select * from (SELECT A.type FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='"+id+"' ORDER BY s.point desc limit 1) As type) "+ 
+								"and A.time IN (Select * from (SELECT A.time FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='"+id+"' ORDER BY s.point desc limit 1) As time) "+ 
+								"group by A.seq	"+
+								"order by avg desc ";
+			
+			String sql2 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(D.point), 2),'not rated') AS avg "+
+					"FROM posting AS A "+
+					"LEFT JOIN TempScoreView S ON S.posting_seq = A.seq "+
+					"LEFT JOIN score D ON D.posting_seq = A.seq "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+					"where S.seq is null "+
+					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='"+id+"' ORDER BY s.point desc limit 1) As taste) "+ 
+					"and A.type IN (Select * from (SELECT A.type FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='"+id+"' ORDER BY s.point desc limit 1) As type) "+ 
+					"group by A.seq	"+
+					"order by avg desc ";
+			
+			String sql3 = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(D.point), 2),'not rated') AS avg "+
+					"FROM posting AS A "+
+					"LEFT JOIN TempScoreView S ON S.posting_seq = A.seq "+
+					"LEFT JOIN score D ON D.posting_seq = A.seq "+
+					"LEFT OUTER JOIN user B ON B.id = A.writer "+
+					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
+					"where S.seq is null "+
+					"and A.taste IN (Select * from (SELECT A.taste FROM posting AS A INNER JOIN score S ON S.posting_seq = A.seq where S.id='"+id+"' ORDER BY s.point desc limit 1) As taste) "+ 
+					"group by A.seq	"+
+					"order by avg desc ";
+			
+			String sql4 = "Drop View if exists TempScoreView";
+
+			stmt4.executeUpdate(sql4);
+			stmt1.executeUpdate(sql);
+			ResultSet rs = stmt2.executeQuery(sql1);
 			
 			if (!rs.next()){
-				ResultSet rs2=stmt.executeQuery(sql2);
+				ResultSet rs2=stmt3.executeQuery(sql2);
 				
 				if(!rs2.next()){
-					ResultSet rs3=stmt.executeQuery(sql3);
+					ResultSet rs3=stmt4.executeQuery(sql3);
 					
 					while(rs3.next()){
 						HashMap<String, Object> item = new HashMap<String, Object>();
-						item.put("seq", rs.getString("seq"));
-						item.put("content", rs.getString("content"));
-						item.put("writer", rs.getString("writer"));
-						item.put("regdate", rs.getString("regdate"));
-						item.put("thumb", rs.getString("thumb"));
-						item.put("avg", rs.getString("avg"));
-						item.put("img", rs.getString("img"));
-						item.put("type", rs.getString("type"));
-						item.put("taste", rs.getString("taste"));
-						item.put("time", rs.getString("time"));
-						item.put("location", rs.getString("location"));
+						item.put("seq", rs3.getString("seq"));
+						item.put("content", rs3.getString("content"));
+						item.put("writer", rs3.getString("writer"));
+						item.put("regdate", rs3.getString("regdate"));
+						item.put("thumb", rs3.getString("thumb"));
+						item.put("avg", rs3.getString("avg"));
+						item.put("img", rs3.getString("img"));
+						item.put("type", rs3.getString("type"));
+						item.put("taste", rs3.getString("taste"));
+						item.put("time", rs3.getString("time"));
+						item.put("location", rs3.getString("location"));
 						
 						result.add(item);
 					}
 				}else{
-					while(rs.next()){
+					while(rs2.next()){
 						HashMap<String, Object> item = new HashMap<String, Object>();
-						item.put("seq", rs.getString("seq"));
-						item.put("content", rs.getString("content"));
-						item.put("writer", rs.getString("writer"));
-						item.put("regdate", rs.getString("regdate"));
-						item.put("thumb", rs.getString("thumb"));
-						item.put("avg", rs.getString("avg"));
-						item.put("img", rs.getString("img"));
-						item.put("type", rs.getString("type"));
-						item.put("taste", rs.getString("taste"));
-						item.put("time", rs.getString("time"));
-						item.put("location", rs.getString("location"));
+						item.put("seq", rs2.getString("seq"));
+						item.put("content", rs2.getString("content"));
+						item.put("writer", rs2.getString("writer"));
+						item.put("regdate", rs2.getString("regdate"));
+						item.put("thumb", rs2.getString("thumb"));
+						item.put("avg", rs2.getString("avg"));
+						item.put("img", rs2.getString("img"));
+						item.put("type", rs2.getString("type"));
+						item.put("taste", rs2.getString("taste"));
+						item.put("time", rs2.getString("time"));
+						item.put("location", rs2.getString("location"));
 						
 						result.add(item);
 					}
@@ -475,8 +487,13 @@ public class PostingDao {
 				}
 			}
 			
+			stmt3.executeUpdate(sql4);
+			
 			rs.close();
-			stmt.close();
+			stmt1.close();
+			stmt2.close();
+			stmt3.close();
+			stmt4.close();
 			conn.close();
 
 		}catch(SQLException se){
