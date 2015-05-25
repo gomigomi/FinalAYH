@@ -1,15 +1,24 @@
 function getSectionItem(postingDatas, isHide){
 	var display = isHide ? 'none' : 'block';
-	
+
 	//favorite 하트를 변경하기위한 부분 
 	var favoriteDisplay = "none";
 	var favoriteDisplaySub ='block';
-	
+	var point = "0";
 	/*favorite와 posting 연결*/
 	var currentFavoriteDatas = _.filter(favoriteDatas, function(value){
 //			alert("flag"+value.posting_seq+"posting"+postingDatas.seq);
 		return value.posting_seq == postingDatas.seq;
 	});
+	
+	var currentScoreDatas = _.filter(scoreDatas, function(value) {
+		return value.posting_seq == postingDatas.seq;
+	})
+	
+	$.each(currentScoreDatas, function(idx, item) {
+		point = item.point;
+	})
+	
 			
 	$.each(currentFavoriteDatas, function(idx, item){
 		if (item.flag == "1") {
@@ -45,7 +54,7 @@ function getSectionItem(postingDatas, isHide){
 			'<div class = "comment-form">'+
 				'<span class="bac-point" id="score='+postingDatas.avg+'">Point '+postingDatas.avg+'</span>'+
 				'<span class="comment-raty-form">'+
-					'<span class="raty" data-score="'+postingDatas.avg+'" style="cursor:pointer;"></span>'+
+					'<span class="raty" data-score="'+point+'" style="cursor:pointer;"></span>'+
 					'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
 				'</span>'+
 				'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
@@ -74,14 +83,14 @@ function getSectionItem(postingDatas, isHide){
 		'</div>'+
 	'</div>'+
 '</section>'
-
+	
 /* comment와 posting 연결 */
 	var currentCommentDatas = _.filter(commentDatas, function(value) {
 		// console.log(JSON.stringify(value) + ' // '+ postingDatas.seq);
 		// alert("comment:"+value.posting_seq+"posting:"+postingDatas.seq);
 		return value.posting_seq == postingDatas.seq;
 	});
-	var sectionObject = $(sectionElem);
+	var sectionObject = $(sectionElem)
 
 	$.each(currentCommentDatas, function(idx, item) {
 		var liElem = '<li class = "comment-list-sub">'
@@ -91,8 +100,8 @@ function getSectionItem(postingDatas, isHide){
 				+ item.regdate.substr(0, 10) + '</span>' + '</li>'
 				+ '<span class="comment view" id="commentView-content">'
 				+ item.content + '</span>'
-
 		sectionObject.find('.comment-list').append(liElem);
 	});
 	return sectionObject.get(0).outerHTML;
+
 }

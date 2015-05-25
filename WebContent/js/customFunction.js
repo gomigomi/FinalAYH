@@ -1,9 +1,3 @@
-var commentDatas;
-var favoriteDatas;
-var postingDatas;
-var scoreDatas;
-
-
 /*comment를 위한 함수 선언*/
 function getCommentData() {
 	$.ajax({
@@ -71,7 +65,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 	};
 	
 	$.ajax ({
-		url : 'http://localhost:8080/getScore?id='+param.id+'&posting_seq='+param.posting_seq,
+		url : 'http://localhost:8080/getScore?type=1&id='+param.id+'&posting_seq='+param.posting_seq,
 		method : 'GET',
 		dataType : 'JSON',
 		success : function(res) {
@@ -126,3 +120,18 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 	})
 
 })
+
+function getBasisScore() {
+	var parentElem = $(this).parents('section');
+	var id = window.sessionStorage.getItem("id");
+	$.ajax({
+		url : 'http://localhost:8080/getScore?type=2&id='+id,
+		method : 'GET',
+		dataType : 'JSON',
+		async : false,
+		success : function(res) {
+			scoreDatas = res.result;
+		}
+	})
+}
+getBasisScore();

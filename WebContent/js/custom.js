@@ -5,6 +5,7 @@ var commentDatas;
 var postingDatas;
 var scoreDatas;
 
+
 function readURL(input) {
 	$('#img_preview').empty();
 	for (i = 0; i < input.files.length; i++) {

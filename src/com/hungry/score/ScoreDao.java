@@ -37,7 +37,7 @@ public class ScoreDao {
 		return dbConn;
 	}
 	
-	public List<HashMap<String, Object>> getBasisScore(String id, String posting_seq) {
+	public List<HashMap<String, Object>> getBasisScore(String id) {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> resultContent = new ArrayList<HashMap<String, Object>>();
@@ -46,7 +46,7 @@ public class ScoreDao {
 		try{
 		conn = getConnection();
 		stmt = conn.createStatement();
-		String sql ="SELECT * FROM score where id='"+id+"' and posting_seq='"+posting_seq+"'";
+		String sql ="SELECT * FROM score where id='"+id+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 
 		while(rs.next()){
