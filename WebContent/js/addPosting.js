@@ -43,9 +43,9 @@ function getSectionItem(postingDatas, isHide){
 				'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
 			'</span>'+
 			'<div class = "comment-form">'+
-				'<span class="bac-point">Point '+postingDatas.avg+'</span>'+
+				'<span class="bac-point" id="score='+postingDatas.avg+'">Point '+postingDatas.avg+'</span>'+
 				'<span class="comment-raty-form">'+
-					'<span class="raty" data-score="2.5" style="cursor:pointer;"></span>'+
+					'<span class="raty" data-score="'+postingDatas.avg+'" style="cursor:pointer;"></span>'+
 					'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
 				'</span>'+
 				'<span class="post-regdate">'+postingDatas.regdate+'</span>'+

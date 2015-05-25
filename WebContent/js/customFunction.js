@@ -86,6 +86,10 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 						success : function(res) {
 							if(res.result == 'success') {
 								alert("감사합니다!!");
+////								var currentPoint = parentElem.find('.bac-point').attr('id');
+//								currentPoint=currentPoint.substring(6);
+//								var addingPoint = parentElem.find('.raty').raty('score').attr();
+								
 								return false;
 							} else {
 								alert("Point has not been changed.");
@@ -106,6 +110,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 						if(res.result =='success') {
 							console.log("postScore_CF");
 							alert("감사합니다!\n점수는 재평가가 가능합니다.");
+							
 							return false;
 						} else if(!window.sessionStorage.getItem('id')){
 							alert ("Please Log-in first!");

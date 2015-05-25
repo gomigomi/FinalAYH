@@ -47,7 +47,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2), '평가안됨') AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
@@ -97,7 +97,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2), '평가안됨') AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
@@ -146,7 +146,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, IFNULL(D.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(D.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2), '평가안됨') AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN comment C ON C.posting_seq = A.seq "+ 
@@ -197,7 +197,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2), '평가안됨') AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
@@ -330,7 +330,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),'평가안됨') AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
