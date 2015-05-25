@@ -37,6 +37,41 @@ public class ScoreDao {
 		return dbConn;
 	}
 	
+	public List<HashMap<String, Object>> getBasisScore(String id, String posting_seq) {
+		Connection conn = null;
+		Statement stmt = null;
+		List<HashMap<String, Object>> resultContent = new ArrayList<HashMap<String, Object>>();
+		System.out.println("SCORE : user "+id+" used getBasisScore");
+
+		try{
+		conn = getConnection();
+		stmt = conn.createStatement();
+		String sql ="SELECT * FROM score where id='"+id+"' and posting_seq='"+posting_seq+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+
+		while(rs.next()){
+		HashMap<String, Object> item = new HashMap<String, Object>();
+		item.put("id", rs.getString("id"));
+		item.put("posting_seq", rs.getString("posting_Seq"));
+		item.put("point", rs.getString("point"));
+
+		resultContent.add(item);
+		} 
+
+		rs.close();
+		stmt.close();
+		conn.close();
+
+		}catch(SQLException se){
+		se.printStackTrace();
+		
+		}catch(Exception e){
+		e.printStackTrace();
+
+		}finally{}
+
+		return resultContent;
+		}
 
 	public String getScore(String id, String posting_seq) {
 		Connection conn = null;
@@ -52,7 +87,6 @@ public class ScoreDao {
 			
 			if(rs.next()){
 				result="1";
-				System.out.println("ScoreDao.getScore1");
 				}
 			rs.close();
 			stmt.close();
@@ -80,20 +114,18 @@ public class ScoreDao {
 			
 			String sql= "INSERT INTO score (point, id, posting_seq) "+
 						"VALUES('"+scoreParam.get("point")[0].toString()+"', '"+scoreParam.get("id")[0].toString()+"', '"+scoreParam.get("posting_seq")[0].toString()+"')";
-			
+				
 			stmt.executeUpdate(sql);
-			System.out.println("ScoreDao.Post");
+		
 			stmt.close();
 			conn.close();
 
 		}catch(SQLException se){
 			se.printStackTrace();
-			System.out.println("ScoreDao.SQLEx");
 			result = "fail";
 		}catch(Exception e){
 			e.printStackTrace();
 			result = "fail";
-			System.out.println("ScoreDao.Exc");
 		}finally{
 			
 		}

@@ -23,12 +23,20 @@ public class ScoreServlet extends HttpServlet{
 
 		PrintWriter printout = response.getWriter();
 		JSONObject JObject = new JSONObject();
-
+		String type = request.getParameter("type");
 		ScoreDao dao = new ScoreDao();
 		try{
-			String point_id = request.getParameter("id");
-			String posting_seq = request.getParameter("posting_seq");
-			JObject.put("result",  dao.getScore(point_id, posting_seq));
+			if(type.equals("1")){
+				String point_id = request.getParameter("id");
+				String posting_seq = request.getParameter("posting_seq");
+				JObject.put("result", dao.getScore(point_id, posting_seq));
+			} else if(type.equals("2")){
+				String point_id = request.getParameter("id");
+				String posting_seq = request.getParameter("posting_seq");
+				JObject.put("result", dao.getBasisScore(point_id,  posting_seq));
+			}
+
+			
 
 		}catch (JSONException e) {
 			// TODO Auto-generated catch block
