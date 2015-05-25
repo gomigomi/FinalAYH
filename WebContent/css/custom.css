@@ -402,3 +402,25 @@ comment-list-sub {
   right: 0px;
   margin: 0 auto;
 }
+
+#slideSection {
+	margin-left : 3%;
+	position : absolute;
+	display : inline;
+	width : 45%;
+	height : 50%;
+	border-bottom : none;
+}
+
+#slideContentModal {
+	border-top : 1px solid #e1e1e1;
+}
+
+#slidePoint span.bac-point{
+	color : #999;
+	margin-right : 5%;
+}
+
+#more_content_body {
+	padding-top : 4%;
+}
