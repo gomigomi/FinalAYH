@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 //import com.bac.user.UserDao;
 
 public class UserServlet extends HttpServlet{
@@ -78,12 +81,24 @@ public class UserServlet extends HttpServlet{
 				JObject.put("result", dao.postUser(userParam));
 				
 			}else if(type.equals("2")){	//Update API
+
+				String savePath = "/Users/gomi/FinalAYH/WebContent/img/common";
+				int maxSize = 5*1024*1024;
+
+				MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 				
-				String id = request.getParameter("id");
-				String name = request.getParameter("name");
-				String pass = request.getParameter("pass");
+				Map<String, String> userUpdateParam = new HashMap<String, String>();
 				
-				JObject.put("result", dao.updateUser(id, name, pass));
+				String thumbName=multi.getFilesystemName("thumb");
+				
+		       	userUpdateParam.put("id",multi.getParameter("id").toString());
+		       	userUpdateParam.put("pass",multi.getParameter("pass").toString());
+		       	userUpdateParam.put("name",multi.getParameter("name").toString());
+		       	userUpdateParam.put("thumb",thumbName);
+		       	
+		      	System.out.print(userUpdateParam);
+		      	
+				JObject.put("result", dao.updateUser(userUpdateParam));
 			}
 
 

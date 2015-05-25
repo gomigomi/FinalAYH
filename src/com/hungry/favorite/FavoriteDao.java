@@ -44,7 +44,7 @@ public class FavoriteDao {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("BOOKMARK : user "+id+" is on Favorite-View.");
+		
 		
 		try{
 			conn = getConnection();
@@ -97,7 +97,7 @@ public class FavoriteDao {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-		System.out.println("BOOKMARK : user "+id+" has used getFavorite");
+		
 		
 		try{
 			conn = getConnection();
@@ -154,7 +154,7 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-		System.out.println("BOOKMARK : User "+id+" has deleted "+posting_seq);
+		
 		return result;
 	}
 	
@@ -183,7 +183,7 @@ public class FavoriteDao {
 		}finally{
 			
 		}
-		System.out.println("BOOKMARK : User "+id+ " added posting"+posting_seq+" as favorite.");
+		
 		return result;
 	}
 

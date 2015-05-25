@@ -41,7 +41,6 @@ public class ScoreDao {
 		Connection conn = null;
 		Statement stmt = null;
 		List<HashMap<String, Object>> resultContent = new ArrayList<HashMap<String, Object>>();
-		System.out.println("SCORE : user "+id+" used getBasisScore");
 
 		try{
 		conn = getConnection();
@@ -77,7 +76,6 @@ public class ScoreDao {
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "0";
-		System.out.println("SCORE : user "+id+" used getScore");
 		
 		try{
 			conn = getConnection();
@@ -129,7 +127,6 @@ public class ScoreDao {
 		}finally{
 			
 		}
-		System.out.println("SCORE : User "+scoreParam.get("id")[0].toString()+" gave "+scoreParam.get("point")[0].toString()+" on "+scoreParam.get("posting_seq")[0].toString()+" .");
 		return result;
 	}
 
@@ -157,7 +154,6 @@ public class ScoreDao {
 		}finally{
 			
 		}
-		System.out.println("SCORE : User "+scoreParam.get("id")[0].toString()+" re-gave "+scoreParam.get("point")[0].toString()+" on "+scoreParam.get("posting_seq")[0].toString()+" .");
 		return result;
 	}
 }

@@ -169,7 +169,7 @@ public class UserDao {
 	
 //end FirstExample
 	
-	public String updateUser(String id, String name, String pass){
+	public String updateUser(Map<String, String> userParam){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -177,7 +177,7 @@ public class UserDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql= "UPDATE user SET name='"+name+"', pass='"+pass+"' where id='"+id+"'";
+			String sql= "UPDATE user SET name='"+userParam.get("name")+"', pass='"+userParam.get("pass")+"', thumb='"+userParam.get("thumb")+"' where id='"+userParam.get("id")+"'";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
