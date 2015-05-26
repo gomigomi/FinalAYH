@@ -150,7 +150,7 @@ $(function() {
 			var check=confirm('Are you sure to delete your id? All your postings will be deleted');
 			if (check){
 				$.ajax({
-					url :'http://localhost:8080/deleteUser?&id=' + id,
+					url :'http://localhost:8080/deleteUser?id=' + id,
 					method :'DELETE',
 					dataType :'json',
 					success : function(res) {
@@ -164,10 +164,9 @@ $(function() {
 						$.modal.close();
 
 						sessionStorage.clear();
-
-						$('.logoff').show();
-						$('.logon').hide();
-
+						
+						location.href="/NewFront.jsp";	
+						
 						renderPostingList();
 					}
 				});

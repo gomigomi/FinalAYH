@@ -412,10 +412,37 @@
 
 	<form action="" class="post-editmd modal" id="post_edit"
 		style="position: fixed; top: 50%; left: 50%; margin-top: -116.5px; margin-left: -200px; z-index: 2; display: none;">
+		<select name=taste id="taste_edit">
+			<option value=hot selected>매운맛</option>
+			<option value=swe>단맛</option>
+			<option value=sal>짠맛</option>
+			<option value=sou>신맛</option>
+			<option value=bit>쓴맛</option>
+		</select>
+		<select name=type id="type_edit">
+			<option value=korean selected>한식</option>
+			<option value=chinese>중식</option>
+			<option value=japanese>일식</option>
+			<option value=european>양식</option>
+		</select>
+		<select name=time id="time_edit">
+			<option value=bf selected>아침</option>
+			<option value=lc>점심</option>
+			<option value=dn>저녁</option>
+		</select>
+		<select name=location id="location_edit">
+			<option value=Seoul selected>서울</option>
+			<option value=KK>경기</option>
+			<option value=KW>강원</option>
+			<option value=KS>경상</option>
+			<option value=CC>충청</option>
+			<option value=JR>전라</option>
+			<option value=JJ>제주</option>
+		</select>
 		<p>
 			<textarea id="post_edit_area"></textarea>
 		</p>
-		<input type="button" value="Withdrawal" id="post-edit-submit">
+		<input type="button" value="Edit" id="post-edit-submit">
 	</form>
 	
 	<form action="" class="more-contentmd modal" id="more_content"

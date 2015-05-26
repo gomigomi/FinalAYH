@@ -30,7 +30,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>deleteUser</servlet-name>            
-    <servlet-class>com.bac.hungry.UserServlet</servlet-class>
+    <servlet-class>com.hungry.user.UserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>deleteUser</servlet-name>
