@@ -34,7 +34,8 @@ public class imgServlet extends HttpServlet{
     	
 		PrintWriter printout = resp.getWriter();
 		JSONObject JObject = new JSONObject(); 	
-    	
+    	String type=req.getParameter("type");
+		
 		imgDao dao=new imgDao();
 		
 		try{
@@ -62,15 +63,11 @@ public class imgServlet extends HttpServlet{
 		             String filename = mr.getFilesystemName(name);
 		             //전송전 원래의 파일이름
 		             String original = mr.getOriginalFileName(name);
-		             //전송된 파일의 내용타입
-		             String type = mr.getContentType(name);
-		             //전송된 파일 속성이  file인 태그의 name 속성값을 이용해 파일 객체 생성
 		             //용량을 알아내기 위해서 : file.length();
 		             File file = mr.getFile(name);
 		             System.out.println("파라미터 이름 : " + name + "<br/>");
 		             System.out.println("실제 파일 이름 : " + original + "<br/>");
 		             System.out.println("저장된 파일 이름 : " + filename + "<br/>");
-		             System.out.println("파일 타입 : " + type + "<br/>");
 		             
 		             imgname.add(filename);
 
@@ -79,8 +76,17 @@ public class imgServlet extends HttpServlet{
 		            	 System.out.println("<br/>");
 		             }
 		         }
-							
-				JObject.put("result", dao.postImg(imgname));	
+				if(type.equals("1")){
+					System.out.println("I'm now working on type 1");
+					JObject.put("result", dao.postImg(imgname));
+				}else if(type.equals("2")){
+					System.out.println("I'm now working on type 2");
+					String post_seq=req.getParameter("seq");
+					JObject.put("result", dao.deleteImg(post_seq));
+					JObject.put("result", dao.postImg(imgname));
+				}
+				
+				
 			
 		}catch(JSONException e){	
 			e.printStackTrace();
