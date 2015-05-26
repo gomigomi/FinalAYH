@@ -1,5 +1,6 @@
 var count = 0;
 var formData=new FormData();
+var editFormData=new FormData();
 var favoriteDatas;
 var commentDatas;
 var postingDatas;
@@ -26,7 +27,7 @@ function readURL(input) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$('#img_preview').append(
-						'<img width="200px" height="200px" id="blah" src="'
+						'<img width="200px" height="200px" src="'
 								+ e.target.result + '" alt="your image" />');
 			}
 		}
@@ -36,6 +37,35 @@ function readURL(input) {
 		
 }
 
+function readEditURL(input) {
+	$('#img_edit_preview').empty();
+	if(input.files.length>3){
+		alert("이미지 첨부는 최대 3개까지 가능합니다")
+	}
+	for (i = 0; i < input.files.length; i++) {
+		var file=input.files[i].name
+		if(file !=""){
+			var fileExt=file.substring(file.lastIndexOf(".") +1);
+			var reg=/gif|jpg|jpeg|png/i;
+			if(reg.test(fileExt)==false){
+				alert("첨부파일은 gif, jpg, png로 된 이미지만 가능합니다.");
+				 $('#img_upload_frm')[0].reset();
+				return;
+			}
+		}
+		if (input.files && input.files[i]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#img_edit_preview').append(
+						'<img width="150px" height="150px" id="blah" src="'
+								+ e.target.result + '" alt="your image" />');
+			}
+		}
+		reader.readAsDataURL(input.files[i]);
+		editFormData.append(i,input.files[i]);
+	}
+		
+}
 
 $(function() {
 	console.log(commentDatas);
@@ -312,6 +342,10 @@ $(function() {
     $("#img_Upload").on('change', function(){
         readURL(this);
     });
+    
+    $("#img_edit").on('change', function(){
+        readEditURL(this);
+    });
 	
 	//posting process
 	$('#write_post_btn').click(function(){
@@ -364,7 +398,7 @@ $(function() {
 		});
 		
 		$.ajax({
-             url: 'http://localhost:8080/postImg',
+             url: 'http://localhost:8080/postImg?type=1',
              processData: false,
              contentType: false,
              data: formData,
@@ -459,6 +493,7 @@ $(function() {
 			$.ajax({
 				url :'http://localhost:8080/postPosting?type=2',
 				method :'post',
+				async : false,
 				dataType :'json',
 				data:{
 					seq : seq,
@@ -467,10 +502,26 @@ $(function() {
 				success : function(res) {
 					console.log("posting-edit");
 					$('#post_edit_area').val('');
-					$.modal.close();
-					renderPostingList();
 				}
-			});
+			});			
+			if($('#img_edit').val()){
+				$.ajax({
+		             url: 'http://localhost:8080/postImg?type=2&seq='+seq,
+		             processData: false,
+		             contentType: false,
+		             data: editFormData,
+		             async : false,
+		             type: 'POST',
+		             success: function(result){
+		                   $('#img_edit_preview').empty();
+		                   $("#img_edit").val("");
+		                   editFormData=new FormData();
+		                   renderPostingList();
+		             }
+		         });
+			}			
+			$.modal.close();
+			renderPostingList();
 		});
 	});
 });

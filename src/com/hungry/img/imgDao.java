@@ -68,6 +68,36 @@ public class imgDao {
 		return result;
 	}
 	
+	public String deleteImg(String seq){
+		Connection conn = null;
+		Statement stmt = null;
+		String result = "success";
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			System.out.println("delete query execute"+seq);
+			
+			String sql= "DELETE from image where posting_seq='"+seq+"'"; 
+
+			stmt.executeUpdate(sql);
+		
+			stmt.close();				
+			conn.close();
+
+		}catch(SQLException se){
+			se.printStackTrace();
+			result = "fail";
+		}catch(Exception e){
+			e.printStackTrace();
+			result = "fail";
+		}finally{
+			
+		}
+
+		return result;
+	}
+	
 	public ArrayList<String> getImg(String posting_seq) {
 		Connection conn = null;
 		Statement stmt = null;

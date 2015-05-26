@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ page import="java.util.HashMap" %>
 
 <jsp:useBean id="udao" class="com.hungry.user.UserDao" />
@@ -14,6 +14,7 @@
 <%
 	HashMap<String, Object> userHash = new HashMap<String, Object>();
 	userHash = udao.loginUser(form_id, form_pw);
+	
 	
 	//¼­ºí¸´ ÇÔ¼ö->ÇØ½¬¸Ê->½ºÆ®¸µ->jsp¼¼¼Ç½ºÅä¸®Áö
 	String idHash = (String)userHash.get("id");
@@ -37,32 +38,6 @@
 	String thumb = (String)session.getAttribute("thumb");
 %>
 
-
-
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<script type="text/javascript">
-
-	sessionStorage.setItem("id", "<%=id%>")
-	sessionStorage.setItem("pw", "<%=pw%>")
-	sessionStorage.setItem("name", "<%=name%>")
-	sessionStorage.setItem("thumb", "<%=thumb%>")
-	document.location.href= "index.html"
-
-</script>
-</script>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>log-ining...</title>
-</head>
-<body>
-
-</body>
-</html>
-
 <%
 	if(userHash.isEmpty()){
 		System.out.println("wrong");
@@ -71,3 +46,29 @@
 		rd.forward(request, response);
 	}
 %>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<script type="text/javascript">
+	function redirectPage(){
+	sessionStorage.setItem("id", "<%=id%>")
+	sessionStorage.setItem("pw", "<%=pw%>")
+	sessionStorage.setItem("name", "<%=name%>")
+	sessionStorage.setItem("thumb", "<%=thumb%>")
+	document.location.href= "index.html"
+	}
+
+</script>
+
+<script>redirectPage();</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>log-ining...</title>
+</head>
+<body>
+
+</body>
+</html>
