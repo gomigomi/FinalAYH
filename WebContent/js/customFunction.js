@@ -91,6 +91,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 								
 								var basePoint = Number(parentElem.find('.bac-point').attr('id'));
 								var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
+								newAvg.toFixed(2);
 								
 								newAvg = String(newAvg);
 								
@@ -129,6 +130,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 							
 							var basePoint = Number(parentElem.find('.bac-point').attr('id'));
 							var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
+							newAvg.toFixed(2);
 							
 							newAvg = String(newAvg);
 							
