@@ -29,6 +29,7 @@ function getSectionItem(postingDatas, isHide){
 
 	var sectionElem = 
 	'<section class="post '+postingDatas.seq+'" id="posting_'+postingDatas.seq+'">'+
+	'<scIdx id="'+postingDatas.sc_idx+'"/>'+
 	'<div class="post-header post-top">'+
 		'<span class="post-avatar post-img"> '+
 			'<img src="/img/common/'+postingDatas.thumb+'"/>'+
@@ -52,7 +53,7 @@ function getSectionItem(postingDatas, isHide){
 				'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
 			'</span>'+
 			'<div class = "comment-form">'+
-				'<span class="bac-point" id="score='+postingDatas.avg+'">Point '+postingDatas.avg+'</span>'+
+				'<span class="bac-point" id="'+postingDatas.avg+'">Point '+postingDatas.avg+'</span>'+
 				'<span class="comment-raty-form">'+
 					'<span class="raty" data-score="'+point+'" style="cursor:pointer;"></span>'+
 					'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
