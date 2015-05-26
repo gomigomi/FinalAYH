@@ -8,6 +8,9 @@ var scoreDatas;
 
 function readURL(input) {
 	$('#img_preview').empty();
+	if(input.files.length>3){
+		alert("이미지 첨부는 최대 3개까지 가능합니다")
+	}
 	for (i = 0; i < input.files.length; i++) {
 		var file=input.files[i].name
 		if(file !=""){
@@ -30,6 +33,7 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[i]);
 		formData.append(i,input.files[i]);
 	}
+		
 }
 
 
