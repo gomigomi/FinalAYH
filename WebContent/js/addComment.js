@@ -21,13 +21,22 @@ $(function(){
 			success: function(res){
 				console.log("postcomment");
 				if(res.result=='success'){
+					
+					var id = window.sessionStorage.getItem('id');
+					var cmtDisplay = "none";
+					if(param.writer==id) {
+						cmtDisplay = "inline-block";
+					}
+					
 					//Append comment to comment list
 					var commentItem = 
-					'<li class = "comment-list-sub">'+
-						'<span class="user" id="commentView-user">'+param.writer+'</span>'+
-						'<span class="regdate view" id="commentView-regdate">'+getNowDate()+'</span>'+
-					'</li>'+
-					'<span class="comment view" id="commentView-content">'+param.content+'</span>'
+					'<li class = "comment-list-sub" id="'+param.seq+'">'+
+					'<span class="user" id="commentView-user">' + param.writer+'</span>'+
+					'<span class="regdate view" id="commentView-regdate">'+getNowDate()+
+						'<button class="comment-delete" style="display:'+cmtDisplay+'">'+
+						'</button>'+
+					'</span>' + '</li>'+
+					'<span class="comment view" id="commentView-content">'+ param.content + '</span>'
 					
 					parentElem.find('.comment-list').append(commentItem);	
 					parentElem.find('input.comment').val('');

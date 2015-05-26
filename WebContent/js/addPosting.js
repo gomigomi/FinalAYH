@@ -94,13 +94,21 @@ function getSectionItem(postingDatas, isHide){
 	var sectionObject = $(sectionElem)
 
 	$.each(currentCommentDatas, function(idx, item) {
-		var liElem = '<li class = "comment-list-sub">'
-				+ '<span class="user" id="commentView-user">' + item.writer
-				+ '</span>'
-				+ '<span class="regdate view" id="commentView-regdate">'
-				+ item.regdate.substr(0, 10) + '</span>' + '</li>'
-				+ '<span class="comment view" id="commentView-content">'
-				+ item.content + '</span>'
+		//댓글 삭제 버튼 추가
+		var id = window.sessionStorage.getItem('id');
+		var cmtDisplay = "none";
+		if(item.writer==id) {
+			cmtDisplay = "inline-block";
+		}
+		
+		var liElem = 
+				'<li class = "comment-list-sub" id="'+item.seq+'">'+
+					'<span class="user" id="commentView-user">' + item.writer+'</span>'+
+					'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+
+						'<button class="comment-delete" style="display:'+cmtDisplay+'">'+
+						'</button>'+
+					'</span>' + '</li>'+
+					'<span class="comment view" id="commentView-content">'+ item.content + '</span>'
 		sectionObject.find('.comment-list').append(liElem);
 	});
 	return sectionObject.get(0).outerHTML;
