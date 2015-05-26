@@ -28,7 +28,9 @@ $(function(){
 						'<span class="regdate view" id="commentView-regdate">'+getNowDate()+'</span>'+
 					'</li>'+
 					'<span class="comment view" id="commentView-content">'+param.content+'</span>'
-						parentElem.find('.comment-list').append(commentItem);	
+					
+					parentElem.find('.comment-list').append(commentItem);	
+					parentElem.find('input.comment').val('');
 				}else{
 					alert('comment add fail');
 					parentElem.find('input').focus();
