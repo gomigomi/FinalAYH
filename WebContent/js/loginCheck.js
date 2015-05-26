@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
 	
 	
 	var session = {
@@ -6,11 +6,11 @@ $(function() {
 		name : window.sessionStorage.getItem('name')
 	};
 	var thumb = window.sessionStorage.getItem('thumb');
-	var pass = window.sessionStorage.getItem('pass');
+	var pass = window.sessionStorage.getItem('pw');
 	
 	
 	if(!session.id){
-		location.href="/NewFront.jsp";		
+		
 	}else{
 		$('.logon').show();
 		$('.logoff').hide();
