@@ -294,7 +294,7 @@ public class PostingDao {
 		return result;
 	}
 	
-	public String updatePosting(String seq, String content){
+	public String updatePosting(Map<String, String[]>updateParam){
 		Connection conn = null;
 		Statement stmt = null;
 		String result = "success";
@@ -302,7 +302,7 @@ public class PostingDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql= "UPDATE posting SET content='"+content.toString()+"' where seq='"+seq+"'";
+			String sql= "UPDATE posting SET taste='"+updateParam.get("taste")[0].toString()+"', type='"+updateParam.get("f_type")[0].toString()+"', time='"+updateParam.get("time")[0].toString()+"', location='"+updateParam.get("location")[0].toString()+"', content='"+updateParam.get("content")[0].toString()+"' where seq='"+updateParam.get("seq")[0].toString()+"'";
 			stmt.executeUpdate(sql);
 
 			stmt.close();

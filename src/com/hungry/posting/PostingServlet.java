@@ -89,10 +89,10 @@ public class PostingServlet extends HttpServlet{
 			
 				JObject.put("result", dao.postPosting(postingParam));
 			}else if(type.equals("2")){
-				String seq=request.getParameter("seq");
-				String content=request.getParameter("content");
+				Map<String, String[]> updateParam = request.getParameterMap();
 				
-				JObject.put("result", dao.updatePosting(seq, content));
+				
+				JObject.put("result", dao.updatePosting(updateParam));
 				
 			}
 		}catch(JSONException e){

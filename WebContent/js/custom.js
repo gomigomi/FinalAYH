@@ -388,7 +388,7 @@ $(function() {
 					$('input[type="checkbox"][name="f_type"]').prop('checked', false);
 					$('input[type="checkbox"][name="taste"]').prop('checked', false);
 					$('input[type="checkbox"][name="time"]').prop('checked', false);
-					$("#locationSel > option[value=none]").attr("selected", "ture");
+					$("#locationSel > option[value=none]").attr("selected", "true");
 					//renew posting list
 				}else{
 					alert('post fail!');
@@ -486,10 +486,25 @@ $(function() {
 	$(document).on('click','.post-edit', function(){
 		var seq = $(this).closest('section').attr('id');
 		seq= seq.substring(8);
-
+		var taste=$(this).parents('section').find('.taste').attr('id');
+		var f_type=$(this).parents('section').find('.type').attr('id');
+		var location=$(this).parents('section').find('.location').attr('id');
+		var time = $(this).parents('section').find('.time').attr('id');
+		
+		$("#taste_edit > option[value="+taste+"]").attr("selected", "true");
+		$("#type_edit > option[value="+f_type+"]").attr("selected", "true");
+		$("#time_edit > option[value="+time+"]").attr("selected", "true");
+		$("#location_edit > option[value="+location+"]").attr("selected", "true");
+		
 		console.log(seq);
 		$(document).on('click', '#post-edit-submit' , function(){
+			taste=$("#taste_edit option:selected").val();
+			f_type=$("#type_edit option:selected").val();
+			time=$("#time_edit option:selected").val();
+			location=$("#location_edit option:selected").val();
+			
 			var content=$('#post_edit_area').val();
+			
 			$.ajax({
 				url :'http://localhost:8080/postPosting?type=2',
 				method :'post',
@@ -497,6 +512,10 @@ $(function() {
 				dataType :'json',
 				data:{
 					seq : seq,
+					taste : taste,
+					f_type : f_type,
+					time : time,
+					location : location,
 					content : content
 				},
 				success : function(res) {

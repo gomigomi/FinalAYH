@@ -46,10 +46,10 @@ function getModalItem(additionalPosting){
 		'<span class="bac-point">Point '+additionalPosting[0].avg+'</span>'+
 	'</span>'+
 	'<span id = "slideIcon">'+
-		'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-'+additionalPosting[0].type+'.png"/></span>'+
-		'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-'+additionalPosting[0].location+'.png"/></span>'+
-		'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-'+additionalPosting[0].taste+'.png"/></span>'+
-		'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-time/time-'+additionalPosting[0].time+'.png"/></span>'+
+		'<span id = "postingClassifyImg"><img class = "imgNational postingCI" src="/img/icon/posting-nationality/nationality-'+additionalPosting[0].type+'.png"/></span>'+
+		'<span id = "postingClassifyImg"><img class = "imgLocation postingCI" src="/img/icon/posting-location/location-'+additionalPosting[0].location+'.png"/></span>'+
+		'<span id = "postingClassifyImg"><img class = "imgTaste postingCI" src="/img/icon/posting-taste/taste-'+additionalPosting[0].taste+'.png"/></span>'+
+		'<span id = "postingClassifyImg"><img class = "imgTime postingCI" src="/img/icon/posting-time/time-'+additionalPosting[0].time+'.png"/></span>'+
 	'<span>'+
 	'<div id = "slideContentModal">'+
 		'<h2>'+additionalPosting[0].content+'</h2>'+
