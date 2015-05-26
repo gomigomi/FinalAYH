@@ -22,6 +22,7 @@ $(document).on('click', '.comment-delete', function() {
 		async : false,
 		dataType : 'JSON',
 		success : function(res) {
+			
 			$('li[id$="'+seq+'"]').hide();
 //			$('li[id$="'+seq+'"] .comment').empty();
 		},
