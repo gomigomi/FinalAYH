@@ -80,9 +80,22 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 						success : function(res) {
 							if(res.result == 'success') {
 								alert("감사합니다!!");
-////								var currentPoint = parentElem.find('.bac-point').attr('id');
-//								currentPoint=currentPoint.substring(6);
-//								var addingPoint = parentElem.find('.raty').raty('score').attr();
+								
+								//점수화면 동적 제어.
+								var myPoint =Number(parentElem.find('.raty').attr('data-score'));
+								var currentPoint = Number(param.point);
+								var sc_idx = Number(parentElem.find('scIdx').attr('id'));
+								if(sc_idx == 0) {
+									sc_idx+=1;
+								}
+								
+								var basePoint = Number(parentElem.find('.bac-point').attr('id'));
+								var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
+								
+								newAvg = String(newAvg);
+								
+								parentElem.find('.bac-point').empty();
+								parentElem.find('.bac-point').append('Point '+newAvg);
 								
 								return false;
 							} else {
@@ -103,7 +116,24 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 					success : function(res) {
 						if(res.result =='success') {
 							console.log("postScore_CF");
+
 							alert("감사합니다!\n점수는 재평가가 가능합니다.");
+							
+							//점수화면 동적 제어.
+							var myPoint =Number(parentElem.find('.raty').attr('data-score'));
+							var currentPoint = Number(param.point);
+							var sc_idx = Number(parentElem.find('scIdx').attr('id'));
+							if(sc_idx == 0) {
+								sc_idx+=1;
+							}
+							
+							var basePoint = Number(parentElem.find('.bac-point').attr('id'));
+							var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
+							
+							newAvg = String(newAvg);
+							
+							parentElem.find('.bac-point').empty();
+							parentElem.find('.bac-point').append('Point '+newAvg);
 							
 							return false;
 						} else if(!window.sessionStorage.getItem('id')){
