@@ -13,6 +13,25 @@ function getCommentData() {
 }
 getCommentData();
 
+$(document).on('click', '.comment-delete', function() {
+	var seq = $(this).closest('li').attr('id');
+	
+	$.ajax({
+		url : 'http://localhost:8080/deleteComment?seq='+seq,
+		method : 'DELETE',
+		async : false,
+		dataType : 'JSON',
+		success : function(res) {
+			
+			$('li[id$="'+seq+'"]').hide();
+//			$('li[id$="'+seq+'"] .comment').empty();
+		},
+		error : function() {
+			alert("Please Try Again.");
+		}
+	})
+})
+
 
 /*favorite를 위한 함수 선언*/
 function getFavoriteData(){
@@ -91,6 +110,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 								
 								var basePoint = Number(parentElem.find('.bac-point').attr('id'));
 								var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
+								newAvg.toFixed(2);
 								
 								newAvg = String(newAvg);
 								
@@ -129,6 +149,7 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 							
 							var basePoint = Number(parentElem.find('.bac-point').attr('id'));
 							var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
+							newAvg.toFixed(2);
 							
 							newAvg = String(newAvg);
 							
