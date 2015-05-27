@@ -47,13 +47,32 @@ public class SearchDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
+			String sql_ty ="";
+			String sql_ti ="";
+			String sql_ta ="";
+				
+			if(searchParam.get("f_type")[0].toString().equals("ty-all")){
+				sql_ty = "";
+			}else{
+				sql_ty = "and type='"+searchParam.get("f_type")[0].toString()+"' ";
+			}
+			if(searchParam.get("time")[0].toString().equals("ti-all")){
+				sql_ti = "";
+			}else{
+				sql_ti = "and time='"+searchParam.get("time")[0].toString()+"' ";
+			}
+			if(searchParam.get("taste")[0].toString().equals("ta-all")){
+				sql_ta = "";
+			}else{
+				sql_ta = "and taste='"+searchParam.get("taste")[0].toString()+"' ";
+			}
+			
 			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, IFNULL(round(avg(S.point), 2),2.5) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
 					"LEFT OUTER JOIN score S ON S.posting_seq = A.seq "+
-					"WHERE type='"+searchParam.get("f_type")[0].toString()+"' and location='"+searchParam.get("location")[0].toString()+
-								"' and time='"+searchParam.get("time")[0].toString()+"' and taste='"+searchParam.get("taste")[0].toString()+"' "+
+					"WHERE location = '"+searchParam.get("location")[0].toString()+"' "+sql_ty+sql_ti+sql_ta+
 					"GROUP BY A.seq "+
 					"ORDER BY A.seq DESC";
 
