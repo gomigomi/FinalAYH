@@ -30,13 +30,16 @@ $(function(){
 					
 					//Append comment to comment list
 					var commentItem = 
+					'<div class="comment-wrap">'+
 					'<li class = "comment-list-sub" id="'+param.seq+'">'+
 					'<span class="user" id="commentView-user">' + param.writer+'</span>'+
 					'<span class="regdate view" id="commentView-regdate">'+getNowDate()+
 						'<button class="comment-delete" style="display:'+cmtDisplay+'">'+
+						'<i class="fa fa-times"></i>'+
 						'</button>'+
 					'</span>' + '</li>'+
-					'<span class="comment view" id="commentView-content">'+ param.content + '</span>'
+					'<span class="comment view" id="commentView-content">'+ param.content + '</span>'+
+					'</div>'
 					
 					parentElem.find('.comment-list').append(commentItem);	
 					parentElem.find('input.comment').val('');

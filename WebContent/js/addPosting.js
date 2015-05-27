@@ -102,13 +102,16 @@ function getSectionItem(postingDatas, isHide){
 		}
 		
 		var liElem = 
+			'<div class="comment-wrap">'+
 				'<li class = "comment-list-sub" id="'+item.seq+'">'+
 					'<span class="user" id="commentView-user">' + item.writer+'</span>'+
 					'<span class="regdate view" id="commentView-regdate">'+item.regdate.substr(0, 10)+
 						'<button class="comment-delete" style="display:'+cmtDisplay+'">'+
+							'<i class="fa fa-times"></i>'+
 						'</button>'+
 					'</span>' + '</li>'+
-					'<span class="comment view" id="commentView-content">'+ item.content + '</span>'
+					'<span class="comment view" id="commentView-content">'+ item.content + '</span>'+
+			'</div>'
 		sectionObject.find('.comment-list').append(liElem);
 	});
 	return sectionObject.get(0).outerHTML;

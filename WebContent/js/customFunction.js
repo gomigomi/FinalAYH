@@ -21,10 +21,8 @@ $(document).on('click', '.comment-delete', function() {
 		method : 'DELETE',
 		async : false,
 		dataType : 'JSON',
-		success : function(res) {
-			
-			$('li[id$="'+seq+'"]').hide();
-//			$('li[id$="'+seq+'"] .comment').empty();
+		success : function(res) {		
+			$('li[id$="'+seq+'"]').closest('div').remove();
 		},
 		error : function() {
 			alert("Please Try Again.");
