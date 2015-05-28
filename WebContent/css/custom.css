@@ -425,3 +425,8 @@ comment-list-sub {
 #more_content_body {
 	padding-top : 4%;
 }
+.comment-delete{
+    border: 0;
+	
+    background-color: transparent;
+}
