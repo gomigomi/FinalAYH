@@ -426,8 +426,7 @@ comment-list-sub {
 #more_content_body {
 	padding-top : 5%;
 }
-
-.comment-delete {
-	border : none;
-	background-color : white;
+.comment-delete{
+    border: 0;	
+    background-color: transparent;
 }
