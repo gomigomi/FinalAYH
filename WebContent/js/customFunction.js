@@ -101,19 +101,35 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 								//점수화면 동적 제어.
 								var myPoint =Number(parentElem.find('.raty').attr('data-score'));
 								var currentPoint = Number(param.point);
+								var pre_idx = Number(parentElem.find('scIdx').attr('id'));
 								var sc_idx = Number(parentElem.find('scIdx').attr('id'));
 								if(sc_idx == 0) {
 									sc_idx+=1;
 								}
 								
 								var basePoint = Number(parentElem.find('.bac-point').attr('id'));
-								var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
-								newAvg.toFixed(2);
+								var newAvg = (basePoint*pre_idx+currentPoint-myPoint)/(sc_idx);
 								
-								newAvg = String(newAvg);
-								
+								//소수점 두 자리로 맞추기 위한 코드.
+								//방법 1.
+//								var zeroCounter = 0;
+//								zeroCounter = newAvg.indexOf(".");
+//
+//								if(zeroCounter == -1) {
+//									newAvg = String(newAvg+'.00');
+//								}		
+								//방법 2.
+//								newAvg = newAvg*1.01;
+//								newAvg = String(newAvg);
+//								parseFloat(newAvg, 2);
+//								newAvg.toFixed(2)
+								//방법 3.
+//								Math.round(newAvg*100)/1;
+								//방법 4. 유레카!!
+								var printNum = newAvg.toFixed(2);
+
 								parentElem.find('.bac-point').empty();
-								parentElem.find('.bac-point').append('Point '+newAvg);
+								parentElem.find('.bac-point').append('Point '+printNum);
 								
 								return false;
 							} else {
@@ -140,19 +156,44 @@ $(document).on('click', '.add-commentRaty-btn', function() {
 							//점수화면 동적 제어.
 							var myPoint =Number(parentElem.find('.raty').attr('data-score'));
 							var currentPoint = Number(param.point);
+							var pre_idx = Number(parentElem.find('scIdx').attr('id'));
 							var sc_idx = Number(parentElem.find('scIdx').attr('id'));
 							if(sc_idx == 0) {
 								sc_idx+=1;
 							}
 							
 							var basePoint = Number(parentElem.find('.bac-point').attr('id'));
-							var newAvg = (basePoint*sc_idx+currentPoint-myPoint)/(sc_idx);
-							newAvg.toFixed(2);
+							var newAvg = (basePoint*pre_idx+currentPoint-myPoint)/(sc_idx);
 							
-							newAvg = String(newAvg);
-							
+							//소수점 두 자리로 맞추기 위한 코드.
+							//방법 1.
+//							var zeroCounter = 0;
+//							zeroCounter = newAvg.indexOf(".");
+//
+//							if(zeroCounter == -1) {
+//								newAvg = String(newAvg+'.00');
+//							}		
+							//방법 2.
+//							newAvg = newAvg*1.01;
+//							newAvg = String(newAvg);
+//							parseFloat(newAvg, 2);
+//							newAvg.toFixed(2)
+							//방법 3.
+//							Math.round(newAvg*100)/1;
+							//방법 4. 유레카!!
+							var printNum = newAvg.toFixed(2);
+
 							parentElem.find('.bac-point').empty();
-							parentElem.find('.bac-point').append('Point '+newAvg);
+							parentElem.find('.bac-point').append('Point '+printNum);
+							
+							return false;
+							
+//							console.log("내가 준 점수 "+currentPoint);
+//							console.log("내가 줬던 점수 "+myPoint);
+//							console.log("기존 평균 "+basePoint);
+//							console.log("인덱스 "+sc_idx);
+//							var testAvg = ();/
+//							console.log("평균 "+current)
 							
 							return false;
 						} else if(!window.sessionStorage.getItem('id')){
