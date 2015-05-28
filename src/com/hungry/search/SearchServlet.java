@@ -46,29 +46,4 @@ public class SearchServlet extends HttpServlet{
 		printout.flush();
 	}
 
-//	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json; charset=UTF-8");//CREATE
-//
-//		PrintWriter printout = response.getWriter();
-//		JSONObject JObject = new JSONObject();
-//		String type=request.getParameter("type");
-//
-//		SearchDao dao = new SearchDao();
-//		
-//
-//		
-//		try{
-//			if(type.equals("1")){
-//				Map<String, String[]> postingParam = request.getParameterMap();
-//			
-//				JObject.put("result", dao.postSearch(postingParam));
-//			}
-//		}catch(JSONException e){
-//			
-//			e.printStackTrace();
-//		}
-//		printout.print(JObject);
-//		printout.flush();
-//	}
-
 }

@@ -44,6 +44,12 @@ $(function() {
 			success : function(res){
 				console.log("get user-written-posting");
 				postingUserDatas = res.result;
+				
+				if(postingUserDatas == "") {
+					$('#history-posting').empty();
+					$('#history-posting').append('<div id="nothingElem">검색결과가 없습니다.</div>');
+				}
+				
 				for(var i=0;i<postingUserDatas.length;i++){
 					$('#history-posting').append(getSectionItem(postingUserDatas[i],false));
 					handleRaty();
@@ -63,8 +69,14 @@ $(function() {
 			success : function(res){
 				console.log("get-user-written comment");
 				postingUserCommentDatas = res.result;
+				
+				if(postingUserCommentDatas == "") {
+					$('#history-comment').empty();
+					$('#history-comment').append('<div id="nothingElem">검색결과가 없습니다.</div>');
+				}
+				
 				//콘솔 
-				console.log(postingUserCommentDatas);
+//				console.log(postingUserCommentDatas);
 				for(var i=0; i<postingUserCommentDatas.length; i++){
 					$('#history-comment').append(getSectionItem(postingUserCommentDatas[i],false));
 					handleRaty();

@@ -58,6 +58,13 @@ function getFavoriteView() {
 		success : function(res) {
 			console.log('getFavoriteView');
 			favoriteView = res.result;
+
+			if (favoriteView == "") {
+				var  nothingElem = 
+					$('#favoritePosting').empty();
+					$('#favoritePosting').append('<div id="nothingElem">검색결과가 없습니다.</div>');
+			}
+			
 			console.log(favoriteView);
 			for(var i=0; i<favoriteView.length; i++) {
 				if( id == favoriteView[i].writer) {

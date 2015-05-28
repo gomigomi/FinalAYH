@@ -56,6 +56,11 @@ $(function() {
 				var id = window.sessionStorage.getItem("id");
 				console.log("letSearch");
 				searchDatas = res.result;
+				
+				if(searchDatas == "") {
+					$('#searchContent').empty();
+					$('#searchContent').append('<div id="nothingElem">검색결과가 없습니다.</div>');	
+				}
 					
 				$('#write').val('');
 				$('input[type="checkbox"][name="f_type"]').prop('checked', false);

@@ -136,6 +136,7 @@
 }
 .favorite-btn{
     float: right;
+    margin-right : 1.3%;
 	
 }
 
@@ -408,7 +409,7 @@ comment-list-sub {
 	margin-left : 3%;
 	position : absolute;
 	display : inline;
-	width : 45%;
+	width : 30%;
 	height : 50%;
 	border-bottom : none;
 }
@@ -423,7 +424,7 @@ comment-list-sub {
 }
 
 #more_content_body {
-	padding-top : 4%;
+	padding-top : 5%;
 }
 
 .comment-delete {
