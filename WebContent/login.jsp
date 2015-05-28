@@ -14,14 +14,19 @@
 <%
 	HashMap<String, Object> userHash = new HashMap<String, Object>();
 	userHash = udao.loginUser(form_id, form_pw);
+	String idHash;
+	String pwHash;
+	String nameHash;
+	String regdateHash;
+	String thumbHash;
 	
 	
 	//¼­ºí¸´ ÇÔ¼ö->ÇØ½¬¸Ê->½ºÆ®¸µ->jsp¼¼¼Ç½ºÅä¸®Áö
-	String idHash = (String)userHash.get("id");
-	String pwHash = (String)userHash.get("pass");
-	String nameHash = (String)userHash.get("name");
-	String regdateHash = (String)userHash.get("regdate");
-	String thumbHash = (String)userHash.get("thumb");
+	idHash = (String)userHash.get("id");
+	pwHash = (String)userHash.get("pass");
+	nameHash = (String)userHash.get("name");
+	regdateHash = (String)userHash.get("regdate");
+	thumbHash = (String)userHash.get("thumb");
 	
 	session.setAttribute("id", idHash);
 	session.setAttribute("pass", pwHash);
@@ -39,7 +44,7 @@
 %>
 
 <%
-	if(userHash.isEmpty()){
+	if(idHash.isEmpty()){
 		System.out.println("wrong");
 		request.setAttribute("errMsg", "아이디나 비밀번호가 일치하지 않습니다.");
 		RequestDispatcher rd = request.getRequestDispatcher("NewFront.jsp");
