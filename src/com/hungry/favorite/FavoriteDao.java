@@ -49,7 +49,7 @@ public class FavoriteDao {
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT A.*, B.thumb, IFNULL(E.img,'no-image.jpg') AS img, count(S.point) as sc_idx, IFNULL(round(avg(S.point), 2), '첫 평가입니다') AS avg "+
+			String sql = "SELECT A.*, B.thumb, D.flag, IFNULL(E.img,'no-image.jpg') AS img, count(S.point) as sc_idx, IFNULL(round(avg(S.point), 2), 0.00) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image E ON E.posting_seq = A.seq "+
@@ -75,6 +75,7 @@ public class FavoriteDao {
 				item.put("type", rs.getString("type"));
 				item.put("location", rs.getString("location"));
 				item.put("sc_idx", rs.getString("sc_idx"));
+				item.put("flag",  rs.getString("flag"));
 				
 				result.add(item);
 			}

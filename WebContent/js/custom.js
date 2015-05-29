@@ -70,6 +70,7 @@ function readEditURL(input) {
 $(function() {
 	console.log(commentDatas);
 	console.log(favoriteDatas);
+	console.log(favoriteView);
 
 	var postingDatas;	
 
@@ -551,13 +552,13 @@ function handleRaty(){
 		half : true,
 //		cancel : true,
 //		cancelPlace : 'left',
-//		noRatedMsg : "I'am readOnly and I haven't rated yet!",
+		noRatedMsg : "I'am readOnly and I haven't rated yet!",
 		score: function() {
 			return $(this).attr('data-score');
 		}
 	});
 
-	//List
+	//It's nessesary when you want to express rated score.  
 //	$('span.raty-view').raty({
 //		score: function() {
 //			half : true;

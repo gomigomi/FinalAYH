@@ -56,16 +56,15 @@ function getFavoriteView() {
 		dataType : 'json',
 		async : false,
 		success : function(res) {
-			console.log('getFavoriteView');
+			console.log('getFavoriteView_CF');
 			favoriteView = res.result;
 
 			if (favoriteView == "") {
-				var  nothingElem = 
 					$('#favoritePosting').empty();
 					$('#favoritePosting').append('<div id="nothingElem">검색결과가 없습니다.</div>');
+					return false;
 			}
 			
-			console.log(favoriteView);
 			for(var i=0; i<favoriteView.length; i++) {
 				if( id == favoriteView[i].writer) {
 					$('#favoritePosting').append(getSectionItem(favoriteView[i], false));
