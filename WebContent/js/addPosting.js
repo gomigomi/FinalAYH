@@ -55,8 +55,9 @@ function getSectionItem(postingDatas, isHide){
 			'<div class = "comment-form">'+
 				'<span class="bac-point" id="'+postingDatas.avg+'">Point '+postingDatas.avg+'</span>'+
 				'<span class="comment-raty-form">'+
+					'<span class="ex">내가 준 점수&nbsp;&nbsp;&nbsp;&nbsp;</span>'+
 					'<span class="raty" data-score="'+point+'" style="cursor:pointer;"></span>'+
-					'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
+					'<span class = "pure-button add-commentRaty-btn">평가</span>'+
 				'</span>'+
 				'<span class="post-regdate">'+postingDatas.regdate+'</span>'+
 			'</div>'+

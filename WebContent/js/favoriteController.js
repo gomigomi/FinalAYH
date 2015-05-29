@@ -61,11 +61,11 @@ $(document).on('click', '#mainView_favorite .fa-heart-o', function(e) {
 		data : param,
 		success :  function(res){
 			console.log("BOOKMARK : Updated");
-//			attr과 substring이용해 적용 필요  
+
 			$('section[id$="'+param.posting_seq+'"] .fa-heart').show();
 			$('section[id$="'+param.posting_seq+'"] .fa-heart-o').hide();
 			
-			//location.reload([false]);
+
 		}
 	})
 })
@@ -92,55 +92,79 @@ $(document).on('click', '#mainView_favorite .fa-heart', function(){
 	} else { return false; }
 })
 
+function leadingZeros(n, digits) {
+	var zero = '';
+	n = n.toString();
+
+	if (n.length < digits) {
+		for (var i = 0; i < digits - n.length; i++)
+			zero += '0';
+	}
+	return zero + n;
+}
+
+
 //Rendering section
-function getSectionItem(favoriteView, isHide) {
+/**
+ * 하트 문제해결 및 데이터 통신 단
+ */
+function getFavSectionItem(favoriteView, isHide) {
 
-	var favoriteDisplay = 'block';
-	var favoriteDisplaySub = 'none';
-	
 	var display = isHide ? 'none' : 'block';
-
-	var sectionElem = 		
-	'<section class="post '+favoriteView.seq+'" id="posting_'+favoriteView.seq+'">'+
+	var point = "0";
+	
+	var currentScoreDatas = _.filter(scoreDatas, function(value) {
+		return value.posting_seq == favoriteView.seq
+	})
+	
+	$.each(currentScoreDatas, function(idx, item) {
+		point = item.point;
+	})
+	
+	var sectionElem = 
+		'<section class="post '+favoriteView.seq+'" id="posting_'+favoriteView.seq+'">'+
+		'<scIdx id="'+favoriteView.sc_idx+'"/>'+
 		'<div class="post-header post-top">'+
-		'<span class="post-avatar post-img"> '+
-			'<img src="/img/common/'+favoriteView.thumb+'"/>'+
-		'</span>'+ 
-		'<span class="post-meta bacpost-meta">'+ 
-			'<span class="post-writer">'+ 
-				'<a class="post-author" href="#">'+favoriteView.writer+'</a>'+
+			'<span class="post-avatar post-img"> '+
+				'<img src="/img/common/'+favoriteView.thumb+'"/>'+
 			'</span>'+ 
-			'<span class="posting-buttons" style="display:'+display+'"> '+
-				'<a href="#post_edit" rel="modal:open">'+
-					'<button class="post-edit">'+
-						'<i class="fa fa-pencil-square-o"></i>'+
+			'<span class="post-meta bacpost-meta">'+ 
+				'<span class="post-writer">'+ 
+					'<a class="post-author" href="#">'+favoriteView.writer+'</a>'+
+				'</span>'+ 
+				'<span class="posting-buttons" style="display:'+display+'"> '+
+					'<a href="#post_edit" rel="modal:open">'+
+						'<button class="post-edit">'+
+							'<i class="fa fa-pencil-square-o"></i>'+
+						'</button>'+
+					'</a>'+
+					'<button class="post-delete">'+
+						'<i class="fa fa-times"></i>'+
 					'</button>'+
-				'</a>'+
-				'<button class="post-delete">'+
-					'<i class="fa fa-times"></i>'+
-				'</button>'+
-			'</span>'+
-			'<span id=mainView_favorite>'+
-				'<button id="heart-o" class="fa fa-heart-o favorite-btn" style="display:'+favoriteDisplaySub+'"></button>'+
-				'<button id="heart" class="fa fa-heart favorite-btn" style="display:'+favoriteDisplay+'"></button>'+
-			'</span>'+
-			'<p>'+
-				'<span class="bac-point">Point '+favoriteView.avg+'</span>'+
-				'<span class="comment-raty-form">'+
-					'<span class="raty" data-score="3"></span>'+
-					'<span class = "pure-button add-commentRaty-btn">별점주기</span>'+
 				'</span>'+
-				'<span class="post-regdate">'+favoriteView.regdate+'</span>'+
-			'</p>'+
+				'<span id=mainView_favorite>'+
+					'<button id="heart" class="fa fa-heart favorite-btn" style="display:block"></button>'+
+				'</span>'+
+				'<div class = "comment-form">'+
+					'<span class="bac-point" id="'+favoriteView.avg+'">Point '+favoriteView.avg+'</span>'+
+					'<span class="comment-raty-form">'+
+						'<span class="ex">내가 준 점수&nbsp;&nbsp;&nbsp;&nbsp;</span>'+
+						'<span class="raty" data-score="'+point+'" style="cursor:pointer;"></span>'+
+						'<span class = "pure-button add-commentRaty-btn">평가</span>'+
+					'</span>'+
+					'<span class="post-regdate">'+favoriteView.regdate+'</span>'+
+				'</div>'+
 			'</span>'+
 		'</div>'+
 		'<div class="post-description bac-content">'+
-			'<span id = "postingImg_view"></span>'+
+			'<span id = "postingImg_view">'+
+			'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/'+favoriteView.img+'"/></button></a>'+
+			'</span>'+
 			'<span id = "postingContent_div">'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgNational" src="/img/icon/posting-nationality/nationality-'+favoriteView.type+'.png"/></span>'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgLocation" src="/img/icon/posting-location/location-'+location+'.png"/></span>'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTaste" src="/img/icon/posting-taste/taste-'+taste+'.png"/></span>'+
-				'<span id = "postingClassifyImg"><img id = "postingCI" class = "imgTime" src="/img/icon/posting-classification/time-'+time+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "'+favoriteView.type+'" class ="type postingCI" src="/img/icon/posting-nationality/nationality-'+favoriteView.type+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "'+favoriteView.location+'" class ="location postingCI" src="/img/icon/posting-location/location-'+favoriteView.location+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "'+favoriteView.taste+'" class ="taste postingCI" src="/img/icon/posting-taste/taste-'+favoriteView.taste+'.png"/></span>'+
+				'<span id = "postingClassifyImg"><img id = "'+favoriteView.time+'" class ="time postingCI" src="/img/icon/posting-time/time-'+favoriteView.time+'.png"/></span>'+
 				'<div id = "postingContent_view">'+favoriteView.content+'</div>'+
 			'</span>'+
 		'</div>'+
@@ -171,24 +195,4 @@ function getSectionItem(favoriteView, isHide) {
 		sectionObject.find('.comment-list').append(liElem);
 	});
 	return sectionObject.get(0).outerHTML;
-}
-
-function handleRaty() {
-	$('span.raty').raty({
-		half : 'true',
-		score : function() {
-			return $(this).attr('data-score');
-		}
-	});
-}
-
-function leadingZeros(n, digits) {
-	var zero = '';
-	n = n.toString();
-
-	if (n.length < digits) {
-		for (var i = 0; i < digits - n.length; i++)
-			zero += '0';
-	}
-	return zero + n;
 }

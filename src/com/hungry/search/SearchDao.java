@@ -68,7 +68,7 @@ public class SearchDao {
 				sql_ta = "and taste='"+searchParam.get("taste")[0].toString()+"' ";
 			}
 			
-			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, count(S.point) as sc_idx, IFNULL(round(avg(S.point), 2), '첫 평가자가 되세요!') AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(C.img,'no-image.jpg') AS img, count(S.point) as sc_idx, IFNULL(round(avg(S.point), 2), 0.00) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image C ON C.posting_seq = A.seq "+ 
