@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FavoriteDao {
-//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-//	static final String DB_URL = "jdbc:mysql://54.64.160.105:3306/AYH";
-	//DB test
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost:3306/AYH";
 
@@ -22,11 +19,6 @@ public class FavoriteDao {
 	static final String USER = "root";
 	static final String PASS = "900418";
 	
-	/**
-	 * 커넥션 공동 메소드
-	 * @returna
-	 * @throws ClassNotFoundException
-	 */
 	public Connection getConnection() throws ClassNotFoundException{
 		Connection dbConn = null;
 		
@@ -45,11 +37,10 @@ public class FavoriteDao {
 		Statement stmt = null;
 		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 		
-		
 		try{
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT A.*, B.thumb, D.flag, IFNULL(E.img,'no-image.jpg') AS img, count(S.point) as sc_idx, IFNULL(round(avg(S.point), 2), 0.00) AS avg "+
+			String sql = "SELECT A.*, B.thumb, IFNULL(E.img,'no-image.jpg') AS img, count(S.point) as sc_idx, IFNULL(round(avg(S.point), 2), 0.00) AS avg "+
 					"FROM posting AS A "+
 					"LEFT OUTER JOIN user B ON B.id = A.writer "+ 
 					"LEFT OUTER JOIN image E ON E.posting_seq = A.seq "+
@@ -75,7 +66,7 @@ public class FavoriteDao {
 				item.put("type", rs.getString("type"));
 				item.put("location", rs.getString("location"));
 				item.put("sc_idx", rs.getString("sc_idx"));
-				item.put("flag",  rs.getString("flag"));
+//				item.put("flag",  rs.getString("flag"));
 				
 				result.add(item);
 			}

@@ -67,10 +67,10 @@ function getFavoriteView() {
 			
 			for(var i=0; i<favoriteView.length; i++) {
 				if( id == favoriteView[i].writer) {
-					$('#favoritePosting').append(getSectionItem(favoriteView[i], false));
+					$('#favoritePosting').append(getFavSectionItem(favoriteView[i], false));
 					handleRaty();
 				} else {
-					$('#favoritePosting').append(getSectionItem(favoriteView[i], true));
+					$('#favoritePosting').append(getFavSectionItem(favoriteView[i], true));
 					handleRaty();
 				}
 			}
