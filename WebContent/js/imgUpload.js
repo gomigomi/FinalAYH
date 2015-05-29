@@ -20,7 +20,11 @@ $(function(){
  				$('#howAbout').empty();
  				postingPreferenceDatas = res.result;
  				console.log(postingPreferenceDatas);
- 				for(var i=0; i<postingPreferenceDatas.length; i++ ){
+ 				$('#howAbout').append("We think you like "+postingPreferenceDatas[0].tasteR+postingPreferenceDatas[0].typeR+postingPreferenceDatas[0].timeR+"<br>");
+ 				if(postingPreferenceDatas.length==1){
+ 	 				$('#howAbout').append("We are sorry but we couldn't find restaurent that you might like");
+ 				}
+ 				for(var i=1; i<postingPreferenceDatas.length; i++ ){
 					if(window.sessionStorage.getItem('id')==postingPreferenceDatas[i].writer){
 						$('#howAbout').append(getSectionItem(postingPreferenceDatas[i], false));
 						handleRaty();
