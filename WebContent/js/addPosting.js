@@ -75,7 +75,7 @@ function getSectionItem(postingDatas, isHide){
 		'<span id = "postingImg_view">'+
 		'<a href="#more_content" rel="modal:open"><button class="more-content"><img width="200px" height="200px" src="img/'+postingDatas.img+'"/></button></a>'+
 		'</span>'+
-		'<span id = "postingContent_div">'+
+		'<span id = "postingContent_div" style="overflow-x:hidden; overflow-y:hidden;">'+
 			'<span id = "postingClassifyImg"><img id = "'+postingDatas.type+'" class ="type postingCI" src="/img/icon/posting-nationality/nationality-'+postingDatas.type+'.png"/></span>'+
 			'<span id = "postingClassifyImg"><img id = "'+postingDatas.location+'" class ="location postingCI" src="/img/icon/posting-location/location-'+postingDatas.location+'.png"/></span>'+
 			'<span id = "postingClassifyImg"><img id = "'+postingDatas.taste+'" class ="taste postingCI" src="/img/icon/posting-taste/taste-'+postingDatas.taste+'.png"/></span>'+
