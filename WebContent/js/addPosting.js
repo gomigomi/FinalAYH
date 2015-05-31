@@ -5,10 +5,18 @@ function getSectionItem(postingDatas, isHide){
 	var favoriteDisplay = "none";
 	var favoriteDisplaySub ='block';
 	var point = "0";
+	var sc_idx = "0";
 	/*favorite와 posting 연결*/
 	var currentFavoriteDatas = _.filter(favoriteDatas, function(value){
 //			alert("flag"+value.posting_seq+"posting"+postingDatas.seq);
 		return value.posting_seq == postingDatas.seq;
+	});
+	
+	$.each(currentFavoriteDatas, function(idx, item){
+		if (item.flag == "1") {
+			favoriteDisplay = "block";
+			favoriteDisplaySub = "none";
+		}
 	});
 	
 	var currentScoreDatas = _.filter(scoreDatas, function(value) {
@@ -19,17 +27,17 @@ function getSectionItem(postingDatas, isHide){
 		point = item.point;
 	})
 	
+	var currentAllScoreDatas = _.filter(allScoreDatas, function(value) {
+		return value.posting_seq == postingDatas.seq;
+	})
+	
+	$.each(currentAllScoreDatas, function(idx, item) {
+		sc_idx = item.sc_idx;
+	})
 			
-	$.each(currentFavoriteDatas, function(idx, item){
-		if (item.flag == "1") {
-			favoriteDisplay = "block";
-			favoriteDisplaySub = "none";
-		}
-	});
-
 	var sectionElem = 
 	'<section class="post '+postingDatas.seq+'" id="posting_'+postingDatas.seq+'">'+
-	'<scIdx id="'+postingDatas.sc_idx+'"/>'+
+	'<scIdx id="'+sc_idx+'"/>'+
 	'<div class="post-header post-top">'+
 		'<span class="post-avatar post-img"> '+
 			'<img src="/img/common/'+postingDatas.thumb+'"/>'+

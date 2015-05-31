@@ -5,6 +5,7 @@ var favoriteDatas;
 var commentDatas;
 var postingDatas;
 var scoreDatas;
+var allScoreDatas;
 
 
 function readURL(input) {

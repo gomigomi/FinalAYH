@@ -33,6 +33,8 @@ public class ScoreServlet extends HttpServlet{
 			} else if(type.equals("2")){
 				String point_id = request.getParameter("id");
 				JObject.put("result", dao.getBasisScore(point_id));
+			} else if (type.equals("3")) {
+				JObject.put("result", dao.getAllScore());
 			}
 
 		}catch (JSONException e) {

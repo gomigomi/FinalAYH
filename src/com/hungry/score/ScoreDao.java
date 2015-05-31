@@ -72,6 +72,45 @@ public class ScoreDao {
 		return resultContent;
 		}
 
+	public List<HashMap<String, Object>> getAllScore() {
+		Connection conn = null;
+		Statement stmt = null;
+		List<HashMap<String, Object>> resultContent = new ArrayList<HashMap<String, Object>>();
+
+		try{
+		conn = getConnection();
+		stmt = conn.createStatement();
+		String sql ="SELECT A.*, count(A.point) as sc_idx "+
+					"FROM score as A "+
+					"GROUP BY A.posting_seq";
+		
+		ResultSet rs = stmt.executeQuery(sql);
+
+		while(rs.next()){
+		HashMap<String, Object> item = new HashMap<String, Object>();
+		item.put("id", rs.getString("id"));
+		item.put("posting_seq", rs.getString("posting_Seq"));
+		item.put("point", rs.getString("point"));
+		item.put("sc_idx", rs.getString("sc_idx"));
+
+		resultContent.add(item);
+		} 
+
+		rs.close();
+		stmt.close();
+		conn.close();
+
+		}catch(SQLException se){
+		se.printStackTrace();
+		
+		}catch(Exception e){
+		e.printStackTrace();
+
+		}finally{}
+
+		return resultContent;
+		}
+	
 	public String getScore(String id, String posting_seq) {
 		Connection conn = null;
 		Statement stmt = null;
